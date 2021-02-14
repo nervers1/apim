@@ -1,0 +1,22 @@
+package kr.mydata.apim.vo.insu;
+
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+/**
+ * 보험 거래내역 조회 - 상세
+ */
+@Data
+public class ResInsu006Sub {
+  @JsonFormat(pattern = "yyyyMMdd")
+  private LocalDate trans_date;
+  private int trans_applied_month;
+  private int trans_no;
+  private BigDecimal paid_amt;
+  private String currency_code;
+  private String pay_method;
+}
