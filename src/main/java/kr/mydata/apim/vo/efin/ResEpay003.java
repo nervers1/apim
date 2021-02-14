@@ -2,8 +2,6 @@ package kr.mydata.apim.vo.efin;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
-
 /**
  * 전자지급수단 자동충전정보 조회 - 출력
  */

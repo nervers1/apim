@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
  * 전송요구 내역 조회 (공통) - 입력
  */
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class ReqCmn002 extends APIEntity {
   // 접근토큰
   private String authorization;

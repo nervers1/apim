@@ -7,17 +7,17 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
-API 목록 조회 (공통) - 입력
-api: /apis
-Header:
-    - Authorization 접근토큰
-Parameter:
-    - org_code   기관코드   aN(7)   - 지원 API로부터 배포
+ * API 목록 조회 (공통) - 입력
+ * api: /apis
+ * Header:
+ * - Authorization 접근토큰
+ * Parameter:
+ * - org_code   기관코드   aN(7)   - 지원 API로부터 배포
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class ReqCmn001 extends APIEntity {
   // 접근토큰
   private String authorization;

@@ -1,9 +1,7 @@
 package kr.mydata.apim.vo.mgmts;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -11,8 +9,7 @@ import java.util.List;
  */
 @Data
 public class ReqMgmts004Sub {
-  @JsonFormat(pattern = "yyyyMMdd")
-  private LocalDate statistics_date;
+  private String statistics_date;
   private int org_cnt;
   private List<ReqMgmts004Sub2> org_list;
 }

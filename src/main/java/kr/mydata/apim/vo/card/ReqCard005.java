@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
  * 청구 추가정보 조회 - 입력
  */
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class ReqCard005 extends APIEntity {
   private String authorization;
   private String org_code;

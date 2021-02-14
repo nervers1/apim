@@ -5,8 +5,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Optional;
 
 public class APIMapper implements RowMapper<APIEntity> {
   public APIEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -21,9 +19,8 @@ public class APIMapper implements RowMapper<APIEntity> {
     entity.setRes_data(rs.getString("res_data"));
     entity.setApi_ver(rs.getInt("api_ver"));
     entity.setData_nm(rs.getString("data_nm"));
-    Optional.ofNullable(rs.getTimestamp("reg_dt")).map(Timestamp::toLocalDateTime).orElse(null);
-    entity.setReg_dt(Optional.ofNullable(rs.getTimestamp("reg_dt")).map(Timestamp::toLocalDateTime).orElse(null));
-    entity.setMod_dt(Optional.ofNullable(rs.getTimestamp("mod_dt")).map(Timestamp::toLocalDateTime).orElse(null));
+    entity.setReg_dt(rs.getString("reg_dt"));
+    entity.setMod_dt(rs.getString("mod_dt"));
     entity.setMod_id(rs.getString("mod_id"));
     entity.setReg_id(rs.getString("reg_id"));
     return entity;

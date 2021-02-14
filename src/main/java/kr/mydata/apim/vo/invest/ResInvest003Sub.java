@@ -2,10 +2,8 @@ package kr.mydata.apim.vo.invest;
 
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * 계좌 거래내역 조회 - 상세

@@ -4,9 +4,6 @@ package kr.mydata.apim.vo.card;
 import kr.mydata.apim.vo.APIEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDateTime;
 
 /**
  * 국내 승인내역 조회 - 입력

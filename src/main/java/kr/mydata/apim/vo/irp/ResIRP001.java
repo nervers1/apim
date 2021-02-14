@@ -3,7 +3,6 @@ package kr.mydata.apim.vo.irp;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 /**

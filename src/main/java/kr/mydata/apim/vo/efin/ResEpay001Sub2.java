@@ -9,5 +9,5 @@ import lombok.Data;
 public class ResEpay001Sub2 {
   private String pay_org_code;
   private String pay_id;
-  private boolean is_primary;
+  private String is_primary;
 }

@@ -1,10 +1,8 @@
 package kr.mydata.apim.vo.invest;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 /**
  * 계좌 상품정보 조회 - 상세
@@ -19,12 +17,10 @@ public class ResInvest004Sub {
   private BigDecimal holding_num;
   private BigDecimal avail_for_sale_num;
   private BigDecimal eval_amt;
-  @JsonFormat(pattern = "yyyyMMdd")
-  private LocalDate issue_date;
+  private String issue_date;
   private BigDecimal paid_in_amt;
   private BigDecimal withdrawal_amt;
-  @JsonFormat(pattern = "yyyyMMdd")
-  private LocalDate last_paid_in_date;
+  private String last_paid_in_date;
   private BigDecimal received_amt;
   private String currency_code;
 }

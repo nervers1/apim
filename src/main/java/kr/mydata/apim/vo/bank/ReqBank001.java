@@ -2,8 +2,6 @@ package kr.mydata.apim.vo.bank;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
-
 /**
  * 계좌 목록 조회 - 입력
  */

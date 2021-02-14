@@ -5,13 +5,11 @@ import kr.mydata.apim.vo.APIEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.sql.Timestamp;
-
 /**
  * 결제정보 조회 - 입력
  */
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class ReqCard006 extends APIEntity {
   private String authorization;
   private String org_code;

@@ -6,15 +6,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
-
 /**
  * 개인형 IRP 계좌 목록 조회 (은행, 금투, 모험 공통) - 입력
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class ReqIRP001 extends APIEntity {
   private String authorization;
   private String org_code;

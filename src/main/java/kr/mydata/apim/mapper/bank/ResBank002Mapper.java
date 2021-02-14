@@ -6,9 +6,6 @@ import org.springframework.jdbc.core.RowMapper;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 public class ResBank002Mapper implements RowMapper<ResBank002> {
 
@@ -19,8 +16,8 @@ public class ResBank002Mapper implements RowMapper<ResBank002> {
     entity.setSearch_timestamp(rs.getString("search_timestamp"));
     entity.setSaving_mehotd(rs.getString("saving_mehotd"));
     entity.setHolder_name(rs.getString("holder_name"));
-    entity.setIssue_date(Optional.ofNullable(rs.getTimestamp("issue_date")).map(Timestamp::toLocalDateTime).map(LocalDateTime::toLocalDate).orElse(null));
-    entity.setExp_date(Optional.ofNullable(rs.getTimestamp("exp_date")).map(Timestamp::toLocalDateTime).map(LocalDateTime::toLocalDate).orElse(null));
+    entity.setIssue_date(rs.getString("issue_date"));
+    entity.setExp_date(rs.getString("exp_date"));
     entity.setCurrency_code(rs.getString("currency_code"));
     entity.setCommit_amt(new BigDecimal(rs.getString("commit_amt")));
     entity.setMonthly_paid_in_amt(new BigDecimal(rs.getString("monthly_paid_in_amt")));

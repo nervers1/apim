@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
  * 인가코드 발급 요청 - 입력
  */
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class ReqAuth001 extends APIEntity {
   private String org_code;
   private String response_type;

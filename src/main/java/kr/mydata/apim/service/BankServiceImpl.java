@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import kr.mydata.apim.mapper.bank.ResBank001Mapper;
 import kr.mydata.apim.vo.bank.*;
 import lombok.extern.log4j.Log4j2;
 import org.postgresql.util.PGobject;
@@ -39,17 +40,19 @@ public class BankServiceImpl implements BankService {
     Map<String, String> search_timestamp = new HashMap<>();
     search_timestamp.put("search_timestamp", req.getSearch_timestamp());
     String strTimeStamp = mapper.writeValueAsString(search_timestamp);
-    String condition = req.getSearch_timestamp() != null ? " and res_data @> '" + strTimeStamp + "'::jsonb" : "";
+    //String condition = req.getSearch_timestamp() != null ? " and res_data @> '" + strTimeStamp + "'::jsonb" : "";
+    //String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + condition;
 
-    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + condition;
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ?";
+    ResBank001 res = jdbcTemplate.queryForObject(sql,new ResBank001Mapper(), Integer.valueOf(api_id), own_org_cd);
 
-    PGobject res = jdbcTemplate.queryForObject(sql, PGobject.class);
     log.info("res --> {}", res);
 
-    mapper.registerModule(new JavaTimeModule());
-    ResBank001 resBank001 = mapper.readValue(res.toString(), ResBank001.class);
+    /*mapper.registerModule(new JavaTimeModule());
+    ResBank001 resBank001 = mapper.readValue(res, ResBank001.class);
+    log.info("resBank001 --> {}", resBank001);*/
 
-    return resBank001;
+    return res;
   }
 
   /**

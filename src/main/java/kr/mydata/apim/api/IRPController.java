@@ -62,6 +62,13 @@ public class IRPController {
     }
   }
 
+  /**
+   * 개인형 IRP 계좌 추가정보 조회 (은행, 금투, 모험 공통)
+   * @param api_id
+   * @param own_org_cd
+   * @param req
+   * @return
+   */
   @PostMapping(value = "/irps/detail", produces = "application/json; charset=UTF-8")
   public ResponseEntity irpDetail(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd, ReqIRP003 req) {
 
@@ -75,5 +82,24 @@ public class IRPController {
     }
   }
 
+  /**
+   * 개인형 IRP 계좌 거래내역 조회 (은행, 금투, 모험 공통)
+   * @param api_id
+   * @param own_org_cd
+   * @param req
+   * @return
+   */
+  @PostMapping(value = "/irps/transactions", produces = "application/json; charset=UTF-8")
+  public ResponseEntity irpTransactions(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd, ReqIRP004 req) {
+
+    try {
+      ResIRP004 resIRP004 = service.irpTransactions(req, api_id, own_org_cd);
+      return new ResponseEntity(resIRP004, HttpStatus.OK);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 
 }

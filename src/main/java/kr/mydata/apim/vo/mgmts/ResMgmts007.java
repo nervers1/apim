@@ -11,7 +11,7 @@ import java.util.List;
 public class ResMgmts007 {
   private String rsp_code;
   private String rsp_msg;
-  private boolean is_member;
+  private String is_member;
   private int service_cnt;
   private List<ResMgmts007Sub> service_list;
 }

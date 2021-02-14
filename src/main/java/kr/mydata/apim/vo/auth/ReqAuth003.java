@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
  * 접근토큰 발급 갱신 - 입력
  */
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class ReqAuth003 extends APIEntity {
   private String org_code;
   private String grant_type;

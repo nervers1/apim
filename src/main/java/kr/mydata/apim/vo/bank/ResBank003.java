@@ -3,7 +3,6 @@ package kr.mydata.apim.vo.bank;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 
 /**
  * 수신계좌 추가정보 조회 - 출력

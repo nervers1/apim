@@ -13,7 +13,7 @@ public class ResEpay001Sub {
   private String account_id;
   private String is_consent;
   private String account_status;
-  private boolean is_pay_reg;
+  private String is_pay_reg;
   private int pay_cnt;
   private List<ResEpay001Sub2> pay_list;
 }
