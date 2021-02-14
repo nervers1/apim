@@ -8,11 +8,8 @@ import kr.mydata.apim.vo.bank.*;
 import lombok.extern.log4j.Log4j2;
 import org.postgresql.util.PGobject;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +24,14 @@ public class BankServiceImpl implements BankService {
     this.jdbcTemplate = jdbcTemplate;
   }
 
+  /**
+   * 은행업권 : 계좌 목록 조회
+   * @param req
+   * @param api_id
+   * @param own_org_cd
+   * @return
+   * @throws JsonProcessingException
+   */
   @Override
   public ResBank001 listAccount(ReqBank001 req, String api_id, String own_org_cd) throws JsonProcessingException {
 
@@ -46,6 +51,14 @@ public class BankServiceImpl implements BankService {
     return resBank001;
   }
 
+  /**
+   * 은행업권 - 수신계좌 기본정보 조회(은행)
+   * @param req
+   * @param api_id
+   * @param own_org_cd
+   * @return
+   * @throws JsonProcessingException
+   */
   @Override
   public ResBank002 inqBasicInfo(ReqBank002 req, String api_id, String own_org_cd) throws JsonProcessingException {
 
@@ -59,6 +72,14 @@ public class BankServiceImpl implements BankService {
     return resBank002;
   }
 
+  /**
+   * 은행업권 - 수신계좌 추가정보 조회(은행)
+   * @param req
+   * @param api_id
+   * @param own_org_cd
+   * @return
+   * @throws JsonProcessingException
+   */
   @Override
   public ResBank003 addtionalInfo(ReqBank003 req, String api_id, String own_org_cd) throws JsonProcessingException {
 
@@ -72,6 +93,14 @@ public class BankServiceImpl implements BankService {
     return resBank003;
   }
 
+  /**
+   * 은행업권 - 수신계좌 거래내역 조회
+   * @param req
+   * @param api_id
+   * @param own_org_cd
+   * @return
+   * @throws JsonProcessingException
+   */
   @Override
   public ResBank004 listTransactions(ReqBank004 req, String api_id, String own_org_cd) throws JsonProcessingException {
     String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + " and ast_id = '" + req.getAccount_num() + "'";
@@ -95,6 +124,14 @@ public class BankServiceImpl implements BankService {
     return resBank004;
   }
 
+  /**
+   * 은행업권 - 투자상품계좌 기본정보 조회
+   * @param req
+   * @param api_id
+   * @param own_org_cd
+   * @return
+   * @throws JsonProcessingException
+   */
   @Override
   public ResBank005 investBasic(ReqBank005 req, String api_id, String own_org_cd) throws JsonProcessingException {
 
@@ -108,6 +145,14 @@ public class BankServiceImpl implements BankService {
     return resBank005;
   }
 
+  /**
+   * 은행업권 - 투자상품계좌 추가정보 조회
+   * @param req
+   * @param api_id
+   * @param own_org_cd
+   * @return
+   * @throws JsonProcessingException
+   */
   @Override
   public ResBank006 investDetail(ReqBank006 req, String api_id, String own_org_cd) throws JsonProcessingException {
 
@@ -121,8 +166,55 @@ public class BankServiceImpl implements BankService {
     return resBank006;
   }
 
+  /**
+   * 은행업권 - 투자상품계좌 거래내역 조회
+   * @param req
+   * @param api_id
+   * @param own_org_cd
+   * @return
+   * @throws JsonProcessingException
+   */
   @Override
   public ResBank007 investTransactions(ReqBank007 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    return null;
+  }
+
+  /**
+   * 은행업권 - 대출상품계좌 기본정보 조회
+   * @param req
+   * @param api_id
+   * @param own_org_cd
+   * @return
+   * @throws JsonProcessingException
+   */
+  @Override
+  public ResBank008 loanBasic(ReqBank008 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    return null;
+  }
+
+  /**
+   * 은행업권 - 대출상품계좌 추가정보 조회
+   * @param req
+   * @param api_id
+   * @param own_org_cd
+   * @return
+   * @throws JsonProcessingException
+   */
+  @Override
+  public ResBank009 loanDetail(ReqBank009 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    return null;
+  }
+
+  /**
+   * 은행업권 - 대출상품계좌 거래내역 조회
+   * @param req
+   * @param api_id
+   * @param own_org_cd
+   * @return
+   * @throws JsonProcessingException
+   */
+  @Override
+  public ResBank010 loanTransactions(ReqBank010 req, String api_id, String own_org_cd) throws JsonProcessingException {
     return null;
   }
 }

@@ -1,9 +1,7 @@
 package kr.mydata.apim.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import kr.mydata.apim.service.BankService;
 import kr.mydata.apim.vo.bank.*;
 import lombok.extern.log4j.Log4j2;
@@ -90,7 +88,6 @@ public class BankController {
     log.info("RequestBody : {}", req);
 
     try {
-      // 수신계좌 추가정보 조회
       ResBank003 resBank003 = service.addtionalInfo(req, api_id, own_org_cd);
       return new ResponseEntity<>(resBank003, HttpStatus.OK);
 
