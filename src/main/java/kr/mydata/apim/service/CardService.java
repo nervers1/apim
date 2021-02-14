@@ -82,7 +82,7 @@ public interface CardService {
    * @return
    * @throws JsonProcessingException
    */
-  ResCard008 cardApprovalOverseas(ReqCard008 req, String api_id, String own_org_cd) throws JsonProcessingException;
+  String cardApprovalOverseas(ReqCard008 req, String api_id, String own_org_cd) throws JsonProcessingException;
 
   /**
    * 카드업권 : 대출상품 목록 조회

@@ -151,8 +151,15 @@ public class CardServiceImpl implements CardService {
    * @throws JsonProcessingException
    */
   @Override
-  public ResCard008 cardApprovalOverseas(ReqCard008 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+  public String cardApprovalOverseas(ReqCard008 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id;
+    // Card
+    String res = jdbcTemplate.queryForObject(sql, String.class);
+    log.info("res : {}", res);
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return res;
   }
 
   /**

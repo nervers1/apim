@@ -20,6 +20,7 @@ public class BankServiceImpl implements BankService {
 
   private final ObjectMapper mapper = new ObjectMapper();
   final JdbcTemplate jdbcTemplate;
+
   public BankServiceImpl(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
   }
