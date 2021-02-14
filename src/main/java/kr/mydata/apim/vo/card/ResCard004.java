@@ -11,7 +11,7 @@ import java.util.List;
 public class ResCard004 {
   private String rsp_code;
   private String rsp_msg;
-  private ResCard004Sub next_page;
+  private String next_page;
   private int bill_cnt;
   private List<ResCard004Sub> bill_list;
 }

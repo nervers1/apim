@@ -12,7 +12,7 @@ import java.util.List;
 public class ResInvest003 {
   private String rsp_code;
   private String rsp_msg;
-  private ResInvest003Sub next_page;
+  private String next_page;
   private int trans_cnt;
   private List<ResInvest003Sub> trans_list;
 }

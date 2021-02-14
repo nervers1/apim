@@ -48,26 +48,28 @@ public class CardServiceImpl implements CardService {
    * @param req
    * @param api_id
    * @param own_org_cd
+   * @param card_id
    * @return
    * @throws JsonProcessingException
    */
   @Override
-  public String cardBasic(ReqCard002 req, String api_id, String own_org_cd) throws JsonProcessingException {
+  public ResCard002 cardBasic(ReqCard002 req, String api_id, String own_org_cd, String card_id) throws JsonProcessingException {
     Map<String, String> search_timestamp = new HashMap<>();
     search_timestamp.put("search_timestamp", req.getSearch_timestamp());
     String strTimeStamp = mapper.writeValueAsString(search_timestamp);
-    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + " and res_data @> '" + strTimeStamp + "'::jsonb";
+//    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + " and res_data @> '" + strTimeStamp + "'::jsonb";
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and ast_id = ?";
 
     // Card
-    String res = jdbcTemplate.queryForObject(sql, String.class);
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, card_id);
     log.info("res : {}", res);
 
     // to JSON
     mapper.registerModule(new JavaTimeModule());
     mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-    //ResCard002 resCard002 = mapper.readValue(res, ResCard002.class);
-    return res;
+    ResCard002 resCard002 = mapper.readValue(res, ResCard002.class);
+    return resCard002;
   }
 
   /**
@@ -127,19 +129,22 @@ public class CardServiceImpl implements CardService {
    * @param req
    * @param api_id
    * @param own_org_cd
+   * @param card_id
    * @return
    * @throws JsonProcessingException
    */
   @Override
-  public String cardApprovalDomestic(ReqCard007 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id;
+  public ResCard007 cardApprovalDomestic(ReqCard007 req, String api_id, String own_org_cd, String card_id) throws JsonProcessingException {
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+//    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id;
     // Card
-    String res = jdbcTemplate.queryForObject(sql, String.class);
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), card_id);
     log.info("res : {}", res);
     // to JSON
     mapper.registerModule(new JavaTimeModule());
     mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-    return res;
+    ResCard007 resCard007 = mapper.readValue(res, ResCard007.class);
+    return resCard007;
   }
 
   /**

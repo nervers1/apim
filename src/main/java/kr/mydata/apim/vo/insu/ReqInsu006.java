@@ -15,6 +15,6 @@ public class ReqInsu006 extends APIEntity {
   private String insu_num;
   private String from_date;
   private String to_date;
-  private ResInsu006Sub next_page;
+  private String next_page;
   private int limit;
 }

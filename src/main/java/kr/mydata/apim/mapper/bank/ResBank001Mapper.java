@@ -19,6 +19,7 @@ public class ResBank001Mapper implements RowMapper<ResBank001> {
   @Override
   public ResBank001 mapRow(ResultSet rs, int rowNum) throws SQLException {
       ResBank001 entity = new ResBank001();
+      log.info("rs --> {}", rs);
     try {
       entity.setRsp_code(rs.getString("rsp_code"));
       entity.setRsp_msg(rs.getString("rsp_msg"));

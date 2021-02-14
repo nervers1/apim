@@ -11,7 +11,7 @@ import java.util.List;
 public class ResEpay005 {
   private String rsp_code;
   private String rsp_msg;
-  private ResEpay005Sub next_page;
+  private String next_page;
   private int trans_cnt;
   private List<ResEpay005Sub> trans_list;
 }

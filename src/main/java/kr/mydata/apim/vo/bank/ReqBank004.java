@@ -19,5 +19,5 @@ public class ReqBank004 extends APIMapper {
   private String currency_code;
   private String from_dtime;
   private String to_dtime;
-  private ResBank004Sub next_page;
+  private String next_page;
 }

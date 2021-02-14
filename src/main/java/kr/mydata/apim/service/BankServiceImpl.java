@@ -1,6 +1,7 @@
 package kr.mydata.apim.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -9,11 +10,15 @@ import kr.mydata.apim.vo.bank.*;
 import lombok.extern.log4j.Log4j2;
 import org.postgresql.util.PGobject;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -44,15 +49,16 @@ public class BankServiceImpl implements BankService {
     //String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + condition;
 
     String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ?";
-    ResBank001 res = jdbcTemplate.queryForObject(sql,new ResBank001Mapper(), Integer.valueOf(api_id), own_org_cd);
+    String res = jdbcTemplate.queryForObject(sql,String.class, Integer.valueOf(api_id), own_org_cd);
 
     log.info("res --> {}", res);
 
-    /*mapper.registerModule(new JavaTimeModule());
-    ResBank001 resBank001 = mapper.readValue(res, ResBank001.class);
-    log.info("resBank001 --> {}", resBank001);*/
+    mapper.registerModule(new JavaTimeModule());
+    ResBank001 resBank001 = mapper.readValue(res, new TypeReference<>() {
+    });
+    log.info("resBank001 --> {}", resBank001);
 
-    return res;
+    return resBank001;
   }
 
   /**
@@ -66,13 +72,31 @@ public class BankServiceImpl implements BankService {
   @Override
   public ResBank002 inqBasicInfo(ReqBank002 req, String api_id, String own_org_cd) throws JsonProcessingException {
 
-    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + " and ast_id = '" + req.getAccount_num() + "'";
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and ast_id = ?";
     // 은행
-    String res = jdbcTemplate.queryForObject(sql, String.class);
-    // to JSON
-    mapper.registerModule(new JavaTimeModule());
-    ResBank002 resBank002 = mapper.readValue(res, ResBank002.class);
 
+    /*ResBank002 res = jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
+      ResBank002 entity = new ResBank002();
+      entity.setRsp_code(Optional.ofNullable(rs.getString("rsp_code")).orElse(""));
+      entity.setRsp_msg(rs.getString("rsp_msg"));
+      entity.setSearch_timestamp(rs.getString("search_timestamp"));
+      entity.setSaving_method(rs.getString("saving_mehotd"));
+      entity.setHolder_name(rs.getString("holder_name"));
+      entity.setIssue_date(rs.getString("issue_date"));
+      entity.setExp_date(rs.getString("exp_date"));
+      entity.setCurrency_code(rs.getString("currency_code"));
+      entity.setCommit_amt(rs.getBigDecimal("commit_amt"));
+      entity.setMonthly_paid_in_amt(rs.getBigDecimal("monthly_paid_in_amt"));
+      entity.setTermination_amt(rs.getBigDecimal("termination_amt"));
+      entity.setLast_offered_rate(rs.getDouble("last_offered_rate"));
+      return entity;
+    }, Integer.valueOf(api_id), req.getAccount_num());*/
+    // to JSON
+    /*mapper.registerModule(new JavaTimeModule());
+    ResBank002 resBank002 = mapper.readValue(res, ResBank002.class);*/
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), req.getAccount_num());
+    log.info("res --> {}", res);
+    ResBank002 resBank002 = mapper.readValue(res, ResBank002.class);
     return resBank002;
   }
 
@@ -87,9 +111,9 @@ public class BankServiceImpl implements BankService {
   @Override
   public ResBank003 addtionalInfo(ReqBank003 req, String api_id, String own_org_cd) throws JsonProcessingException {
 
-    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + " and ast_id = '" + req.getAccount_num() + "'";
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and ast_id = ?";
     // 은행
-    String res = jdbcTemplate.queryForObject(sql, String.class);
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), req.getAccount_num());
     // String to JSON
     mapper.registerModule(new JavaTimeModule());
     ResBank003 resBank003 = mapper.readValue(res, ResBank003.class);
@@ -115,7 +139,7 @@ public class BankServiceImpl implements BankService {
       ResBank004 entity = new ResBank004();
       entity.setRsp_code(rs.getString("rsp_code"));
       entity.setRsp_msg(rs.getString("rsp_msg"));
-      entity.setNext_page(rs.getObject("next_page", ResBank004Sub.class));
+      entity.setNext_page(rs.getString("next_page"));
       entity.setTrans_cnt(rs.getInt("trans_cnt"));
       entity.setTrans_list((List<ResBank004Sub>)rs.getObject("trans_list", List.class));
       return entity;

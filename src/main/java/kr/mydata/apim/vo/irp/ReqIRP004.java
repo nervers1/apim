@@ -16,7 +16,7 @@ public class ReqIRP004 extends APIEntity {
   private String account_num;
   private String from_dtime;
   private String to_dtime;
-  private ResIRP004Sub next_page;
+  private String next_page;
   private int limit;
 
 }

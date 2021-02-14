@@ -15,6 +15,6 @@ public class ReqBank010 extends APIEntity {
   private String account_num;
   private String from_dtime;
   private String to_dtime;
-  private ResBank010 next_page;
+  private String next_page;
   private int limit;
 }

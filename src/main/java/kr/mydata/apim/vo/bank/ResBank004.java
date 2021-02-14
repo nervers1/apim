@@ -16,7 +16,7 @@ import java.util.List;
 public class ResBank004 {
   private String rsp_code;
   private String rsp_msg;
-  private ResBank004Sub next_page;
+  private String next_page;
   private int trans_cnt;
   @JsonDeserialize(as = List.class)
   private List<ResBank004Sub> trans_list;

@@ -12,7 +12,7 @@ import java.util.List;
 public class ResCard008 {
   private String rsp_code;
   private String rsp_msg;
-  private ResCard008Sub next_page;
+  private String next_page;
   private int approved_cnt;
   private List<ResCard008Sub> approved_list;
 }

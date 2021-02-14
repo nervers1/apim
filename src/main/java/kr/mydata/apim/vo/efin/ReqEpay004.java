@@ -15,6 +15,6 @@ public class ReqEpay004 extends APIEntity {
   private String sub_key;
   private String from_dtime;
   private String to_dtime;
-  private ResEpay004Sub next_page;
+  private String next_page;
   private int limit;
 }

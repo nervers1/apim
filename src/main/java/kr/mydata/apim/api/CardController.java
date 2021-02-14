@@ -63,7 +63,7 @@ public class CardController {
     log.info("req : {}", req);
 
     try {
-      String resCard002 = service.cardBasic(req, api_id, own_org_cd);
+      ResCard002 resCard002 = service.cardBasic(req, api_id, own_org_cd, card_id);
       return new ResponseEntity(resCard002, HttpStatus.OK);
 
     } catch (Exception e) {
@@ -183,7 +183,7 @@ public class CardController {
     log.info("req : {}", req);
 
     try {
-      String res = service.cardApprovalDomestic(req, api_id, own_org_cd);
+      ResCard007 res = service.cardApprovalDomestic(req, api_id, own_org_cd, card_id);
       return new ResponseEntity(res, HttpStatus.OK);
 
     } catch (Exception e) {

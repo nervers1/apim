@@ -15,6 +15,6 @@ public class ReqCard005 extends APIEntity {
   private String org_code;
   private int seqno;
   private int charge_month;
-  private ResCard005Sub next_page;
+  private String next_page;
   private int limit;
 }

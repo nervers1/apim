@@ -13,7 +13,7 @@ public class ResCard002 {
   private String is_trans_payable;
   private String is_cash_card;
   private String linked_bank_code;
-  private String bank_brand;
+  private String card_brand;
   private BigDecimal annual_fee;
   private String issue_date;
 }

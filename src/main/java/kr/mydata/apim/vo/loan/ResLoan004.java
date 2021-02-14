@@ -11,7 +11,7 @@ import java.util.List;
 public class ResLoan004 {
   private String rsp_code;
   private String rsp_msg;
-  private ResLoan004Sub next_page;
+  private String next_page;
   private int trans_cnt;
   private List<ResLoan004Sub> trans_list;
 }

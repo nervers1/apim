@@ -19,10 +19,11 @@ public interface CardService {
    * @param req
    * @param api_id
    * @param own_org_cd
+   * @param card_id
    * @return
    * @throws JsonProcessingException
    */
-  String cardBasic(ReqCard002 req, String api_id, String own_org_cd) throws JsonProcessingException;
+  ResCard002 cardBasic(ReqCard002 req, String api_id, String own_org_cd, String card_id) throws JsonProcessingException;
 
   /**
    * 카드업권 : 포인트 정보 조회
@@ -69,10 +70,11 @@ public interface CardService {
    * @param req
    * @param api_id
    * @param own_org_cd
+   * @param card_id
    * @return
    * @throws JsonProcessingException
    */
-  String cardApprovalDomestic(ReqCard007 req, String api_id, String own_org_cd) throws JsonProcessingException;
+  ResCard007 cardApprovalDomestic(ReqCard007 req, String api_id, String own_org_cd, String card_id) throws JsonProcessingException;
 
   /**
    * 카드업권 : 해외 승인내역 조회

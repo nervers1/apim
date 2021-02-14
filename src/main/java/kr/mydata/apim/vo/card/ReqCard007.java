@@ -15,6 +15,6 @@ public class ReqCard007 extends APIEntity {
   private String org_code;
   private String from_dtime;
   private String to_dtime;
-  private ResCard007Sub next_page;
+  private String next_page;
   private int limit;
 }

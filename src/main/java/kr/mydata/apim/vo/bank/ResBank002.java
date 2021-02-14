@@ -12,7 +12,7 @@ public class ResBank002 {
   private String rsp_code;
   private String rsp_msg;
   private String search_timestamp;
-  private String saving_mehotd;
+  private String saving_method;
   private String holder_name;
   private String issue_date;
   private String exp_date;
