@@ -7,7 +7,6 @@ import kr.mydata.apim.vo.bank.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,11 +15,9 @@ public class BankController {
 
   private final BankService service;
   private final ObjectMapper mapper = new ObjectMapper();
-  final JdbcTemplate jdbcTemplate;
 
-  public BankController(BankService service, JdbcTemplate jdbcTemplate) {
+  public BankController(BankService service) {
     this.service = service;
-    this.jdbcTemplate = jdbcTemplate;
   }
 
 

@@ -1,13 +1,22 @@
 package kr.mydata.apim.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import kr.mydata.apim.vo.card.*;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
+@Log4j2
 @Service
 public class CardServiceImpl implements CardService {
 
+  private final ObjectMapper mapper = new ObjectMapper();
   final JdbcTemplate jdbcTemplate;
 
   public CardServiceImpl(JdbcTemplate jdbcTemplate) {
@@ -24,7 +33,14 @@ public class CardServiceImpl implements CardService {
    */
   @Override
   public ResCard001 listCard(ReqCard001 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id;
+    // Card
+    String res = jdbcTemplate.queryForObject(sql, String.class);
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    ResCard001 resCard001 = mapper.readValue(res, ResCard001.class);
+    return resCard001;
   }
 
   /**
@@ -36,8 +52,22 @@ public class CardServiceImpl implements CardService {
    * @throws JsonProcessingException
    */
   @Override
-  public ResCard002 cardBasic(ReqCard002 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+  public String cardBasic(ReqCard002 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    Map<String, String> search_timestamp = new HashMap<>();
+    search_timestamp.put("search_timestamp", req.getSearch_timestamp());
+    String strTimeStamp = mapper.writeValueAsString(search_timestamp);
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + " and res_data @> '" + strTimeStamp + "'::jsonb";
+
+    // Card
+    String res = jdbcTemplate.queryForObject(sql, String.class);
+    log.info("res : {}", res);
+
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
+    //ResCard002 resCard002 = mapper.readValue(res, ResCard002.class);
+    return res;
   }
 
   /**
@@ -101,8 +131,15 @@ public class CardServiceImpl implements CardService {
    * @throws JsonProcessingException
    */
   @Override
-  public ResCard007 cardApprovalDomestic(ReqCard007 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+  public String cardApprovalDomestic(ReqCard007 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id;
+    // Card
+    String res = jdbcTemplate.queryForObject(sql, String.class);
+    log.info("res : {}", res);
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return res;
   }
 
   /**
