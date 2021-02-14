@@ -1,7 +1,6 @@
 package kr.mydata.apim.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.mydata.apim.service.BankService;
 import kr.mydata.apim.vo.bank.*;
 import lombok.extern.log4j.Log4j2;
@@ -28,12 +27,14 @@ public class BankController {
    * @param req
    * @return ResBank001
    */
-  @GetMapping(value = "/accounts")
+  @GetMapping(value = "/accounts", produces = "application/json; charset=UTF-8")
   public ResponseEntity accounts(@RequestHeader(value = "x-api-id") String api_id,
                                  @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                  ReqBank001 req) {
+
     log.info("api_id : {}", api_id);
-    log.info("RequestBody : {}", req);
+    log.info("own_org_cd : {}", own_org_cd);
+    log.info("req : {}", req);
 
     try {
       ResBank001 res = service.listAccount(req, api_id, own_org_cd);
@@ -58,7 +59,8 @@ public class BankController {
                                       @RequestBody ReqBank002 req) {
 
     log.info("api_id : {}", api_id);
-    log.info("RequestBody : {}", req);
+    log.info("own_org_cd : {}", own_org_cd);
+    log.info("req : {}", req);
 
     try {
       ResBank002 res = service.inqBasicInfo(req, api_id, own_org_cd);
@@ -81,8 +83,10 @@ public class BankController {
   public ResponseEntity<ResBank003> accountDetail(@RequestHeader(value = "x-api-id") String api_id,
                                                   @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                                   @RequestBody ReqBank003 req) {
+
     log.info("api_id : {}", api_id);
-    log.info("RequestBody : {}", req);
+    log.info("own_org_cd : {}", own_org_cd);
+    log.info("req : {}", req);
 
     try {
       ResBank003 resBank003 = service.addtionalInfo(req, api_id, own_org_cd);
@@ -108,6 +112,7 @@ public class BankController {
                                          @RequestBody ReqBank004 req) {
 
     log.info("api_id : {}", api_id);
+    log.info("own_org_cd : {}", own_org_cd);
     log.info("req : {}", req);
 
     try {
@@ -137,6 +142,7 @@ public class BankController {
                                     @RequestBody ReqBank005 req) {
 
     log.info("api_id : {}", api_id);
+    log.info("own_org_cd : {}", own_org_cd);
     log.info("req : {}", req);
 
     try {
@@ -161,6 +167,7 @@ public class BankController {
                                      @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                      @RequestBody ReqBank006 req) {
     log.info("api_id : {}", api_id);
+    log.info("own_org_cd : {}", own_org_cd);
     log.info("req : {}", req);
 
     try {

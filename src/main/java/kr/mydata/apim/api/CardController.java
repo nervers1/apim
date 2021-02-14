@@ -1,7 +1,6 @@
 package kr.mydata.apim.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.mydata.apim.service.CardService;
 import kr.mydata.apim.vo.card.*;
 import lombok.extern.log4j.Log4j2;
