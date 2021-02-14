@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * 대출상품 추가정보 조회 - 상세
+ * 대출상품 거래내역 조회 - 상세
  */
 @Data
 public class ResInsu011Sub {

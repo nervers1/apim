@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * 대출상품 추가정보 조회 - 출력
+ * 대출상품 거래내역 조회 - 출력
  */
 @Data
 public class ResInsu011 {

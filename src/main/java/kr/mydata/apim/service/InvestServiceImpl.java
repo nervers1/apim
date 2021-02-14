@@ -1,13 +1,23 @@
 package kr.mydata.apim.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.mydata.apim.vo.invest.*;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Log4j2
 @Service
 public class InvestServiceImpl implements InvestService {
+
+  private final ObjectMapper mapper = new ObjectMapper();
+  private final JdbcTemplate jdbcTemplate;
+
+  public InvestServiceImpl(JdbcTemplate jdbcTemplate) {
+    this.jdbcTemplate = jdbcTemplate;
+  }
+
   /**
    * 금융투자 업권 : 계좌 목록 조회
    * @param req

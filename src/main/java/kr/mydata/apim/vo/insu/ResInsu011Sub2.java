@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 /**
- * 대출상품 추가정보 조회 - 이자적용항목
+ * 대출상품 거래내역 조회 - 이자적용항목
  */
 @Data
 public class ResInsu011Sub2 {

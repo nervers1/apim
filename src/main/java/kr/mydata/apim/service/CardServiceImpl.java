@@ -17,7 +17,7 @@ import java.util.Map;
 public class CardServiceImpl implements CardService {
 
   private final ObjectMapper mapper = new ObjectMapper();
-  final JdbcTemplate jdbcTemplate;
+  private final JdbcTemplate jdbcTemplate;
 
   public CardServiceImpl(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
