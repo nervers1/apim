@@ -94,6 +94,7 @@ public class BankServiceImpl implements BankService {
     // to JSON
     /*mapper.registerModule(new JavaTimeModule());
     ResBank002 resBank002 = mapper.readValue(res, ResBank002.class);*/
+
     String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), req.getAccount_num());
     log.info("res --> {}", res);
     ResBank002 resBank002 = mapper.readValue(res, ResBank002.class);
@@ -110,10 +111,10 @@ public class BankServiceImpl implements BankService {
    */
   @Override
   public ResBank003 addtionalInfo(ReqBank003 req, String api_id, String own_org_cd) throws JsonProcessingException {
-
-    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and ast_id = ?";
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+//    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and ast_id = ?";
     // 은행
-    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), req.getAccount_num());
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
     // String to JSON
     mapper.registerModule(new JavaTimeModule());
     ResBank003 resBank003 = mapper.readValue(res, ResBank003.class);
@@ -131,10 +132,9 @@ public class BankServiceImpl implements BankService {
    */
   @Override
   public ResBank004 listTransactions(ReqBank004 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + " and ast_id = '" + req.getAccount_num() + "'";
-    // 은행
 
-    //PGobject res = jdbcTemplate.queryForObject(sql, PGobject.class);
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+
     ResBank004 resBank004 = jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
       ResBank004 entity = new ResBank004();
       entity.setRsp_code(rs.getString("rsp_code"));
@@ -143,12 +143,8 @@ public class BankServiceImpl implements BankService {
       entity.setTrans_cnt(rs.getInt("trans_cnt"));
       entity.setTrans_list((List<ResBank004Sub>)rs.getObject("trans_list", List.class));
       return entity;
-    });
+    }, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
 
-    // to JSON
-    /*mapper.registerModule(new JavaTimeModule());
-    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-    ResBank004 resBank004 = mapper.readValue(res.toString(), ResBank004.class);*/
     return resBank004;
   }
 
@@ -163,14 +159,12 @@ public class BankServiceImpl implements BankService {
   @Override
   public ResBank005 investBasic(ReqBank005 req, String api_id, String own_org_cd) throws JsonProcessingException {
 
-    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + " and ast_id = '" + req.getAccount_num() + "'";
-    // 은행
-    String res = jdbcTemplate.queryForObject(sql, String.class);
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
     // to JSON
     mapper.registerModule(new JavaTimeModule());
     mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-    ResBank005 resBank005 = mapper.readValue(res, ResBank005.class);
-    return resBank005;
+    return mapper.readValue(res, ResBank005.class);
   }
 
   /**
@@ -184,14 +178,12 @@ public class BankServiceImpl implements BankService {
   @Override
   public ResBank006 investDetail(ReqBank006 req, String api_id, String own_org_cd) throws JsonProcessingException {
 
-    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + " and ast_id = '" + req.getAccount_num() + "'";
-    // 은행
-    String res = jdbcTemplate.queryForObject(sql, String.class);
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
     // to JSON
     mapper.registerModule(new JavaTimeModule());
     mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-    ResBank006 resBank006 = mapper.readValue(res, ResBank006.class);
-    return resBank006;
+    return mapper.readValue(res, ResBank006.class);
   }
 
   /**
@@ -204,7 +196,13 @@ public class BankServiceImpl implements BankService {
    */
   @Override
   public ResBank007 investTransactions(ReqBank007 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResBank007.class);
   }
 
   /**
@@ -217,7 +215,13 @@ public class BankServiceImpl implements BankService {
    */
   @Override
   public ResBank008 loanBasic(ReqBank008 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResBank008.class);
   }
 
   /**
@@ -230,7 +234,13 @@ public class BankServiceImpl implements BankService {
    */
   @Override
   public ResBank009 loanDetail(ReqBank009 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResBank009.class);
   }
 
   /**
@@ -243,6 +253,12 @@ public class BankServiceImpl implements BankService {
    */
   @Override
   public ResBank010 loanTransactions(ReqBank010 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResBank010.class);
   }
 }
