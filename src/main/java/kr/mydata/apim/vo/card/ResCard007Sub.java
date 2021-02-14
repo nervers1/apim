@@ -21,5 +21,5 @@ public class ResCard007Sub {
   private String cancel_dtime;
   private String merchant_name;
   private BigDecimal approved_amt;
-  private int total_intall_cnt;
+  private String total_install_cnt;
 }
