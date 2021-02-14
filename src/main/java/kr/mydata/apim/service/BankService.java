@@ -41,4 +41,36 @@ public interface BankService {
    * @return
    */
   ResBank004 listTransactions(ReqBank004 req, String api_id, String own_org_cd) throws JsonProcessingException;
+
+  /**
+   * 은행업권 - 투자상품계좌 기본정보 조회
+   * @param req
+   * @param api_id
+   * @param own_org_cd
+   * @return
+   * @throws JsonProcessingException
+   */
+  ResBank005 investBasic(ReqBank005 req, String api_id, String own_org_cd) throws JsonProcessingException;
+
+
+  /**
+   * 은행업권 - 투자상품계좌 추가정보 조회
+   * @param req
+   * @param api_id
+   * @param own_org_cd
+   * @return
+   * @throws JsonProcessingException
+   */
+  ResBank006 investDetail(ReqBank006 req, String api_id, String own_org_cd) throws JsonProcessingException;
+
+  /**
+   * 은행업권 - 투자상품계좌 거래내역 조회
+   * @param req
+   * @param api_id
+   * @param own_org_cd
+   * @return
+   * @throws JsonProcessingException
+   */
+  ResBank007 investTransactions(ReqBank007 req, String api_id, String own_org_cd) throws JsonProcessingException;
+
 }

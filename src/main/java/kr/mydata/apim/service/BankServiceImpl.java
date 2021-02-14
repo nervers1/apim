@@ -94,4 +94,35 @@ public class BankServiceImpl implements BankService {
     ResBank004 resBank004 = mapper.readValue(res.toString(), ResBank004.class);*/
     return resBank004;
   }
+
+  @Override
+  public ResBank005 investBasic(ReqBank005 req, String api_id, String own_org_cd) throws JsonProcessingException {
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + " and ast_id = '" + req.getAccount_num() + "'";
+    // 은행
+    String res = jdbcTemplate.queryForObject(sql, String.class);
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    ResBank005 resBank005 = mapper.readValue(res, ResBank005.class);
+    return resBank005;
+  }
+
+  @Override
+  public ResBank006 investDetail(ReqBank006 req, String api_id, String own_org_cd) throws JsonProcessingException {
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + " and ast_id = '" + req.getAccount_num() + "'";
+    // 은행
+    String res = jdbcTemplate.queryForObject(sql, String.class);
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    ResBank006 resBank006 = mapper.readValue(res, ResBank006.class);
+    return resBank006;
+  }
+
+  @Override
+  public ResBank007 investTransactions(ReqBank007 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    return null;
+  }
 }

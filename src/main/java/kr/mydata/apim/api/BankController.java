@@ -145,16 +145,33 @@ public class BankController {
     log.info("api_id : {}", api_id);
     log.info("req : {}", req);
 
-    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + " and ast_id = '" + req.getAccount_num() + "'";
     try {
-      // 은행
-      String res = jdbcTemplate.queryForObject(sql, String.class);
-      // to JSON
-      mapper.registerModule(new JavaTimeModule());
-      mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-      ReqBank005 resBank005 = mapper.readValue(res, ReqBank005.class);
-
+      ResBank005 resBank005 = service.investBasic(req, api_id, own_org_cd);
       return new ResponseEntity(resBank005, HttpStatus.OK);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  /**
+   * 은행업권 - 투자상품계좌 추가정보 조회
+   * @param api_id
+   * @param own_org_cd
+   * @param req
+   * @return
+   */
+  @PostMapping(value = "/v1/bank/accounts/invest/detail", produces = "application/json; charset=UTF-8")
+  public ResponseEntity investDetail(@RequestHeader(value = "x-api-id") String api_id,
+                                     @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                     @RequestBody ReqBank006 req) {
+    log.info("api_id : {}", api_id);
+    log.info("req : {}", req);
+
+    try {
+      ResBank006 resBank006 = service.investDetail(req, api_id, own_org_cd);
+      return new ResponseEntity(resBank006, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
