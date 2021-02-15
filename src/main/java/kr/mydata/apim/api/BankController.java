@@ -91,7 +91,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			ResBank001 res = bankService.listAccount(req, api_id, own_org_cd);
+			ResBank001 res = bankService.accounts(req, api_id, own_org_cd);
 
 			return new ResponseEntity<ResBank001>(res, HttpStatus.OK);
 		} catch (Exception e) {
@@ -116,7 +116,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			ResBank002 res = bankService.inqBasicInfo(req, api_id, own_org_cd);
+			ResBank002 res = bankService.accountBasic(req, api_id, own_org_cd);
 
 			return new ResponseEntity<ResBank002>(res, HttpStatus.OK);
 		} catch (Exception e) {
@@ -140,7 +140,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			ResBank003 resBank003 = bankService.addtionalInfo(req, api_id, own_org_cd);
+			ResBank003 resBank003 = bankService.accountDetail(req, api_id, own_org_cd);
 			return new ResponseEntity<ResBank003>(resBank003, HttpStatus.OK);
 
 		} catch (Exception e) {
@@ -164,7 +164,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			ResBank004 result = bankService.listTransactions(req, api_id, own_org_cd);
+			ResBank004 result = bankService.accountTransactions(req, api_id, own_org_cd);
 			return new ResponseEntity<ResBank004>(result, HttpStatus.OK);
 
 		} catch (Exception e) {

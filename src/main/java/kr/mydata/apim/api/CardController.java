@@ -39,6 +39,10 @@ import kr.mydata.apim.vo.card.ResCard009;
 import kr.mydata.apim.vo.card.ResCard010;
 import kr.mydata.apim.vo.card.ResCard011;
 import kr.mydata.apim.vo.card.ResCard012;
+import kr.mydata.apim.vo.common.ReqCmn001;
+import kr.mydata.apim.vo.common.ReqCmn002;
+import kr.mydata.apim.vo.common.ResCmn001;
+import kr.mydata.apim.vo.common.ResCmn002;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -109,8 +113,8 @@ public class CardController {
 
 		try {
 			ResCard002 resCard002 = cardService.cardBasic(req, api_id, own_org_cd, card_id);
-			return new ResponseEntity<ResCard002>(resCard002, HttpStatus.OK);
 
+			return new ResponseEntity<ResCard002>(resCard002, HttpStatus.OK);
 		} catch (Exception e) {
 			return returnErrorMessage(e);
 		}
@@ -128,13 +132,14 @@ public class CardController {
 	@GetMapping(value = "/cards/point", produces = "application/json; charset=UTF-8")
 	public ResponseEntity cardPoint(@RequestHeader(value = "x-api-id") String api_id,
 			@RequestHeader(value = "x-own-org-cd") String own_org_cd, @Valid ReqCard003 req) {
-		
+
 		log.info("api_id : {}", api_id);
 		log.info("own_org_cd : {}", own_org_cd);
 		log.info("req : {}", req);
 
 		try {
 			ResCard003 res = cardService.cardPoint(req, api_id, own_org_cd);
+			
 			return new ResponseEntity<ResCard003>(res, HttpStatus.OK);
 		} catch (JsonProcessingException e) {
 			return returnErrorMessage(e);
@@ -355,6 +360,56 @@ public class CardController {
 			ResCard012 res = cardService.cardLoansLongTerm(req, api_id, own_org_cd);
 			return new ResponseEntity(res, HttpStatus.OK);
 
+		} catch (Exception e) {
+			return returnErrorMessage(e);
+		}
+	}
+
+	/**
+	 * API 목록 조회 (공통)
+	 * 
+	 * @param api_id
+	 * @param own_org_cd
+	 * @param req
+	 * @return
+	 */
+	@GetMapping("/apis")
+	public ResponseEntity apis(@RequestHeader(value = "x-api-id") String api_id,
+			@RequestHeader(value = "x-own-org-cd") String own_org_cd, @Valid ReqCmn001 req) {
+
+		log.info("api_id : {}", api_id);
+		log.info("own_org_cd : {}", own_org_cd);
+		log.info("req : {}", req);
+
+		try {
+			ResCmn001 resCmn001 = commonService.apis(req, api_id, own_org_cd);
+
+			return new ResponseEntity<ResCmn001>(resCmn001, HttpStatus.OK);
+		} catch (Exception e) {
+			return returnErrorMessage(e);
+		}
+	}
+
+	/**
+	 * 전송요구 내역 조회 (공통)
+	 * 
+	 * @param api_id
+	 * @param own_org_cd
+	 * @param req
+	 * @return
+	 */
+	@GetMapping("/consents")
+	public ResponseEntity consents(@RequestHeader(value = "x-api-id") String api_id,
+			@RequestHeader(value = "x-own-org-cd") String own_org_cd, @Valid ReqCmn002 req) {
+
+		log.info("api_id : {}", api_id);
+		log.info("own_org_cd : {}", own_org_cd);
+		log.info("req : {}", req);
+
+		try {
+			ResCmn002 resCmn002 = commonService.consents(req, api_id, own_org_cd);
+
+			return new ResponseEntity<ResCmn002>(resCmn002, HttpStatus.OK);
 		} catch (Exception e) {
 			return returnErrorMessage(e);
 		}

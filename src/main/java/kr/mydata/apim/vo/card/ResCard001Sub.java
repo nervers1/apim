@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResCard001Sub {
-  private String card_id;
-  private String card_num;
-  private String is_consent;
-  private String card_name;
-  private String card_member;
+	private String card_id;
+	private String card_num;
+	private String is_consent;
+	private String card_name;
+	private String card_member;
 }

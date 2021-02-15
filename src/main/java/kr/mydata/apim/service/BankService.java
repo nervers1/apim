@@ -12,7 +12,7 @@ public interface BankService {
    * @return
    * @throws JsonProcessingException
    */
-  ResBank001 listAccount(ReqBank001 req, String api_id, String own_org_cd) throws JsonProcessingException;
+  ResBank001 accounts(ReqBank001 req, String api_id, String own_org_cd) throws JsonProcessingException;
 
   /**
    * 은행업권 - 수신계좌 기본정보 조회(은행)
@@ -21,7 +21,7 @@ public interface BankService {
    * @param own_org_cd
    * @return
    */
-  ResBank002 inqBasicInfo(ReqBank002 req, String api_id, String own_org_cd) throws JsonProcessingException;
+  ResBank002 accountBasic(ReqBank002 req, String api_id, String own_org_cd) throws JsonProcessingException;
 
   /**
    * 은행업권 - 수신계좌 추가정보 조회(은행)
@@ -31,7 +31,7 @@ public interface BankService {
    * @return ResBank003
    * @throws JsonProcessingException
    */
-  ResBank003 addtionalInfo(ReqBank003 req, String api_id, String own_org_cd) throws JsonProcessingException;
+  ResBank003 accountDetail(ReqBank003 req, String api_id, String own_org_cd) throws JsonProcessingException;
 
   /**
    * 은행업권 - 수신계좌 거래내역 조회
@@ -40,7 +40,7 @@ public interface BankService {
    * @param own_org_cd
    * @return
    */
-  ResBank004 listTransactions(ReqBank004 req, String api_id, String own_org_cd) throws JsonProcessingException;
+  ResBank004 accountTransactions(ReqBank004 req, String api_id, String own_org_cd) throws JsonProcessingException;
 
   /**
    * 은행업권 - 투자상품계좌 기본정보 조회
