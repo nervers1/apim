@@ -32,7 +32,7 @@ public class CardServiceImpl implements CardService {
    * @throws JsonProcessingException
    */
   @Override
-  public ResCard001 listCard(ReqCard001 req, String api_id, String own_org_cd) throws JsonProcessingException {
+  public ResCard001 cards(ReqCard001 req, String api_id, String own_org_cd) throws JsonProcessingException {
     String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id;
     // Card
     String res = jdbcTemplate.queryForObject(sql, String.class);

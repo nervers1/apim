@@ -12,7 +12,7 @@ public interface CardService {
    * @return
    * @throws JsonProcessingException
    */
-  ResCard001 listCard(ReqCard001 req, String api_id, String own_org_cd) throws JsonProcessingException;
+  ResCard001 cards(ReqCard001 req, String api_id, String own_org_cd) throws JsonProcessingException;
 
   /**
    * 카드업권 : 카드 기본정보 조회
