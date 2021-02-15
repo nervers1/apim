@@ -1,6 +1,8 @@
 package kr.mydata.apim.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -21,6 +23,8 @@ import java.io.Serializable;
  * "reg_id" VARCHAR(50) NULL DEFAULT NULL,
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class APIEntity implements Serializable {
   private int seq_no;
   private int busr;

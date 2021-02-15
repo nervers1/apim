@@ -1,13 +1,17 @@
 package kr.mydata.apim.vo.efin;
 
 import kr.mydata.apim.vo.APIEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 선불 거래내역 조회 - 입력
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ReqEpay004 extends APIEntity {
   private String authorization;

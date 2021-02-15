@@ -1,6 +1,8 @@
 package kr.mydata.apim.vo.insu;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -8,6 +10,8 @@ import java.math.BigDecimal;
  * 자동차보험 정보 조회 - 상세
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResInsu004Sub {
   private String car_number;
   private String car_insu_type;

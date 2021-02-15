@@ -1,7 +1,9 @@
 package kr.mydata.apim.vo.invest;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -9,6 +11,8 @@ import java.util.List;
  * 계좌 목록 조회 - 출력
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResInvest001 {
   private String rsp_code;
   private String rsp_msg;

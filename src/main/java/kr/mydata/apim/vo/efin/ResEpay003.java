@@ -1,11 +1,15 @@
 package kr.mydata.apim.vo.efin;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 전자지급수단 자동충전정보 조회 - 출력
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResEpay003 {
   private String rsp_code;
   private String rsp_msg;

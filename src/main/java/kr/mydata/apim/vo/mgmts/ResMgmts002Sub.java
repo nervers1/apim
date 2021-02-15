@@ -1,11 +1,15 @@
 package kr.mydata.apim.vo.mgmts;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 기관정보 조회 - 상세
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResMgmts002Sub {
   private String op_type;
   private String org_type;

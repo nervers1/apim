@@ -1,7 +1,9 @@
 package kr.mydata.apim.vo.card;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -9,6 +11,8 @@ import java.util.List;
  * 해외 승인내역 조회 - 출력
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResCard008 {
   private String rsp_code;
   private String rsp_msg;

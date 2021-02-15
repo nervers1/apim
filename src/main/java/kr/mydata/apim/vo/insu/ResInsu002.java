@@ -1,6 +1,8 @@
 package kr.mydata.apim.vo.insu;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.List;
  * 보험 기본정보 조회 - 출력
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResInsu002 {
   private String rsp_code;
   private String rsp_msg;

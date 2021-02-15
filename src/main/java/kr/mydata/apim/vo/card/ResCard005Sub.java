@@ -1,7 +1,9 @@
 package kr.mydata.apim.vo.card;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -9,6 +11,8 @@ import java.math.BigDecimal;
  * 청구 추가정보 조회 - 상세
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResCard005Sub {
   private String card_id;
   private String paid_dtime;

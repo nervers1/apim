@@ -1,7 +1,9 @@
 package kr.mydata.apim.vo.invest;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -9,6 +11,8 @@ import java.math.BigDecimal;
  * 계좌 기본정보 조회 - 출력
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResInvest002 {
   private String rsp_code;
   private String rsp_msg;

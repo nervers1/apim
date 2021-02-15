@@ -1,8 +1,12 @@
 package kr.mydata.apim.vo.bank;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResBank001Sub {
   private String account_num;
   private String is_consent;

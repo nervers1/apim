@@ -1,8 +1,10 @@
 package kr.mydata.apim.vo.mgmts;
 
 import kr.mydata.apim.vo.APIEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -10,6 +12,8 @@ import java.util.List;
  * 통계자료 전송 - 입력
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ReqMgmts004 extends APIEntity {
   private String authorization;

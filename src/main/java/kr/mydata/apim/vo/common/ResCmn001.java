@@ -1,6 +1,8 @@
 package kr.mydata.apim.vo.common;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -21,6 +23,8 @@ import java.util.List;
  * - api_uri    API 명 aN(50)      - URI 계층 구조 중 <base path>를 제외한 URI 정보(ex /v5/bank/accounts/basic)
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResCmn001 {
   private String rsp_code;
   private String rsp_msg;

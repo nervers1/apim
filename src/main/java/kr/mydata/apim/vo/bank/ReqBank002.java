@@ -1,13 +1,17 @@
 package kr.mydata.apim.vo.bank;
 
 import kr.mydata.apim.vo.APIEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 수신계좌 기본정보 조회 - 입력
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ReqBank002 extends APIEntity {
   private String authorization;

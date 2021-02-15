@@ -1,6 +1,8 @@
 package kr.mydata.apim.vo.invest;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -8,6 +10,8 @@ import java.math.BigDecimal;
  * 계좌 상품정보 조회 - 상세
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResInvest004Sub {
   private String prod_type;
   private String prod_type_detail;

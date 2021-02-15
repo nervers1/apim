@@ -1,6 +1,8 @@
 package kr.mydata.apim.vo.card;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -8,6 +10,8 @@ import java.math.BigDecimal;
  * 청구 기본정보 조회 - 상세
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResCard004Sub {
   private String seqno;
   private BigDecimal charge_amt;
