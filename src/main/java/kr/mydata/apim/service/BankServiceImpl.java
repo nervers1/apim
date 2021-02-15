@@ -134,8 +134,11 @@ public class BankServiceImpl implements BankService {
   public ResBank004 listTransactions(ReqBank004 req, String api_id, String own_org_cd) throws JsonProcessingException {
 
     String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
 
-    ResBank004 resBank004 = jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
+    mapper.registerModule(new JavaTimeModule());
+
+    /*ResBank004 resBank004 = jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
       ResBank004 entity = new ResBank004();
       entity.setRsp_code(rs.getString("rsp_code"));
       entity.setRsp_msg(rs.getString("rsp_msg"));
@@ -143,9 +146,9 @@ public class BankServiceImpl implements BankService {
       entity.setTrans_cnt(rs.getInt("trans_cnt"));
       entity.setTrans_list((List<ResBank004Sub>)rs.getObject("trans_list", List.class));
       return entity;
-    }, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
+    }, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());*/
 
-    return resBank004;
+    return mapper.readValue(res, ResBank004.class);
   }
 
   /**
