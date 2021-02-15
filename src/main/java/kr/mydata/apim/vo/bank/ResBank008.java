@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResBank008 {
-  // 결과 확인필요
   private String rsp_code;
   private String rsp_msg;
   private String search_timestamp;
