@@ -13,10 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResBank001 {
-  private String rsp_code;
-  private String rsp_msg;
-  private String search_timestamp;
-  private String reg_date;
-  private int account_cnt;
-  private List<ResBank001Sub> account_list;
+	private String rsp_code;
+	private String rsp_msg;
+	private String search_timestamp;
+	private String reg_date;
+	private String account_cnt;
+	private List<ResBank001Sub> account_list;
 }

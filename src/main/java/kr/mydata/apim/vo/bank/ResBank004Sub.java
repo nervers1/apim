@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 /**
  * 수신계좌 거래내역 조회 - 상세
  */
@@ -13,11 +11,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResBank004Sub {
-  private String trans_dtime;
-  private String trans_no;
-  private String trans_type;
-  private String trans_class;
-  private BigDecimal trans_amt;
-  private BigDecimal balance_amt;
-  private int paid_in_cnt;
+	private String trans_dtime;
+	private String trans_no;
+	private String trans_type;
+	private String trans_class;
+	private String trans_amt;
+	private String balance_amt;
+	private String paid_in_cnt;
 }

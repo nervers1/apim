@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResCmn002 {
-  private String rsp_code;
-  private String rsp_msg;
-  private String is_scheduled;
-  private int cycle;
-  private String end_date;
-  private String purpose;
-  private int period;
+	private String rsp_code;
+	private String rsp_msg;
+	private String is_scheduled;
+	private String cycle;
+	private String end_date;
+	private String purpose;
+	private String period;
 }

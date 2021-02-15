@@ -1,4 +1,4 @@
-package kr.mydata.apim.vo.common;
+package kr.mydata.apim.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResCmn001Sub {
-	private String api_uri;
+public class ErrorResponse {
+	String rsp_code;
+	String rsp_msg;
 }

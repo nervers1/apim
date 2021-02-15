@@ -1,6 +1,8 @@
 package kr.mydata.apim.vo.bank;
 
-import kr.mydata.apim.vo.APIEntity;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,11 +15,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ReqBank002 extends APIEntity {
-  private String authorization;
-  private String org_code;
-  private String account_num;
-  private int seqno;
-  private String currency_code;
-  private String search_timestamp;
+public class ReqBank002 {
+
+	@NotNull(message = "org_code is null")
+	@Size(min = 1, max = 7, message = "org_code size error")
+	private String org_code;
+
+	@NotNull(message = "account_num is null")
+	@Size(min = 1, max = 20, message = "account_num size error")
+	private String account_num;
+
+	@Size(min = 1, max = 5, message = "seqno size error")
+	private String seqno;
+
+	@Size(min = 3, max = 3, message = "currency_code size error")
+	private String currency_code;
+
+	@NotNull(message = "search_timestamp is null")
+	@Size(min = 14, max = 14, message = "search_timestamp size error")
+	private String search_timestamp;
 }

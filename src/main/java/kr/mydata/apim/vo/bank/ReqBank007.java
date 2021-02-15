@@ -1,7 +1,8 @@
 package kr.mydata.apim.vo.bank;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import kr.mydata.apim.vo.APIEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,12 +15,31 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ReqBank007 extends APIEntity {
-  private String authorization;
-  private String org_code;
-  private String account_num;
-  private String from_dtime;
-  private String to_dtime;
-  private String next_page;
-  private int limit;
+public class ReqBank007 {
+
+	@NotNull(message = "org_code is null")
+	@Size(min = 1, max = 7, message = "org_code size error")
+	private String org_code;
+
+	@NotNull(message = "account_num is null")
+	@Size(max = 20, message = "account_num size error")
+	private String account_num;
+
+	@Size(max = 5, message = "seqno size error")
+	private String seqno;
+
+	@NotNull(message = "from_dtime is null")
+	@Size(min = 14, max = 14, message = "from_dtime size error")
+	private String from_dtime;
+
+	@NotNull(message = "to_dtime is null")
+	@Size(min = 14, max = 14, message = "to_dtime size error")
+	private String to_dtime;
+
+	@Size(max = 1000, message = "next_page size error")
+	private String next_page;
+
+	@NotNull(message = "limit is null")
+	@Size(min = 1, max = 3, message = "limit size error")
+	private String limit;
 }

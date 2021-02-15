@@ -1,6 +1,8 @@
 package kr.mydata.apim.vo.common;
 
-import kr.mydata.apim.vo.APIEntity;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,9 +15,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ReqCmn002 extends APIEntity {
-  // 접근토큰
-  private String authorization;
-  // 기관코드
-  private String org_code;
+public class ReqCmn002 {
+
+	@NotNull(message = "org_code is null")
+	@Size(min = 1, max = 7, message = "org_code size error")
+	private String org_code;
 }
