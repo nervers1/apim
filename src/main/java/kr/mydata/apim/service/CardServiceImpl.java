@@ -1,8 +1,5 @@
 package kr.mydata.apim.service;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -105,7 +102,7 @@ public class CardServiceImpl implements CardService {
 	 * @throws JsonProcessingException
 	 */
 	@Override
-	public ResCard003 cardPoint(ReqCard003 req, String api_id, String own_org_cd) throws JsonProcessingException {
+	public ResCard003 point(ReqCard003 req, String api_id, String own_org_cd) throws JsonProcessingException {
 
 		String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
 		String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd,
@@ -128,7 +125,7 @@ public class CardServiceImpl implements CardService {
 	 * @throws JsonProcessingException
 	 */
 	@Override
-	public ResCard004 cardBills(ReqCard004 req, String api_id, String own_org_cd) throws JsonProcessingException {
+	public ResCard004 bills(ReqCard004 req, String api_id, String own_org_cd) throws JsonProcessingException {
 		return null;
 	}
 
@@ -142,7 +139,7 @@ public class CardServiceImpl implements CardService {
 	 * @throws JsonProcessingException
 	 */
 	@Override
-	public ResCard005 cardBillsDetail(ReqCard005 req, String api_id, String own_org_cd) throws JsonProcessingException {
+	public ResCard005 billsDetail(ReqCard005 req, String api_id, String own_org_cd) throws JsonProcessingException {
 		return null;
 	}
 
@@ -156,7 +153,7 @@ public class CardServiceImpl implements CardService {
 	 * @throws JsonProcessingException
 	 */
 	@Override
-	public ResCard006 cardPayment(ReqCard006 req, String api_id, String own_org_cd) throws JsonProcessingException {
+	public ResCard006 payment(ReqCard006 req, String api_id, String own_org_cd) throws JsonProcessingException {
 		return null;
 	}
 
@@ -173,16 +170,50 @@ public class CardServiceImpl implements CardService {
 	@Override
 	public ResCard007 cardApprovalDomestic(ReqCard007 req, String api_id, String own_org_cd, String card_id)
 			throws JsonProcessingException {
-		String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
-//    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id;
-		// Card
-		String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd,
-				req.getOrg_code(), card_id);
-		log.info("res : {}", res);
-		// to JSON
-		mapper.registerModule(new JavaTimeModule());
+
+		int nextPage = req.getNext_page() == null ? 0 : Integer.valueOf(req.getNext_page());
+		int limit = Integer.valueOf(req.getLimit());
+
+		//@formatter:off
+		String sql = "select to_json(rslt) from (select"
+				+ "'00000' as rsp_code,"
+				+ "'정상' as rsp_msg,"
+				+ "  case\r\n"
+				+ "    when max(rownum) = " + nextPage + " + " + limit + " + 1 then (max(rownum) - 1)::text\r\n"
+				+ "    when max(rownum) <= " + nextPage + " + " + limit + " then 0::text\r\n"
+				+ "  end as next_page,\r\n"
+				+ "  case\r\n"
+				+ "    when max(rownum) = " + nextPage + " + " + limit + " + 1 then (count(*) - 1)::text\r\n"
+				+ "    when max(rownum) <= " + nextPage + " + " + limit + " then count(*)::text\r\n"
+				+ "  end as approved_cnt,\r\n"
+				+ "       json_agg(res.list) as approved_list\r\n"
+				+ "  from ( select  \r\n"
+				+ "               ( row_number() over( order by a.list ->> 'approved_dtime' desc)) as rownum, *\r\n"
+				+ "  from ( select  \r\n"
+				+ "              jsonb_array_elements(res_data -> 'approved_list') as list\r\n"
+				+ "  from tb_test_data \r\n"
+				+ "where api_id = " + Integer.valueOf(api_id) + "\r\n"
+				+ "  and org_cd = '" + req.getOrg_code() + "'\r\n"
+				+ "  and own_org_cd = '" + own_org_cd + "'\r\n"
+				+ "  and ast_id = '" + card_id + "') a \r\n"
+				+ "where a.list ->> 'approved_dtime' between '" + req.getFrom_dtime() + "' and '" + req.getTo_dtime() + "') res\r\n"
+				+ "  where res.rownum > " + nextPage + "\r\n"
+				+ "   and res.rownum <= " + nextPage + " + " + limit + " + 1) rslt";
+		//@formatter:on
+
+		String res = jdbcTemplate.queryForObject(sql, String.class);
+
+		log.info("res --> {}", res);
+
 		mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+		
 		ResCard007 resCard007 = mapper.readValue(res, ResCard007.class);
+
+		if (null == resCard007.getApproved_list() || 0 == resCard007.getApproved_list().size()) {
+			resCard007.setRsp_code("99999");
+			resCard007.setRsp_msg("검색결과 없음");
+		}
+
 		return resCard007;
 	}
 
@@ -218,7 +249,7 @@ public class CardServiceImpl implements CardService {
 	 * @throws JsonProcessingException
 	 */
 	@Override
-	public ResCard009 cardLoans(ReqCard009 req, String api_id, String own_org_cd) throws JsonProcessingException {
+	public ResCard009 loans(ReqCard009 req, String api_id, String own_org_cd) throws JsonProcessingException {
 		return null;
 	}
 
@@ -232,8 +263,7 @@ public class CardServiceImpl implements CardService {
 	 * @throws JsonProcessingException
 	 */
 	@Override
-	public ResCard010 cardLoansRevolving(ReqCard010 req, String api_id, String own_org_cd)
-			throws JsonProcessingException {
+	public ResCard010 loansRevolving(ReqCard010 req, String api_id, String own_org_cd) throws JsonProcessingException {
 		return null;
 	}
 
@@ -247,8 +277,7 @@ public class CardServiceImpl implements CardService {
 	 * @throws JsonProcessingException
 	 */
 	@Override
-	public ResCard011 cardLoansShortTerm(ReqCard011 req, String api_id, String own_org_cd)
-			throws JsonProcessingException {
+	public ResCard011 loansShortTerm(ReqCard011 req, String api_id, String own_org_cd) throws JsonProcessingException {
 		return null;
 	}
 
@@ -262,8 +291,7 @@ public class CardServiceImpl implements CardService {
 	 * @throws JsonProcessingException
 	 */
 	@Override
-	public ResCard012 cardLoansLongTerm(ReqCard012 req, String api_id, String own_org_cd)
-			throws JsonProcessingException {
+	public ResCard012 loansLongTerm(ReqCard012 req, String api_id, String own_org_cd) throws JsonProcessingException {
 		return null;
 	}
 }

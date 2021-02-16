@@ -5,6 +5,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.mydata.apim.service.CardService;
 import kr.mydata.apim.service.CommonService;
@@ -57,6 +61,13 @@ public class CardController {
 	@Autowired
 	private CommonService commonService;
 
+	private final ObjectMapper mapper = new ObjectMapper();
+	private final JdbcTemplate jdbcTemplate;
+
+	public CardController(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
 	private ResponseEntity<ErrorResponse> returnErrorMessage(Exception e) {
 		e.printStackTrace();
 
@@ -65,6 +76,49 @@ public class CardController {
 		er.setRsp_msg("Internal server error occured");
 
 		return new ResponseEntity<ErrorResponse>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	private String checkApiId(String api_id, String uri) throws JsonMappingException, JsonProcessingException {
+
+		log.error("uri - {}", uri);
+
+		if (ObjectUtils.isEmpty(api_id)) {
+			// @formatter:off
+			String preSql = "SELECT b.id "
+					+ "        FROM apx_api_resource a, apx_api_resource_method b "
+					+ "       WHERE a.uri = '" + uri + "'"
+					+ "         AND b.resource_version_id = a.target_version";
+			// @formatter:on
+
+			String preRes = jdbcTemplate.queryForObject(preSql, String.class);
+
+			api_id = mapper.readValue(preRes, String.class);
+		}
+
+		return api_id;
+	}
+
+	private String checkOwnOrgCd(String own_org_cd, String authorization)
+			throws JsonMappingException, JsonProcessingException {
+
+		if (ObjectUtils.isEmpty(own_org_cd)) {
+			if (authorization.startsWith("Bearer ")) {
+				authorization = authorization.substring(7);
+			}
+
+			// @formatter:off
+			String ownOrgCdSql = "SELECT b.organization_id " 
+					+ "             FROM apx_oauth_token a, apx_app b "
+					+ "            WHERE a.access_token = '" + authorization + "'"
+					+ "              AND b.id = a.app_id";
+
+			String ownOrgCdRes = jdbcTemplate.queryForObject(ownOrgCdSql, String.class);
+			// @formatter:on
+
+			own_org_cd = mapper.readValue(ownOrgCdRes, String.class);
+		}
+		
+		return own_org_cd;
 	}
 
 	/**
@@ -130,7 +184,7 @@ public class CardController {
 	 * @throws JsonProcessingException
 	 */
 	@GetMapping(value = "/cards/point", produces = "application/json; charset=UTF-8")
-	public ResponseEntity cardPoint(@RequestHeader(value = "x-api-id") String api_id,
+	public ResponseEntity point(@RequestHeader(value = "x-api-id") String api_id,
 			@RequestHeader(value = "x-own-org-cd") String own_org_cd, @Valid ReqCard003 req) {
 
 		log.info("api_id : {}", api_id);
@@ -138,8 +192,8 @@ public class CardController {
 		log.info("req : {}", req);
 
 		try {
-			ResCard003 res = cardService.cardPoint(req, api_id, own_org_cd);
-			
+			ResCard003 res = cardService.point(req, api_id, own_org_cd);
+
 			return new ResponseEntity<ResCard003>(res, HttpStatus.OK);
 		} catch (JsonProcessingException e) {
 			return returnErrorMessage(e);
@@ -156,13 +210,13 @@ public class CardController {
 	 * @throws JsonProcessingException
 	 */
 	@GetMapping(value = "/cards/bills", produces = "application/json; charset=UTF-8")
-	public ResponseEntity cardBills(@RequestHeader(value = "x-api-id") String api_id,
+	public ResponseEntity bills(@RequestHeader(value = "x-api-id") String api_id,
 			@RequestHeader(value = "x-own-org-cd") String own_org_cd, ReqCard004 req) {
 		log.info("api_id : {}", api_id);
 		log.info("own_org_cd : {}", own_org_cd);
 
 		try {
-			ResCard004 res = cardService.cardBills(req, api_id, own_org_cd);
+			ResCard004 res = cardService.bills(req, api_id, own_org_cd);
 			return new ResponseEntity(res, HttpStatus.OK);
 		} catch (JsonProcessingException e) {
 			return returnErrorMessage(e);
@@ -179,13 +233,13 @@ public class CardController {
 	 * @throws JsonProcessingException
 	 */
 	@GetMapping(value = "/cards/bills/detail", produces = "application/json; charset=UTF-8")
-	public ResponseEntity cardBills(@RequestHeader(value = "x-api-id") String api_id,
+	public ResponseEntity billsDetail(@RequestHeader(value = "x-api-id") String api_id,
 			@RequestHeader(value = "x-own-org-cd") String own_org_cd, ReqCard005 req) {
 		log.info("api_id : {}", api_id);
 		log.info("own_org_cd : {}", own_org_cd);
 
 		try {
-			ResCard005 res = cardService.cardBillsDetail(req, api_id, own_org_cd);
+			ResCard005 res = cardService.billsDetail(req, api_id, own_org_cd);
 			return new ResponseEntity(res, HttpStatus.OK);
 		} catch (JsonProcessingException e) {
 			return returnErrorMessage(e);
@@ -202,12 +256,12 @@ public class CardController {
 	 * @throws JsonProcessingException
 	 */
 	@GetMapping(value = "/cards/payment", produces = "application/json; charset=UTF-8")
-	public ResponseEntity cardBills(@RequestHeader(value = "x-api-id") String api_id,
+	public ResponseEntity payment(@RequestHeader(value = "x-api-id") String api_id,
 			@RequestHeader(value = "x-own-org-cd") String own_org_cd, ReqCard006 req) {
 		log.info("api_id : {}", api_id);
 		log.info("own_org_cd : {}", own_org_cd);
 		try {
-			ResCard006 res = cardService.cardPayment(req, api_id, own_org_cd);
+			ResCard006 res = cardService.payment(req, api_id, own_org_cd);
 			return new ResponseEntity(res, HttpStatus.OK);
 		} catch (JsonProcessingException e) {
 			return returnErrorMessage(e);
@@ -222,9 +276,9 @@ public class CardController {
 	 * @return http://localhost:8080/v1/card/cards/10456243512223/approval-domestic?org_code=0000000&from_dtime=20210101000000&to_dtime=20210501235959&limit=20
 	 */
 	@GetMapping(value = "/cards/{card_id}/approval-domestic", produces = "application/json; charset=UTF-8")
-	public ResponseEntity cardApprovalDomestic(@RequestHeader(value = "x-api-id") String api_id,
-			@RequestHeader(value = "x-own-org-cd") String own_org_cd, @PathVariable(value = "card_id") String card_id,
-			ReqCard007 req) {
+	public ResponseEntity cardApprovalDomestic(@RequestHeader(value = "Authorization") String authorization,
+			@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+			@PathVariable(value = "card_id") String card_id, @Valid ReqCard007 req) {
 
 		log.info("api_id : {}", api_id);
 		log.info("card_id : {}", card_id);
@@ -232,9 +286,12 @@ public class CardController {
 		log.info("req : {}", req);
 
 		try {
+			api_id = checkApiId(api_id, "/cards/{card_id}/approval-domestic");
+			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
+			
 			ResCard007 res = cardService.cardApprovalDomestic(req, api_id, own_org_cd, card_id);
-			return new ResponseEntity(res, HttpStatus.OK);
 
+			return new ResponseEntity<ResCard007>(res, HttpStatus.OK);
 		} catch (Exception e) {
 			return returnErrorMessage(e);
 		}
@@ -275,7 +332,7 @@ public class CardController {
 	 * @return
 	 */
 	@GetMapping(value = "/loans", produces = "application/json; charset=UTF-8")
-	public ResponseEntity cardLoans(@RequestHeader(value = "x-api-id") String api_id,
+	public ResponseEntity loans(@RequestHeader(value = "x-api-id") String api_id,
 			@RequestHeader(value = "x-own-org-cd") String own_org_cd, ReqCard009 req) {
 
 		log.info("api_id : {}", api_id);
@@ -283,7 +340,7 @@ public class CardController {
 		log.info("req : {}", req);
 
 		try {
-			ResCard009 res = cardService.cardLoans(req, api_id, own_org_cd);
+			ResCard009 res = cardService.loans(req, api_id, own_org_cd);
 			return new ResponseEntity(res, HttpStatus.OK);
 
 		} catch (Exception e) {
@@ -301,13 +358,13 @@ public class CardController {
 	 * @return
 	 */
 	@GetMapping(value = "/loans/revolving", produces = "application/json; charset=UTF-8")
-	public ResponseEntity cardLoanRevolving(@RequestHeader(value = "x-api-id") String api_id,
+	public ResponseEntity loansRevolving(@RequestHeader(value = "x-api-id") String api_id,
 			@RequestHeader(value = "x-own-org-cd") String own_org_cd, ReqCard010 req) {
 		log.info("api_id : {}", api_id);
 		log.info("own_org_cd : {}", own_org_cd);
 		log.info("req : {}", req);
 		try {
-			ResCard010 res = cardService.cardLoansRevolving(req, api_id, own_org_cd);
+			ResCard010 res = cardService.loansRevolving(req, api_id, own_org_cd);
 			return new ResponseEntity(res, HttpStatus.OK);
 
 		} catch (Exception e) {
@@ -324,7 +381,7 @@ public class CardController {
 	 * @return
 	 */
 	@GetMapping(value = "/loans/short-term", produces = "application/json; charset=UTF-8")
-	public ResponseEntity cardLoansShortTerm(@RequestHeader(value = "x-api-id") String api_id,
+	public ResponseEntity loansShortTerm(@RequestHeader(value = "x-api-id") String api_id,
 			@RequestHeader(value = "x-own-org-cd") String own_org_cd, ReqCard011 req) {
 
 		log.info("api_id : {}", api_id);
@@ -332,7 +389,7 @@ public class CardController {
 		log.info("req : {}", req);
 
 		try {
-			ResCard011 res = cardService.cardLoansShortTerm(req, api_id, own_org_cd);
+			ResCard011 res = cardService.loansShortTerm(req, api_id, own_org_cd);
 			return new ResponseEntity(res, HttpStatus.OK);
 
 		} catch (Exception e) {
@@ -349,7 +406,7 @@ public class CardController {
 	 * @return
 	 */
 	@GetMapping(value = "/loans/long-term", produces = "application/json; charset=UTF-8")
-	public ResponseEntity cardLoansLongTerm(@RequestHeader(value = "x-api-id") String api_id,
+	public ResponseEntity loansLongTerm(@RequestHeader(value = "x-api-id") String api_id,
 			@RequestHeader(value = "x-own-org-cd") String own_org_cd, ReqCard012 req) {
 
 		log.info("api_id : {}", api_id);
@@ -357,7 +414,7 @@ public class CardController {
 		log.info("req : {}", req);
 
 		try {
-			ResCard012 res = cardService.cardLoansLongTerm(req, api_id, own_org_cd);
+			ResCard012 res = cardService.loansLongTerm(req, api_id, own_org_cd);
 			return new ResponseEntity(res, HttpStatus.OK);
 
 		} catch (Exception e) {

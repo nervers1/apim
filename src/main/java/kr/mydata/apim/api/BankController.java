@@ -5,12 +5,18 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.mydata.apim.service.BankService;
 import kr.mydata.apim.service.CommonService;
@@ -65,6 +71,13 @@ public class BankController {
 	@Autowired
 	private CommonService commonService;
 
+	private final ObjectMapper mapper = new ObjectMapper();
+	private final JdbcTemplate jdbcTemplate;
+
+	public BankController(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
 	private ResponseEntity<ErrorResponse> returnErrorMessage(Exception e) {
 		e.printStackTrace();
 
@@ -73,6 +86,49 @@ public class BankController {
 		er.setRsp_msg("Internal server error occured");
 
 		return new ResponseEntity<ErrorResponse>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	private String checkApiId(String api_id, String uri) throws JsonMappingException, JsonProcessingException {
+
+		log.error("uri - {}", uri);
+
+		if (ObjectUtils.isEmpty(api_id)) {
+			// @formatter:off
+			String preSql = "SELECT b.id "
+					+ "        FROM apx_api_resource a, apx_api_resource_method b "
+					+ "       WHERE a.uri = '" + uri + "'"
+					+ "         AND b.resource_version_id = a.target_version";
+			// @formatter:on
+
+			String preRes = jdbcTemplate.queryForObject(preSql, String.class);
+
+			api_id = mapper.readValue(preRes, String.class);
+		}
+
+		return api_id;
+	}
+
+	private String checkOwnOrgCd(String own_org_cd, String authorization)
+			throws JsonMappingException, JsonProcessingException {
+
+		if (ObjectUtils.isEmpty(own_org_cd)) {
+			if (authorization.startsWith("Bearer ")) {
+				authorization = authorization.substring(7);
+			}
+
+			// @formatter:off
+			String ownOrgCdSql = "SELECT b.organization_id " 
+					+ "             FROM apx_oauth_token a, apx_app b "
+					+ "            WHERE a.access_token = '" + authorization + "'"
+					+ "              AND b.id = a.app_id";
+
+			String ownOrgCdRes = jdbcTemplate.queryForObject(ownOrgCdSql, String.class);
+			// @formatter:on
+
+			own_org_cd = mapper.readValue(ownOrgCdRes, String.class);
+		}
+
+		return own_org_cd;
 	}
 
 	/**
