@@ -152,7 +152,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/bank/accounts/accounts");
+			api_id = checkApiId(api_id, "/bank/accounts");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResBank001 res = bankService.accounts(req, api_id, own_org_cd);
@@ -522,7 +522,7 @@ public class BankController {
 			@Valid @RequestBody ReqIRP004 req) {
 
 		try {
-			api_id = checkApiId(api_id, "/bank/accounts/irps/transactions");
+			api_id = checkApiId(api_id, "/bank/irps/transactions");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResIRP004 resIRP004 = irpService.irpTransactions(req, api_id, own_org_cd);
