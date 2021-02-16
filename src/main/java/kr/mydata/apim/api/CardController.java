@@ -211,7 +211,7 @@ public class CardController {
     log.info("req : {}", req);
 
     try {
-      String res = service.cardApprovalOverseas(req, api_id, own_org_cd);
+      ResCard008 res = service.cardApprovalOverseas(req, api_id, own_org_cd, card_id);
       return new ResponseEntity(res, HttpStatus.OK);
 
     } catch (Exception e) {
