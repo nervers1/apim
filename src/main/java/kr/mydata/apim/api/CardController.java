@@ -175,7 +175,7 @@ public class CardController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/card/cards");
+			api_id = checkApiId(api_id, "/card/cards/{card_id}");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResCard002 resCard002 = cardService.cardBasic(req, api_id, own_org_cd, card_id);
@@ -205,7 +205,7 @@ public class CardController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/card/cards");
+			api_id = checkApiId(api_id, "/card/cards/point");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResCard003 res = cardService.point(req, api_id, own_org_cd);
@@ -303,7 +303,7 @@ public class CardController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/cards/{card_id}/approval-domestic");
+			api_id = checkApiId(api_id, "/card/cards/{card_id}/approval-domestic");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResCard007 res = cardService.cardApprovalDomestic(req, api_id, own_org_cd, card_id);

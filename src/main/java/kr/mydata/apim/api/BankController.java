@@ -152,7 +152,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/bank/accounts");
+			api_id = checkApiId(api_id, "/bank/accounts/accounts");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResBank001 res = bankService.accounts(req, api_id, own_org_cd);
@@ -182,7 +182,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/bank/deposit/basic");
+			api_id = checkApiId(api_id, "/bank/accounts/deposit/basic");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResBank002 res = bankService.accountBasic(req, api_id, own_org_cd);
@@ -211,7 +211,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/bank/deposit/detail");
+			api_id = checkApiId(api_id, "/bank/accounts/deposit/detail");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResBank003 resBank003 = bankService.accountDetail(req, api_id, own_org_cd);
@@ -240,7 +240,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/bank/deposit/transactions");
+			api_id = checkApiId(api_id, "/bank/accounts/deposit/transactions");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResBank004 result = bankService.accountTransactions(req, api_id, own_org_cd);
@@ -269,7 +269,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/bank/invest/basic");
+			api_id = checkApiId(api_id, "/bank/accounts/invest/basic");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResBank005 resBank005 = bankService.investBasic(req, api_id, own_org_cd);
@@ -299,7 +299,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/bank/invest/detail");
+			api_id = checkApiId(api_id, "/bank/accounts/invest/detail");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResBank006 resBank006 = bankService.investDetail(req, api_id, own_org_cd);
@@ -329,7 +329,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/bank/invest/transactions");
+			api_id = checkApiId(api_id, "/bank/accounts/invest/transactions");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResBank007 resBank007 = bankService.investTransactions(req, api_id, own_org_cd);
@@ -359,7 +359,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/bank/loan/basic");
+			api_id = checkApiId(api_id, "/bank/accounts/loan/basic");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResBank008 resBank008 = bankService.loanBasic(req, api_id, own_org_cd);
@@ -389,7 +389,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/bank/loan/detail");
+			api_id = checkApiId(api_id, "/bank/accounts/loan/detail");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResBank009 resBank009 = bankService.loanDetail(req, api_id, own_org_cd);
@@ -419,7 +419,7 @@ public class BankController {
 		log.info("req : {}", req);
 
 		try {
-			api_id = checkApiId(api_id, "/bank/loan/transactions");
+			api_id = checkApiId(api_id, "/bank/accounts/loan/transactions");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResBank010 resBank010 = bankService.loanTransactions(req, api_id, own_org_cd);
@@ -522,7 +522,7 @@ public class BankController {
 			@Valid @RequestBody ReqIRP004 req) {
 
 		try {
-			api_id = checkApiId(api_id, "/bank/irps/transactions");
+			api_id = checkApiId(api_id, "/bank/accounts/irps/transactions");
 			own_org_cd = checkOwnOrgCd(own_org_cd, authorization);
 
 			ResIRP004 resIRP004 = irpService.irpTransactions(req, api_id, own_org_cd);
