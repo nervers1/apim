@@ -1,7 +1,9 @@
 package kr.mydata.apim.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import kr.mydata.apim.vo.insu.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,7 +29,13 @@ public class InsuServiceImpl implements InsuService {
    */
   @Override
   public ResInsu001 listInsu(ReqInsu001 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInsu001.class);
   }
 
   /**
@@ -40,7 +48,13 @@ public class InsuServiceImpl implements InsuService {
    */
   @Override
   public ResInsu002 insuBasic(ReqInsu002 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getInsu_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInsu002.class);
   }
 
   /**
@@ -53,7 +67,13 @@ public class InsuServiceImpl implements InsuService {
    */
   @Override
   public ResInsu003 insuContracts(ReqInsu003 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getInsu_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInsu003.class);
   }
 
   /**
@@ -66,7 +86,13 @@ public class InsuServiceImpl implements InsuService {
    */
   @Override
   public ResInsu004 insuCar(ReqInsu004 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getInsu_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInsu004.class);
   }
 
   /**
@@ -79,7 +105,13 @@ public class InsuServiceImpl implements InsuService {
    */
   @Override
   public ResInsu005 insuPayment(ReqInsu005 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getInsu_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInsu005.class);
   }
 
   /**
@@ -92,7 +124,13 @@ public class InsuServiceImpl implements InsuService {
    */
   @Override
   public ResInsu006 insuTransactions(ReqInsu006 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getInsu_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInsu006.class);
   }
 
   /**
@@ -105,7 +143,13 @@ public class InsuServiceImpl implements InsuService {
    */
   @Override
   public ResInsu007 insuCarTransactions(ReqInsu007 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getInsu_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInsu007.class);
   }
 
   /**
@@ -118,7 +162,13 @@ public class InsuServiceImpl implements InsuService {
    */
   @Override
   public ResInsu008 insuLoans(ReqInsu008 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInsu008.class);
   }
 
   /**
@@ -131,7 +181,13 @@ public class InsuServiceImpl implements InsuService {
    */
   @Override
   public ResInsu009 insuLoansBasic(ReqInsu009 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInsu009.class);
   }
 
   /**
@@ -144,7 +200,13 @@ public class InsuServiceImpl implements InsuService {
    */
   @Override
   public ResInsu010 insuLoansDetail(ReqInsu010 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInsu010.class);
   }
 
   /**
@@ -157,6 +219,12 @@ public class InsuServiceImpl implements InsuService {
    */
   @Override
   public ResInsu011 insuLoansTransactions(ReqInsu011 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInsu011.class);
   }
 }

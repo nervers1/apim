@@ -16,4 +16,6 @@ public class ResInsu009 {
   private String search_timestamp;
   private String loan_start_date;
   private String loan_exp_date;
+  private String repay_method;
+  private String insu_num;
 }

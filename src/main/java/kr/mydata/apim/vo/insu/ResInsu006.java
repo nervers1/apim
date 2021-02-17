@@ -18,5 +18,5 @@ public class ResInsu006 {
   private String rsp_msg;
   private String next_page;
   private int trans_cnt;
-  private List<ResInsu004Sub> trans_list;
+  private List<ResInsu006Sub> trans_list;
 }

@@ -164,6 +164,35 @@ public class InsuController {
 
 
   /**
+   * 보험업권 - 보험 거래내역 조회
+   *
+   * @param api_id     String
+   * @param own_org_cd String
+   * @param req        ResInsu006
+   * @return ResponseEntity
+   */
+  @PostMapping(value = "/insurances/transactions", produces = "application/json; charset=UTF-8")
+  public ResponseEntity<ResInsu006> insuTransactions(@RequestHeader(value = "x-api-id") String api_id,
+                                                     @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                     @RequestBody ReqInsu006 req) {
+
+    log.info("api_id : {}", api_id);
+    log.info("own_org_cd : {}", own_org_cd);
+    log.info("req : {}", req);
+
+    try {
+      ResInsu006 resInsu006 = service.insuTransactions(req, api_id, own_org_cd);
+      return new ResponseEntity<>(resInsu006, HttpStatus.OK);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+  }
+
+
+  /**
    * 보험업권 - 자동차보험 거래내역 조회
    *
    * @param api_id     String
@@ -228,7 +257,7 @@ public class InsuController {
    * @param req        ReqInsu009
    * @return ResponseEntity
    */
-  @GetMapping(value = "/loans/basic", produces = "application/json; charset=UTF-8")
+  @PostMapping(value = "/loans/basic", produces = "application/json; charset=UTF-8")
   public ResponseEntity<ResInsu009> insuLoansBasic(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                                    @RequestBody ReqInsu009 req) {
 
@@ -256,7 +285,7 @@ public class InsuController {
    * @param req        ReqInsu010
    * @return ResponseEntity
    */
-  @GetMapping(value = "/loans/detail", produces = "application/json; charset=UTF-8")
+  @PostMapping(value = "/loans/detail", produces = "application/json; charset=UTF-8")
   public ResponseEntity<ResInsu010> insuLoansDetail(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                                     @RequestBody ReqInsu010 req) {
 
@@ -284,7 +313,7 @@ public class InsuController {
    * @param req        ReqInsu011
    * @return ResponseEntity
    */
-  @GetMapping(value = "/loans/transactions", produces = "application/json; charset=UTF-8")
+  @PostMapping(value = "/loans/transactions", produces = "application/json; charset=UTF-8")
   public ResponseEntity<ResInsu011> insuLoansTransactions(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                                           @RequestBody ReqInsu011 req) {
 
