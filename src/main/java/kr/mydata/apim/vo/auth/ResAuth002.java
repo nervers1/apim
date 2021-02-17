@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResAuth002 {
-  private String tokent_type;
-  private String acces_token;
-  private int expire_in;
+  private String token_type;
+  private String access_token;
+  private int expires_in;
   private String refresh_token;
   private int refresh_token_expires_in;
   private String scope;

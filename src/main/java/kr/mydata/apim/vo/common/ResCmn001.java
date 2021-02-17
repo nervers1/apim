@@ -1,5 +1,6 @@
 package kr.mydata.apim.vo.common;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ import java.util.List;
 public class ResCmn001 {
   private String rsp_code;
   private String rsp_msg;
+  @JsonAlias({"version", " VERSION"})
   private String version;
   private String min_version;
   private int api_cnt;

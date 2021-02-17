@@ -1,6 +1,7 @@
 package kr.mydata.apim.vo.irp;
 
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ public class ResIRP002 {
   private String rsp_code;
   private String rsp_msg;
   private String search_timestamp;
+  @JsonAlias({"accumulated_amt", "accmulated_amt"})
   private BigDecimal accumulated_amt;
   private BigDecimal eval_amt;
   private BigDecimal accumulated_employer_amt;

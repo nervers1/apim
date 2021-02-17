@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class ResMgmts002Sub {
   private String op_type;
   private String org_type;
+  private String org_code;
   private String org_name;
   private String org_regno;
   private String corp_regno;

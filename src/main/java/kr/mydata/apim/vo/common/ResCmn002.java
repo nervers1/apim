@@ -16,6 +16,7 @@ public class ResCmn002 {
   private String is_scheduled;
   private int cycle;
   private String end_date;
+  private String exp_date; // ???
   private String purpose;
   private int period;
 }
