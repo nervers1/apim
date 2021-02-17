@@ -1,5 +1,6 @@
 package kr.mydata.apim.vo.efin;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,11 +13,13 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResEpay001 {
+public class ResEfin001 {
   private String rsp_code;
   private String rsp_msg;
+  @JsonIgnore
+  private String reg_date; // 불필요한 항목 : 테스트 데이터에서 빼주세요
   private String search_timestamp;
   private String name;
   private int account_cnt;
-  private List<ResEpay001Sub> account_list;
+  private List<ResEfin001Sub> account_list;
 }

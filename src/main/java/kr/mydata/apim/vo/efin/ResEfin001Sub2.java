@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResEpay001Sub2 {
+public class ResEfin001Sub2 {
   private String pay_org_code;
   private String pay_id;
   private String is_primary;

@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResEpay004Sub {
+public class ResEfin004Sub {
   private String trans_type;
   private String fob_name;
   private String trans_dtime;

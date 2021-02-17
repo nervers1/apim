@@ -35,11 +35,11 @@ public class InvestController {
 
     try {
       ResInvest001 resInvest001 = service.listAccount(req, api_id, own_org_cd);
-      return new ResponseEntity(resInvest001, HttpStatus.OK);
+      return new ResponseEntity<>(resInvest001, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -60,11 +60,11 @@ public class InvestController {
 
     try {
       ResInvest002 resInvest002 = service.listBasic(req, api_id, own_org_cd);
-      return new ResponseEntity(resInvest002, HttpStatus.OK);
+      return new ResponseEntity<>(resInvest002, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -85,11 +85,11 @@ public class InvestController {
 
     try {
       ResInvest003 resInvest003 = service.listTransactions(req, api_id, own_org_cd);
-      return new ResponseEntity(resInvest003, HttpStatus.OK);
+      return new ResponseEntity<>(resInvest003, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -110,11 +110,11 @@ public class InvestController {
 
     try {
       ResInvest004 resInvest004 = service.listProducts(req, api_id, own_org_cd);
-      return new ResponseEntity(resInvest004, HttpStatus.OK);
+      return new ResponseEntity<>(resInvest004, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }

@@ -7,18 +7,15 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * 선불 거래내역 조회 - 입력
+ * 전자지급수단 잔액정보 조회 - 입력
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ReqEpay004 extends APIEntity {
+public class ReqEfin002 extends APIEntity {
   private String authorization;
   private String org_code;
   private String sub_key;
-  private String from_dtime;
-  private String to_dtime;
-  private String next_page;
-  private int limit;
+  private String search_timestamp;
 }

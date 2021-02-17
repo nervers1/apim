@@ -40,16 +40,16 @@ public class APIMController {
 
     try {
       ResCmn001 resCmn001 = common.listAPI(req, api_id, own_org_cd);
-      return new ResponseEntity(resCmn001, HttpStatus.OK);
+      return new ResponseEntity<>(resCmn001, HttpStatus.OK);
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 */
 
   @GetMapping("/v1/consents")
-  public ResponseEntity listConsents(@RequestHeader(value = "x-api-id") String api_id,
+  public ResponseEntity<ResCmn002> listConsents(@RequestHeader(value = "x-api-id") String api_id,
                                 @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                 @ModelAttribute ReqCmn002 req) {
 
@@ -59,10 +59,10 @@ public class APIMController {
 
     try {
       ResCmn002 resCmn002 = common.listConsents(req, api_id, own_org_cd);
-      return new ResponseEntity(resCmn002, HttpStatus.OK);
+      return new ResponseEntity<>(resCmn002, HttpStatus.OK);
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -92,7 +92,7 @@ public class APIMController {
     log.info("api_id : {}", api_id);
     log.info("org_code : {}", req.getOrg_code());
     // TODO ...
-    return new ResponseEntity(HttpStatus.OK);
+    return new ResponseEntity<>(HttpStatus.OK);
   }*/
 /*
   *//**
@@ -111,7 +111,7 @@ public class APIMController {
     log.info("account_no : {}", req.getAccount_num());
 
     // TODO ...
-    return new ResponseEntity(HttpStatus.OK);
+    return new ResponseEntity<>(HttpStatus.OK);
 
   }
 
@@ -131,7 +131,7 @@ public class APIMController {
     log.info("account_no : {}", req.getAccount_num());
 
     // TODO ...
-    return new ResponseEntity(HttpStatus.OK);
+    return new ResponseEntity<>(HttpStatus.OK);
 
   }
 
@@ -151,7 +151,7 @@ public class APIMController {
     log.info("account_no : {}", req.getAccount_num());
 
     // TODO ...
-    return new ResponseEntity(HttpStatus.OK);
+    return new ResponseEntity<>(HttpStatus.OK);
 
   }*/
 

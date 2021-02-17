@@ -22,13 +22,13 @@ public class BankController {
 
   /**
    * 은행업권 : 계좌 목록 조회
-   *
-   * @param api_id
-   * @param req
+   * @param api_id String
+   * @param own_org_cd String
+   * @param req ReqBank001
    * @return ResBank001
    */
   @GetMapping(value = "/accounts", produces = "application/json; charset=UTF-8")
-  public ResponseEntity accounts(@RequestHeader(value = "x-api-id") String api_id,
+  public ResponseEntity<ResBank001> accounts(@RequestHeader(value = "x-api-id") String api_id,
                                  @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                  ReqBank001 req) {
 
@@ -38,23 +38,23 @@ public class BankController {
 
     try {
       ResBank001 res = service.listAccount(req, api_id, own_org_cd);
-      return new ResponseEntity(res, HttpStatus.OK);
+      return new ResponseEntity<>(res, HttpStatus.OK);
     } catch (JsonProcessingException e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
   }
 
   /**
    * 은행업권 - 수신계좌 기본정보 조회(은행)
-   *
-   * @param api_id
-   * @param req
-   * @return ReqBank002
+   * @param api_id String
+   * @param own_org_cd String
+   * @param req ReqBank002
+   * @return ResBank002
    */
   @PostMapping(value = "/accounts/deposit/basic", produces = "application/json; charset=UTF-8")
-  public ResponseEntity accountsBasic(@RequestHeader(value = "x-api-id") String api_id,
+  public ResponseEntity<ResBank002> accountsBasic(@RequestHeader(value = "x-api-id") String api_id,
                                       @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                       @RequestBody ReqBank002 req) {
 
@@ -64,20 +64,20 @@ public class BankController {
 
     try {
       ResBank002 res = service.inqBasicInfo(req, api_id, own_org_cd);
-      return new ResponseEntity(res, HttpStatus.OK);
+      return new ResponseEntity<>(res, HttpStatus.OK);
 
     } catch (JsonProcessingException e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
   /**
    * 은행업권 - 수신계좌 추가정보 조회(은행)
-   *
-   * @param api_id
-   * @param req
-   * @return
+   * @param api_id String
+   * @param own_org_cd String
+   * @param req ReqBank003
+   * @return ResBank003
    */
   @PostMapping(value = "/accounts/deposit/detail", produces = "application/json; charset=UTF-8")
   public ResponseEntity<ResBank003> accountDetail(@RequestHeader(value = "x-api-id") String api_id,
@@ -101,13 +101,13 @@ public class BankController {
 
   /**
    * 은행업권 - 수신계좌 거래내역 조회
-   *
-   * @param api_id
-   * @param req
+   * @param api_id String
+   * @param own_org_cd String
+   * @param req ReqBank004
    * @return ResBank004
    */
   @PostMapping(value = "/accounts/deposit/transactions", produces = "application/json; charset=UTF-8")
-  public ResponseEntity listTransactions(@RequestHeader(value = "x-api-id") String api_id,
+  public ResponseEntity<ResBank004> listTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                          @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                          @RequestBody ReqBank004 req) {
 
@@ -117,27 +117,24 @@ public class BankController {
 
     try {
       ResBank004 result = service.listTransactions(req, api_id, own_org_cd);
-      return new ResponseEntity(result, HttpStatus.OK);
+      return new ResponseEntity<>(result, HttpStatus.OK);
 
     } catch (JsonProcessingException e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
 
   /**
    * 은행업권 - 투자상품계좌 기본정보 조회
-   *
-   * @param api_id
-   * @param req
-   * @return ResBank005
-   * JSON DateTimeFormatter Type Error : "20210101000000"에 대한 Deserialize 방법이 없음.
-   * 2021-02-07 17:50:44.883 [http-nio-8080-exec-1] WARN o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.time.LocalDateTime` from String "20210101000000": Failed to deserialize java.time.LocalDateTime: (java.time.format.DateTimeParseException) Text '20210101000000' could not be parsed at index 0; nested exception is com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.time.LocalDateTime` from String "20210101000000": Failed to deserialize java.time.LocalDateTime: (java.time.format.DateTimeParseException) Text '20210101000000' could not be parsed at index 0
-   * at [Source: (PushbackInputStream); line: 4, column: 19] (through reference chain: kr.mydata.apim.vo.bank.ReqBank004["from_dtime"])]
+   * @param api_id String
+   * @param own_org_cd String
+   * @param req ReqBank005
+   * @return ResponseEntity
    */
   @PostMapping(value = "/accounts/invest/basic", produces = "application/json; charset=UTF-8")
-  public ResponseEntity investBasic(@RequestHeader(value = "x-api-id") String api_id,
+  public ResponseEntity<ResBank005> investBasic(@RequestHeader(value = "x-api-id") String api_id,
                                     @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                     @RequestBody ReqBank005 req) {
 
@@ -147,23 +144,23 @@ public class BankController {
 
     try {
       ResBank005 resBank005 = service.investBasic(req, api_id, own_org_cd);
-      return new ResponseEntity(resBank005, HttpStatus.OK);
+      return new ResponseEntity<>(resBank005, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
   /**
    * 은행업권 - 투자상품계좌 추가정보 조회
-   * @param api_id
-   * @param own_org_cd
-   * @param req
-   * @return
+   * @param api_id String
+   * @param own_org_cd String
+   * @param req ReqBank006
+   * @return ResponseEntity
    */
   @PostMapping(value = "/accounts/invest/detail", produces = "application/json; charset=UTF-8")
-  public ResponseEntity investDetail(@RequestHeader(value = "x-api-id") String api_id,
+  public ResponseEntity<ResBank006> investDetail(@RequestHeader(value = "x-api-id") String api_id,
                                      @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                      @RequestBody ReqBank006 req) {
     log.info("api_id : {}", api_id);
@@ -172,23 +169,23 @@ public class BankController {
 
     try {
       ResBank006 resBank006 = service.investDetail(req, api_id, own_org_cd);
-      return new ResponseEntity(resBank006, HttpStatus.OK);
+      return new ResponseEntity<>(resBank006, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
   /**
    * 은행업권 - 투자상품계좌 추가정보 조회
-   * @param api_id
-   * @param own_org_cd
-   * @param req
-   * @return
+   * @param api_id String
+   * @param own_org_cd String
+   * @param req ReqBank007
+   * @return ResponseEntity
    */
   @PostMapping(value = "/accounts/invest/transactions", produces = "application/json; charset=UTF-8")
-  public ResponseEntity investTransactions(@RequestHeader(value = "x-api-id") String api_id,
+  public ResponseEntity<ResBank007> investTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                            @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                            @RequestBody ReqBank007 req) {
     log.info("api_id : {}", api_id);
@@ -196,24 +193,24 @@ public class BankController {
     log.info("req : {}", req);
     try {
       ResBank007 resBank007 = service.investTransactions(req, api_id, own_org_cd);
-      return new ResponseEntity(resBank007, HttpStatus.OK);
+      return new ResponseEntity<>(resBank007, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
 
   /**
    * 은행업권 - 대출상품계좌 기본정보 조회
-   * @param api_id
-   * @param own_org_cd
-   * @param req
-   * @return
+   * @param api_id String
+   * @param own_org_cd String
+   * @param req ReqBank008
+   * @return ResponseEntity
    */
   @PostMapping(value = "/accounts/loan/basic", produces = "application/json; charset=UTF-8")
-  public ResponseEntity loanBasic(@RequestHeader(value = "x-api-id") String api_id,
+  public ResponseEntity<ResBank008> loanBasic(@RequestHeader(value = "x-api-id") String api_id,
                                   @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                   @RequestBody ReqBank008 req) {
     log.info("api_id : {}", api_id);
@@ -221,24 +218,24 @@ public class BankController {
     log.info("req : {}", req);
     try {
       ResBank008 resBank008 = service.loanBasic(req, api_id, own_org_cd);
-      return new ResponseEntity(resBank008, HttpStatus.OK);
+      return new ResponseEntity<>(resBank008, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
 
   /**
    * 은행업권 - 대출상품계좌 추가정보 조회
-   * @param api_id
-   * @param own_org_cd
-   * @param req
-   * @return
+   * @param api_id String
+   * @param own_org_cd String
+   * @param req ReqBank009
+   * @return ResponseEntity
    */
   @PostMapping(value = "/accounts/loan/detail", produces = "application/json; charset=UTF-8")
-  public ResponseEntity loanDetail(@RequestHeader(value = "x-api-id") String api_id,
+  public ResponseEntity<ResBank009> loanDetail(@RequestHeader(value = "x-api-id") String api_id,
                                    @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                    @RequestBody ReqBank009 req) {
     log.info("api_id : {}", api_id);
@@ -246,23 +243,23 @@ public class BankController {
     log.info("req : {}", req);
     try {
       ResBank009 resBank009 = service.loanDetail(req, api_id, own_org_cd);
-      return new ResponseEntity(resBank009, HttpStatus.OK);
+      return new ResponseEntity<>(resBank009, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
   /**
    * 은행업권 - 대출상품계좌 거래내역 조회
-   * @param api_id
-   * @param own_org_cd
-   * @param req
-   * @return
+   * @param api_id String
+   * @param own_org_cd String
+   * @param req ReqBank010
+   * @return ResponseEntity
    */
   @PostMapping(value = "/accounts/loan/transactions", produces = "application/json; charset=UTF-8")
-  public ResponseEntity loanTransactions(@RequestHeader(value = "x-api-id") String api_id,
+  public ResponseEntity<ResBank010> loanTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                          @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                          @RequestBody ReqBank010 req) {
     log.info("api_id : {}", api_id);
@@ -271,11 +268,11 @@ public class BankController {
 
     try {
       ResBank010 resBank010 = service.loanTransactions(req, api_id, own_org_cd);
-      return new ResponseEntity(resBank010, HttpStatus.OK);
+      return new ResponseEntity<>(resBank010, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 

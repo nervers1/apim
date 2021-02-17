@@ -7,15 +7,15 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * 전자지급수단 잔액정보 조회 - 출력
+ * 결제내역 조회 - 출력
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResEpay002 {
+public class ResEfin005 {
   private String rsp_code;
   private String rsp_msg;
-  private String search_timestamp;
-  private int fob_cnt;
-  private List<ResEpay002Sub> fob_list;
+  private String next_page;
+  private int trans_cnt;
+  private List<ResEfin005Sub> trans_list;
 }

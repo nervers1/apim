@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResEpay002Sub {
+public class ResEfin002Sub {
   private String fob_name;
   private BigDecimal total_balance_amt;
   private BigDecimal charge_balance_amt;

@@ -29,11 +29,11 @@ public class OAuthController {
 
     try {
       ResAuth001 res = service.authorize(req, api_id, own_org_cd);
-      return new ResponseEntity(res, HttpStatus.OK);
+      return new ResponseEntity<>(res, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -55,11 +55,11 @@ public class OAuthController {
 
     try {
       ResAuth002 res = service.token(req, api_id, own_org_cd);
-      return new ResponseEntity(res, HttpStatus.OK);
+      return new ResponseEntity<>(res, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -81,11 +81,11 @@ public class OAuthController {
 
     try {
       ResAuth003 res = service.token(req, api_id, own_org_cd);
-      return new ResponseEntity(res, HttpStatus.OK);
+      return new ResponseEntity<>(res, HttpStatus.OK);
 
     } catch (Exception e) {
       e.printStackTrace();
-      return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
   }
