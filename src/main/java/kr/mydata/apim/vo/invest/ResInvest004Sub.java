@@ -1,5 +1,6 @@
 package kr.mydata.apim.vo.invest;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,5 +27,6 @@ public class ResInvest004Sub {
   private BigDecimal withdrawal_amt;
   private String last_paid_in_date;
   private BigDecimal received_amt;
+  @JsonAlias({"currency_code", "currenct_code"})
   private String currency_code;
 }

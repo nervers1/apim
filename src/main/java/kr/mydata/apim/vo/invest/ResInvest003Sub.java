@@ -20,6 +20,7 @@ public class ResInvest003Sub {
   private String trans_type;
   private String trans_type_detail;
   private int trans_num;
+  private BigDecimal base_amt;
   private BigDecimal trans_amt;
   private BigDecimal settle_amt;
   private BigDecimal balance_amt;

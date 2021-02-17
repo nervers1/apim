@@ -1,7 +1,9 @@
 package kr.mydata.apim.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import kr.mydata.apim.vo.invest.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,7 +30,13 @@ public class InvestServiceImpl implements InvestService {
    */
   @Override
   public ResInvest001 listAccount(ReqInvest001 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInvest001.class);
   }
 
   /**
@@ -41,7 +49,13 @@ public class InvestServiceImpl implements InvestService {
    */
   @Override
   public ResInvest002 listBasic(ReqInvest002 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInvest002.class);
   }
 
   /**
@@ -54,7 +68,13 @@ public class InvestServiceImpl implements InvestService {
    */
   @Override
   public ResInvest003 listTransactions(ReqInvest003 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInvest003.class);
   }
 
   /**
@@ -67,6 +87,12 @@ public class InvestServiceImpl implements InvestService {
    */
   @Override
   public ResInvest004 listProducts(ReqInvest004 req, String api_id, String own_org_cd) throws JsonProcessingException {
-    return null;
+
+    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
+    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
+    // to JSON
+    mapper.registerModule(new JavaTimeModule());
+    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    return mapper.readValue(res, ResInvest004.class);
   }
 }
