@@ -19,7 +19,7 @@ public class ResCard012Sub {
   private String loan_type;
   private String loan_name;
   private BigDecimal loan_amt;
-  private int int_rate;
+  private String int_rate;
   private String exp_date;
   private BigDecimal balance_amt;
   private String repay_method;
