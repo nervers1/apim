@@ -16,10 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResBank004 {
-  private String rsp_code;
-  private String rsp_msg;
-  private String next_page;
-  private int trans_cnt;
-  @JsonDeserialize(as = List.class)
-  private List<ResBank004Sub> trans_list;
+    private String rsp_code;
+    private String rsp_msg;
+    private String next_page;
+    private String trans_cnt;
+    private List<ResBank004Sub> trans_list;
 }
