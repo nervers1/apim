@@ -36,6 +36,7 @@ import kr.mydata.apim.vo.bank.ResBank007Sub;
 import kr.mydata.apim.vo.bank.ResBank008;
 import kr.mydata.apim.vo.bank.ResBank009;
 import kr.mydata.apim.vo.bank.ResBank010;
+import kr.mydata.apim.vo.bank.ResBank010Sub;
 import lombok.extern.log4j.Log4j2;
 
 @Service
@@ -290,6 +291,16 @@ public class BankServiceImpl implements BankService {
     // to JSON
     mapper.registerModule(new JavaTimeModule());
     mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-    return mapper.readValue(res, ResBank010.class);
+    ResBank010 resBank010 = mapper.readValue(res, ResBank010.class);
+    List<ResBank010Sub> trans_list = resBank010.getTrans_list();
+    
+    int page = Util.getPage(req.getNext_page());
+    trans_list = trans_list.stream()
+    		.skip(req.getLimit() * (page - 1))
+    		.limit(req.getLimit())
+    		.collect(Collectors.toList());
+    resBank010.setTrans_list(trans_list);
+    resBank010.setNext_page(Util.getNextPage(resBank010.getTrans_cnt(), page, req.getLimit()));
+    return resBank010;
   }
 }

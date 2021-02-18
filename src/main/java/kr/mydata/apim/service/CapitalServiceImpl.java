@@ -5,8 +5,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import kr.mydata.apim.api.util.Util;
 import kr.mydata.apim.vo.loan.*;
 import lombok.extern.log4j.Log4j2;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -90,6 +96,16 @@ public class CapitalServiceImpl implements CapitalService {
     // to JSON
     mapper.registerModule(new JavaTimeModule());
     mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-    return mapper.readValue(res, ResLoan004.class);
+    ResLoan004 resVo = mapper.readValue(res, ResLoan004.class);
+    List<ResLoan004Sub> trans_list = resVo.getTrans_list();
+    
+    int page = Util.getPage(req.getNext_page());
+    trans_list = trans_list.stream()
+    		.skip(req.getLimit() * (page - 1))
+    		.limit(req.getLimit())
+    		.collect(Collectors.toList());
+    resVo.setTrans_list(trans_list);
+    resVo.setNext_page(Util.getNextPage(resVo.getTrans_cnt(), page, req.getLimit()));
+    return resVo;
   }
 }

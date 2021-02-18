@@ -6,12 +6,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * 대출상품계좌 거래내역 조회 - 출력
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResBank010 {
   private String rsp_code;                     // 세부 응답코드
   private String rsp_msg;                      // 세부 응답메시지
