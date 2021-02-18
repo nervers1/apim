@@ -6,12 +6,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * 결제내역 조회 - 출력
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResEfin005 {
   private String rsp_code;
   private String rsp_msg;

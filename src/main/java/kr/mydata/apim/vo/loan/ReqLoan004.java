@@ -1,6 +1,8 @@
 package kr.mydata.apim.vo.loan;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import kr.mydata.apim.vo.APIEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReqLoan004 extends APIEntity {
   private String authorization;
   private String org_code;

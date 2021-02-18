@@ -4,13 +4,21 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import kr.mydata.apim.api.util.Util;
 import kr.mydata.apim.vo.card.*;
+import kr.mydata.apim.vo.efin.ResEfin004;
+import kr.mydata.apim.vo.efin.ResEfin004Sub;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+
 
 @Log4j2
 @Service
@@ -107,8 +115,19 @@ public class CardServiceImpl implements CardService {
     // to JSON
     mapper.registerModule(new JavaTimeModule());
     mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-    return mapper.readValue(res, ResCard004.class);
-  }
+    ResCard004 ResCard004 = mapper.readValue(res, ResCard004.class);
+    
+    List<ResCard004Sub> trans_list = ResCard004.getBill_list();
+        int page = Util.getPage(req.getNext_page());
+        trans_list = trans_list.stream()
+        		.skip(req.getLimit() * (page - 1))
+        		.limit(req.getLimit())
+        		.collect(Collectors.toList());
+        ResCard004.setBill_list(trans_list);
+        ResCard004.setNext_page(Util.getNextPage(ResCard004.getBill_cnt(), page, req.getLimit()));
+        return ResCard004;
+}
+  
 
   /**
    * 카드업권 : 청구 추가정보 조회
@@ -126,7 +145,18 @@ public class CardServiceImpl implements CardService {
     // to JSON
     mapper.registerModule(new JavaTimeModule());
     mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-    return mapper.readValue(res, ResCard005.class);
+    
+    ResCard005 ResCard005 = mapper.readValue(res, ResCard005.class);
+    
+    List<ResCard005Sub> trans_list = ResCard005.getBill_detail_list();
+        int page = Util.getPage(req.getNext_page());
+        trans_list = trans_list.stream()
+        		.skip(req.getLimit() * (page - 1))
+        		.limit(req.getLimit())
+        		.collect(Collectors.toList());
+        ResCard005.setBill_detail_list(trans_list);
+        ResCard005.setNext_page(Util.getNextPage(ResCard005.getBill_detail_cnt(), page, req.getLimit()));
+        return ResCard005;
   }
 
   /**

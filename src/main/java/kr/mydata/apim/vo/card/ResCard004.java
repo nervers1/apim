@@ -6,12 +6,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * 청구 기본정보 조회 - 출력
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResCard004 {
   private String rsp_code;
   private String rsp_msg;
