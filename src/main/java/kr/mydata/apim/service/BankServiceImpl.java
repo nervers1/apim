@@ -1,17 +1,42 @@
 package kr.mydata.apim.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import kr.mydata.apim.vo.bank.*;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import kr.mydata.apim.api.util.Util;
+import kr.mydata.apim.vo.bank.ReqBank001;
+import kr.mydata.apim.vo.bank.ReqBank002;
+import kr.mydata.apim.vo.bank.ReqBank003;
+import kr.mydata.apim.vo.bank.ReqBank004;
+import kr.mydata.apim.vo.bank.ReqBank005;
+import kr.mydata.apim.vo.bank.ReqBank006;
+import kr.mydata.apim.vo.bank.ReqBank007;
+import kr.mydata.apim.vo.bank.ReqBank008;
+import kr.mydata.apim.vo.bank.ReqBank009;
+import kr.mydata.apim.vo.bank.ReqBank010;
+import kr.mydata.apim.vo.bank.ResBank001;
+import kr.mydata.apim.vo.bank.ResBank002;
+import kr.mydata.apim.vo.bank.ResBank003;
+import kr.mydata.apim.vo.bank.ResBank004;
+import kr.mydata.apim.vo.bank.ResBank005;
+import kr.mydata.apim.vo.bank.ResBank006;
+import kr.mydata.apim.vo.bank.ResBank007;
+import kr.mydata.apim.vo.bank.ResBank007Sub;
+import kr.mydata.apim.vo.bank.ResBank008;
+import kr.mydata.apim.vo.bank.ResBank009;
+import kr.mydata.apim.vo.bank.ResBank010;
+import lombok.extern.log4j.Log4j2;
 
 @Service
 @Log4j2
@@ -198,7 +223,17 @@ public class BankServiceImpl implements BankService {
     // to JSON
     mapper.registerModule(new JavaTimeModule());
     mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-    return mapper.readValue(res, ResBank007.class);
+    ResBank007 resBank007 = mapper.readValue(res, ResBank007.class);
+    List<ResBank007Sub> trans_list = resBank007.getTrans_list();
+    
+    int page = Util.getPage(req.getNext_page());
+    trans_list = trans_list.stream()
+    		.skip(req.getLimit() * (page - 1))
+    		.limit(req.getLimit())
+    		.collect(Collectors.toList());
+    resBank007.setTrans_list(trans_list);
+    resBank007.setNext_page(Util.getNextPage(resBank007.getTrans_cnt(), page, req.getLimit()));
+    return resBank007;
   }
 
   /**
