@@ -1,7 +1,7 @@
 package kr.mydata.apim.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.mydata.apim.base.exception.response.ErrorResponse;
+import kr.mydata.apim.base.response.ErrorResponse;
 import kr.mydata.apim.service.CommonService;
 import kr.mydata.apim.vo.common.ReqCmn001;
 import kr.mydata.apim.vo.common.ReqCmn002;

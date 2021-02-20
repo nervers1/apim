@@ -1,4 +1,4 @@
-package kr.mydata.apim.base.exception.response;
+package kr.mydata.apim.base.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

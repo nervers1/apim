@@ -1,9 +1,9 @@
-package kr.mydata.apim.base.exception.advice;
+package kr.mydata.apim.base.advice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import kr.mydata.apim.base.exception.UnsupportedIndustryException;
-import kr.mydata.apim.base.exception.response.ErrorResponse;
+import kr.mydata.apim.base.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
