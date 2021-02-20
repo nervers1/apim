@@ -49,6 +49,10 @@ public class IRPController {
                                                  @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                                  @PathVariable String industry,
                                                  @Valid ReqIRP001 req) throws Exception {
+        log.info("api_id : {}", api_id);
+        log.info("own_org_cd : {}", own_org_cd);
+        log.info("req : {}", req);
+
         checkIndustry(industry);
         ResIRP001 resIRP001 = service.listAccount(req, api_id, own_org_cd, industry);
         return new ResponseEntity<>(resIRP001, HttpStatus.OK);
@@ -67,6 +71,11 @@ public class IRPController {
                                               @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                               @PathVariable String industry,
                                               @Valid @RequestBody ReqIRP002 req) throws Exception {
+        log.info("api_id : {}", api_id);
+        log.info("own_org_cd : {}", own_org_cd);
+        log.info("req : {}", req);
+
+
         checkIndustry(industry);
         ResIRP002 resIRP002 = service.irpBasic(req, api_id, own_org_cd, industry);
         return new ResponseEntity<>(resIRP002, HttpStatus.OK);
@@ -85,6 +94,11 @@ public class IRPController {
                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                                @PathVariable String industry,
                                                @Valid @RequestBody ReqIRP003 req) throws Exception {
+        log.info("api_id : {}", api_id);
+        log.info("own_org_cd : {}", own_org_cd);
+        log.info("req : {}", req);
+
+
         checkIndustry(industry);
         ResIRP003 resIRP003 = service.irpDetail(req, api_id, own_org_cd, industry);
         return new ResponseEntity<>(resIRP003, HttpStatus.OK);
@@ -103,6 +117,11 @@ public class IRPController {
                                                      @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                                      @PathVariable String industry,
                                                      @Valid @RequestBody ReqIRP004 req) throws Exception {
+        log.info("api_id : {}", api_id);
+        log.info("own_org_cd : {}", own_org_cd);
+        log.info("req : {}", req);
+
+
         checkIndustry(industry);
         ResIRP004 resIRP004 = service.irpTransactions(req, api_id, own_org_cd, industry);
         return new ResponseEntity<>(resIRP004, HttpStatus.OK);

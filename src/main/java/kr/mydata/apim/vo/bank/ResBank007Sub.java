@@ -12,13 +12,20 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResBank007Sub {
+public class ResBank007Sub implements Comparable<ResBank007Sub> {
     private String trans_dtime;
     private String trans_no;
     private String trans_type;
     private String currency_code;
-    private BigDecimal base_amt;
-    private BigDecimal trans_fund_num;
-    private BigDecimal trans_amt;
-    private BigDecimal balance_amt;
+    private String base_amt;
+    private String trans_fund_num;
+    private String trans_amt;
+    private String balance_amt;
+
+    @Override
+    public int compareTo(ResBank007Sub o) {
+        // 거래일자 기준 내림차순 정렬
+        return o.trans_dtime.compareTo(this.trans_dtime);
+    }
+
 }

@@ -1,6 +1,5 @@
 package kr.mydata.apim.api;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.mydata.apim.service.BankService;
 import kr.mydata.apim.vo.bank.*;
 import lombok.extern.log4j.Log4j2;
@@ -32,20 +31,14 @@ public class BankController {
     @GetMapping(value = "/accounts", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResBank001> accounts(@RequestHeader(value = "x-api-id") String api_id,
                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                               @Valid ReqBank001 req) {
+                                               @Valid ReqBank001 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResBank001 res = service.listAccount(req, api_id, own_org_cd);
-            return new ResponseEntity<>(res, HttpStatus.OK);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+        ResBank001 res = service.listAccount(req, api_id, own_org_cd);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     /**
@@ -59,20 +52,14 @@ public class BankController {
     @PostMapping(value = "/accounts/deposit/basic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResBank002> accountsBasic(@RequestHeader(value = "x-api-id") String api_id,
                                                     @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                    @Valid @RequestBody ReqBank002 req) {
+                                                    @Valid @RequestBody ReqBank002 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResBank002 res = service.inqBasicInfo(req, api_id, own_org_cd);
-            return new ResponseEntity<>(res, HttpStatus.OK);
-
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        ResBank002 res = service.inqBasicInfo(req, api_id, own_org_cd);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     /**
@@ -86,20 +73,14 @@ public class BankController {
     @PostMapping(value = "/accounts/deposit/detail", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResBank003> accountDetail(@RequestHeader(value = "x-api-id") String api_id,
                                                     @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                    @Valid @RequestBody ReqBank003 req) {
+                                                    @Valid @RequestBody ReqBank003 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResBank003 resBank003 = service.addtionalInfo(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resBank003, HttpStatus.OK);
-
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        ResBank003 resBank003 = service.addtionalInfo(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resBank003, HttpStatus.OK);
     }
 
 
@@ -114,20 +95,14 @@ public class BankController {
     @PostMapping(value = "/accounts/deposit/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResBank004> listTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                                        @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                       @Valid @RequestBody ReqBank004 req) {
+                                                       @Valid @RequestBody ReqBank004 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResBank004 result = service.listTransactions(req, api_id, own_org_cd);
-            return new ResponseEntity<>(result, HttpStatus.OK);
-
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        ResBank004 result = service.listTransactions(req, api_id, own_org_cd);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 
@@ -142,20 +117,14 @@ public class BankController {
     @PostMapping(value = "/accounts/invest/basic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResBank005> investBasic(@RequestHeader(value = "x-api-id") String api_id,
                                                   @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                  @Valid @RequestBody ReqBank005 req) {
+                                                  @Valid @RequestBody ReqBank005 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResBank005 resBank005 = service.investBasic(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resBank005, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        ResBank005 resBank005 = service.investBasic(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resBank005, HttpStatus.OK);
     }
 
     /**
@@ -169,19 +138,13 @@ public class BankController {
     @PostMapping(value = "/accounts/invest/detail", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResBank006> investDetail(@RequestHeader(value = "x-api-id") String api_id,
                                                    @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                   @Valid @RequestBody ReqBank006 req) {
+                                                   @Valid @RequestBody ReqBank006 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResBank006 resBank006 = service.investDetail(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resBank006, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        ResBank006 resBank006 = service.investDetail(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resBank006, HttpStatus.OK);
     }
 
     /**
@@ -195,18 +158,13 @@ public class BankController {
     @PostMapping(value = "/accounts/invest/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResBank007> investTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                                          @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                         @Valid @RequestBody ReqBank007 req) {
+                                                         @Valid @RequestBody ReqBank007 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
-        try {
-            ResBank007 resBank007 = service.investTransactions(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resBank007, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        ResBank007 resBank007 = service.investTransactions(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resBank007, HttpStatus.OK);
     }
 
 
@@ -221,18 +179,13 @@ public class BankController {
     @PostMapping(value = "/accounts/loan/basic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResBank008> loanBasic(@RequestHeader(value = "x-api-id") String api_id,
                                                 @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                @Valid @RequestBody ReqBank008 req) {
+                                                @Valid @RequestBody ReqBank008 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
-        try {
-            ResBank008 resBank008 = service.loanBasic(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resBank008, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        ResBank008 resBank008 = service.loanBasic(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resBank008, HttpStatus.OK);
     }
 
 
@@ -247,18 +200,13 @@ public class BankController {
     @PostMapping(value = "/accounts/loan/detail", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResBank009> loanDetail(@RequestHeader(value = "x-api-id") String api_id,
                                                  @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                 @Valid @RequestBody ReqBank009 req) {
+                                                 @Valid @RequestBody ReqBank009 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
-        try {
-            ResBank009 resBank009 = service.loanDetail(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resBank009, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        ResBank009 resBank009 = service.loanDetail(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resBank009, HttpStatus.OK);
     }
 
     /**
@@ -272,20 +220,12 @@ public class BankController {
     @PostMapping(value = "/accounts/loan/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResBank010> loanTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                                        @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                       @Valid @RequestBody ReqBank010 req) {
+                                                       @Valid @RequestBody ReqBank010 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResBank010 resBank010 = service.loanTransactions(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resBank010, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        ResBank010 resBank010 = service.loanTransactions(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resBank010, HttpStatus.OK);
     }
-
-
 }

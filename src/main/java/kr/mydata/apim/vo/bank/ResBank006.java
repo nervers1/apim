@@ -17,8 +17,8 @@ public class ResBank006 {
     private String rsp_msg;
     private String search_timestamp;
     private String currency_code;
-    private BigDecimal balance_amt;
-    private BigDecimal eval_amt;
-    private BigDecimal inv_principal;
-    private BigDecimal fund_num;
+    private String balance_amt;
+    private String eval_amt;
+    private String inv_principal;
+    private String fund_num;
 }

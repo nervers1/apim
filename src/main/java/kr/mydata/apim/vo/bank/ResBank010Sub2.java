@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class ResBank010Sub2 {
     private String int_start_date;        // 이자적용시작일
     private String int_end_date;          // 이자적용종료일
-    private Double int_rate;                 // 적용이율
+    private String int_rate;                 // 적용이율
     private String int_type;                 // 이자종류(코드)
 }

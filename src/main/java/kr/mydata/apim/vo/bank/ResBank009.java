@@ -16,7 +16,7 @@ public class ResBank009 {
     private String rsp_code;
     private String rsp_msg;
     private String search_timestamp;
-    private BigDecimal balance_amt;
-    private BigDecimal loan_principal;
+    private String balance_amt;
+    private String loan_principal;
     private String int_repay_date;
 }

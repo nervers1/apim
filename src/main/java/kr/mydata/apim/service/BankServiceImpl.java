@@ -43,10 +43,7 @@ public class BankServiceImpl implements BankService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        ResBank001 resBank001 = mapper.readValue(res, ResBank001.class);
-        log.info("resBank001 --> {}", resBank001);
-
-        return resBank001;
+        return mapper.readValue(res, ResBank001.class);
     }
 
     /**
@@ -67,10 +64,7 @@ public class BankServiceImpl implements BankService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        ResBank002 resBank002 = mapper.readValue(res, ResBank002.class);
-        log.info("resBank002 --> {}", resBank002);
-
-        return resBank002;
+        return mapper.readValue(res, ResBank002.class);
     }
 
     /**
@@ -91,10 +85,7 @@ public class BankServiceImpl implements BankService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        ResBank003 resBank003 = mapper.readValue(res, ResBank003.class);
-        log.info("resBank003 --> {}", resBank003);
-
-        return resBank003;
+        return mapper.readValue(res, ResBank003.class);
     }
 
     /**
@@ -109,25 +100,12 @@ public class BankServiceImpl implements BankService {
     @Override
     public ResBank004 listTransactions(ReqBank004 req, String api_id, String own_org_cd) throws Exception {
 
-        String sql = "SELECT res_data " +
-                "       FROM tb_test_data" +
-                "      WHERE api_id = ? " +
-                "        and own_org_cd = ? " +
-                "        and org_cd = ? " +
-                "        and ast_id = ?";
+        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
 
         mapper.registerModule(new JavaTimeModule());
+        mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-    /*ResBank004 resBank004 = jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
-      ResBank004 entity = new ResBank004();
-      entity.setRsp_code(rs.getString("rsp_code"));
-      entity.setRsp_msg(rs.getString("rsp_msg"));
-      entity.setNext_page(rs.getString("next_page"));
-      entity.setTrans_cnt(rs.getInt("trans_cnt"));
-      entity.setTrans_list((List<ResBank004Sub>)rs.getObject("trans_list", List.class));
-      return entity;
-    }, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());*/
         ResBank004 resVo = mapper.readValue(res, ResBank004.class);
         List<ResBank004Sub> trans_list = resVo.getTrans_list();
 
@@ -143,6 +121,7 @@ public class BankServiceImpl implements BankService {
         resVo.setTrans_list(trans_list);
         resVo.setNext_page(Util.getNextPage(Integer.valueOf(resVo.getTrans_cnt()), page, Integer.valueOf(req.getLimit())));
         resVo.setTrans_cnt(String.valueOf(trans_list.size()));
+
         return resVo;
     }
 
@@ -160,9 +139,10 @@ public class BankServiceImpl implements BankService {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         return mapper.readValue(res, ResBank005.class);
     }
 
@@ -180,9 +160,10 @@ public class BankServiceImpl implements BankService {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         return mapper.readValue(res, ResBank006.class);
     }
 
@@ -200,20 +181,27 @@ public class BankServiceImpl implements BankService {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-        ResBank007 resBank007 = mapper.readValue(res, ResBank007.class);
-        List<ResBank007Sub> trans_list = resBank007.getTrans_list();
 
+        ResBank007 resVo = mapper.readValue(res, ResBank007.class);
+        List<ResBank007Sub> trans_list = resVo.getTrans_list();
+
+        // Comparable 구현하여 내림차순 정렬
+        Collections.sort(trans_list);
+
+        // next_page 는 조회 마지막 row_num 으로 들어옴.
         int page = Util.getPage(req.getNext_page());
         trans_list = trans_list.stream()
-                .skip(req.getLimit() * (page - 1))
-                .limit(req.getLimit())
+                .skip(page)
+                .limit(Integer.valueOf(req.getLimit()))
                 .collect(Collectors.toList());
-        resBank007.setTrans_list(trans_list);
-        resBank007.setNext_page(Util.getNextPage(resBank007.getTrans_cnt(), page, req.getLimit()));
-        return resBank007;
+        resVo.setTrans_list(trans_list);
+        resVo.setNext_page(Util.getNextPage(Integer.valueOf(resVo.getTrans_cnt()), page, Integer.valueOf(req.getLimit())));
+        resVo.setTrans_cnt(String.valueOf(trans_list.size()));
+
+        return resVo;
     }
 
     /**
@@ -230,9 +218,10 @@ public class BankServiceImpl implements BankService {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         return mapper.readValue(res, ResBank008.class);
     }
 
@@ -250,9 +239,10 @@ public class BankServiceImpl implements BankService {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         return mapper.readValue(res, ResBank009.class);
     }
 
@@ -270,19 +260,25 @@ public class BankServiceImpl implements BankService {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-        ResBank010 resBank010 = mapper.readValue(res, ResBank010.class);
-        List<ResBank010Sub> trans_list = resBank010.getTrans_list();
+
+        ResBank010 resVo = mapper.readValue(res, ResBank010.class);
+        List<ResBank010Sub> trans_list = resVo.getTrans_list();
+
+        // Comparable 구현하여 내림차순 정렬
+        Collections.sort(trans_list);
 
         int page = Util.getPage(req.getNext_page());
         trans_list = trans_list.stream()
-                .skip(req.getLimit() * (page - 1))
-                .limit(req.getLimit())
+                .skip(page)
+                .limit(Integer.valueOf(req.getLimit()))
                 .collect(Collectors.toList());
-        resBank010.setTrans_list(trans_list);
-        resBank010.setNext_page(Util.getNextPage(resBank010.getTrans_cnt(), page, req.getLimit()));
-        return resBank010;
+        resVo.setTrans_list(trans_list);
+        resVo.setNext_page(Util.getNextPage(Integer.valueOf(resVo.getTrans_cnt()), page, Integer.valueOf(req.getLimit())));
+        resVo.setTrans_cnt(String.valueOf(trans_list.size()));
+
+        return resVo;
     }
 }

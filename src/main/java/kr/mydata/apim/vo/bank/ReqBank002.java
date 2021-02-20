@@ -1,6 +1,5 @@
 package kr.mydata.apim.vo.bank;
 
-import kr.mydata.apim.vo.APIEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,10 +28,10 @@ public class ReqBank002 {
     @Size(min = 1, max = 3, message = "seqno 값은 1 ~ 3 자리 입니다.")
     private String seqno;
 
-    @Size(min = 3, max = 3, message = "seqno currency_code 1 ~ 3 자리 입니다.")
+    @Size(min = 3, max = 3, message = "currency_code 값은 3 자리 입니다.")
     private String currency_code;
 
     @NotNull(message = "search_timestamp 값이 반드시 있어야 합니다.")
-    @Size(min = 1, max = 7, message = "search_timestamp 값은 14 자리 입니다.")
+    @Size(min = 14, max = 14, message = "search_timestamp 값은 14 자리 입니다.")
     private String search_timestamp;
 }

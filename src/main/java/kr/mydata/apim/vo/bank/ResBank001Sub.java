@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class ResBank001Sub {
     private String account_num;
     private String is_consent;
-    private int seqno;
+    private String seqno;
     private String currency_code;
     private String prod_name;
     private String account_type;
