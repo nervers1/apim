@@ -1,6 +1,7 @@
 package kr.mydata.apim.base.exception.advice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import kr.mydata.apim.base.exception.UnsupportedIndustryException;
 import kr.mydata.apim.base.exception.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +10,7 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -33,19 +35,19 @@ public class ExceptionAdvice {
     }
 
     /**
-     * Database 조회 중 발생한 Incorrect Result Size Exception
+     * Database 조회 중 발생한 Empty Result Exception
      *
      * @param e
      * @return
      */
-    @ExceptionHandler(IncorrectResultSizeDataAccessException.class)
-    public ResponseEntity<ErrorResponse> processDataAccessError(IncorrectResultSizeDataAccessException e) {
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public ResponseEntity<ErrorResponse> processDataAccessError(EmptyResultDataAccessException e) {
 
         ErrorResponse er = new ErrorResponse();
-        er.setRsp_code("50002");
-        er.setRsp_msg("API 요청처리에 실패하였습니다. 관리자에게 문의해주세요.");
+        er.setRsp_code("40402");
+        er.setRsp_msg("요청한 자산에 대한 정보는 존재하지 않습니다.");
 
-        return new ResponseEntity<ErrorResponse>(er, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<ErrorResponse>(er, HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -54,7 +56,7 @@ public class ExceptionAdvice {
      * @param e
      * @return
      */
-    @ExceptionHandler(JsonProcessingException.class)
+    @ExceptionHandler({JsonProcessingException.class, UnrecognizedPropertyException.class, IllegalArgumentException.class})
     public ResponseEntity<ErrorResponse> processJsonParsingError(IncorrectResultSizeDataAccessException e) {
 
         ErrorResponse er = new ErrorResponse();
@@ -76,6 +78,16 @@ public class ExceptionAdvice {
         ErrorResponse er = new ErrorResponse();
         er.setRsp_code("40301");
         er.setRsp_msg("올바르지 않은 API를 호출하였습니다.");
+
+        return new ResponseEntity<ErrorResponse>(er, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<ErrorResponse> processHttpRequestMethodNotSupportedError(HttpRequestMethodNotSupportedException e) {
+
+        ErrorResponse er = new ErrorResponse();
+        er.setRsp_code("40301");
+        er.setRsp_msg("지원하지않는 HttpRequestMethod로 API를 호출하였습니다.");
 
         return new ResponseEntity<ErrorResponse>(er, HttpStatus.FORBIDDEN);
     }
