@@ -1,7 +1,6 @@
 package kr.mydata.apim.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -12,9 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,31 +26,24 @@ public class BankServiceImpl implements BankService {
     }
 
     /**
-     * 은행업권 : 계좌 목록 조회
+     * 은행업권 : 계좌(수신계좌/대출상품/투자상품) 목록 조회
      *
      * @param req
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResBank001 listAccount(ReqBank001 req, String api_id, String own_org_cd) throws JsonProcessingException {
-
-        Map<String, String> search_timestamp = new HashMap<>();
-        search_timestamp.put("search_timestamp", req.getSearch_timestamp());
-        String strTimeStamp = mapper.writeValueAsString(search_timestamp);
-        //String condition = req.getSearch_timestamp() != null ? " and res_data @> '" + strTimeStamp + "'::jsonb" : "";
-        //String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + condition;
+    public ResBank001 listAccount(ReqBank001 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd);
 
-        log.info("res --> {}", res);
-
         mapper.registerModule(new JavaTimeModule());
-        ResBank001 resBank001 = mapper.readValue(res, new TypeReference<>() {
-        });
+        mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
+        ResBank001 resBank001 = mapper.readValue(res, ResBank001.class);
         log.info("resBank001 --> {}", resBank001);
 
         return resBank001;
@@ -66,37 +56,20 @@ public class BankServiceImpl implements BankService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResBank002 inqBasicInfo(ReqBank002 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResBank002 inqBasicInfo(ReqBank002 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and ast_id = ?";
-        // 은행
-
-    /*ResBank002 res = jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
-      ResBank002 entity = new ResBank002();
-      entity.setRsp_code(Optional.ofNullable(rs.getString("rsp_code")).orElse(""));
-      entity.setRsp_msg(rs.getString("rsp_msg"));
-      entity.setSearch_timestamp(rs.getString("search_timestamp"));
-      entity.setSaving_method(rs.getString("saving_mehotd"));
-      entity.setHolder_name(rs.getString("holder_name"));
-      entity.setIssue_date(rs.getString("issue_date"));
-      entity.setExp_date(rs.getString("exp_date"));
-      entity.setCurrency_code(rs.getString("currency_code"));
-      entity.setCommit_amt(rs.getBigDecimal("commit_amt"));
-      entity.setMonthly_paid_in_amt(rs.getBigDecimal("monthly_paid_in_amt"));
-      entity.setTermination_amt(rs.getBigDecimal("termination_amt"));
-      entity.setLast_offered_rate(rs.getDouble("last_offered_rate"));
-      return entity;
-    }, Integer.valueOf(api_id), req.getAccount_num());*/
-        // to JSON
-    /*mapper.registerModule(new JavaTimeModule());
-    ResBank002 resBank002 = mapper.readValue(res, ResBank002.class);*/
-
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), req.getAccount_num());
-        log.info("res --> {}", res);
+
+        mapper.registerModule(new JavaTimeModule());
+        mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         ResBank002 resBank002 = mapper.readValue(res, ResBank002.class);
+        log.info("resBank002 --> {}", resBank002);
+
         return resBank002;
     }
 
@@ -107,17 +80,19 @@ public class BankServiceImpl implements BankService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResBank003 addtionalInfo(ReqBank003 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResBank003 addtionalInfo(ReqBank003 req, String api_id, String own_org_cd) throws Exception {
+
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
-//    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and ast_id = ?";
-        // 은행
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
-        // String to JSON
+
         mapper.registerModule(new JavaTimeModule());
+        mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         ResBank003 resBank003 = mapper.readValue(res, ResBank003.class);
+        log.info("resBank003 --> {}", resBank003);
 
         return resBank003;
     }
@@ -129,10 +104,10 @@ public class BankServiceImpl implements BankService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResBank004 listTransactions(ReqBank004 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResBank004 listTransactions(ReqBank004 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data " +
                 "       FROM tb_test_data" +
@@ -178,10 +153,10 @@ public class BankServiceImpl implements BankService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResBank005 investBasic(ReqBank005 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResBank005 investBasic(ReqBank005 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
@@ -198,10 +173,10 @@ public class BankServiceImpl implements BankService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResBank006 investDetail(ReqBank006 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResBank006 investDetail(ReqBank006 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
@@ -218,10 +193,10 @@ public class BankServiceImpl implements BankService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResBank007 investTransactions(ReqBank007 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResBank007 investTransactions(ReqBank007 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
@@ -248,10 +223,10 @@ public class BankServiceImpl implements BankService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResBank008 loanBasic(ReqBank008 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResBank008 loanBasic(ReqBank008 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
@@ -268,10 +243,10 @@ public class BankServiceImpl implements BankService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResBank009 loanDetail(ReqBank009 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResBank009 loanDetail(ReqBank009 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
@@ -288,10 +263,10 @@ public class BankServiceImpl implements BankService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResBank010 loanTransactions(ReqBank010 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResBank010 loanTransactions(ReqBank010 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());

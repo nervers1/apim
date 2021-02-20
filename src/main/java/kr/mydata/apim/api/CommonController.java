@@ -20,11 +20,11 @@ import javax.validation.Valid;
 
 @RestController
 @Log4j2
-public class APIMController {
+public class CommonController {
 
     private final CommonService common;
 
-    public APIMController(CommonService common) {
+    public CommonController(CommonService common) {
         this.common = common;
     }
 
