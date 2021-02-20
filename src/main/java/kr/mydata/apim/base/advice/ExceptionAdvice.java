@@ -25,7 +25,7 @@ public class ExceptionAdvice {
      */
     @ExceptionHandler(BindException.class)
     public ResponseEntity<ErrorResponse> processValidationError(BindException e) {
-        log.error(e.getBindingResult().getFieldError().getDefaultMessage());
+        e.printStackTrace();
 
         ErrorResponse er = new ErrorResponse();
         er.setRsp_code("40001");
@@ -42,6 +42,7 @@ public class ExceptionAdvice {
      */
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public ResponseEntity<ErrorResponse> processDataAccessError(EmptyResultDataAccessException e) {
+        e.printStackTrace();
 
         ErrorResponse er = new ErrorResponse();
         er.setRsp_code("40402");
@@ -57,7 +58,8 @@ public class ExceptionAdvice {
      * @return
      */
     @ExceptionHandler({JsonProcessingException.class, UnrecognizedPropertyException.class, IllegalArgumentException.class})
-    public ResponseEntity<ErrorResponse> processJsonParsingError(IncorrectResultSizeDataAccessException e) {
+    public ResponseEntity<ErrorResponse> processJsonParsingError(Exception e) {
+        e.printStackTrace();
 
         ErrorResponse er = new ErrorResponse();
         er.setRsp_code("50001");
@@ -74,6 +76,7 @@ public class ExceptionAdvice {
      */
     @ExceptionHandler(UnsupportedIndustryException.class)
     public ResponseEntity<ErrorResponse> processUnsupportedIndustryError(UnsupportedIndustryException e) {
+        e.printStackTrace();
 
         ErrorResponse er = new ErrorResponse();
         er.setRsp_code("40301");
@@ -84,6 +87,7 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<ErrorResponse> processHttpRequestMethodNotSupportedError(HttpRequestMethodNotSupportedException e) {
+        e.printStackTrace();
 
         ErrorResponse er = new ErrorResponse();
         er.setRsp_code("40301");
