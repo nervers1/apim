@@ -27,11 +27,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResCmn001 {
-  private String rsp_code;
-  private String rsp_msg;
-  @JsonAlias({"version", " VERSION"})
-  private String version;
-  private String min_version;
-  private int api_cnt;
-  private List<ResCmn001Sub> api_list;
+    private String rsp_code;
+    private String rsp_msg;
+    @JsonAlias({"version", " VERSION"})
+    private String version;
+    private String min_version;
+    private String api_cnt;
+    private List<ResCmn001Sub> api_list;
 }

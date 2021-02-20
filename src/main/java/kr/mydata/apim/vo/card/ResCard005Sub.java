@@ -14,14 +14,14 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResCard005Sub {
-  private String card_id;
-  private String paid_dtime;
-  private BigDecimal paid_amt;
-  private String currency_code;
-  private String merchant_name;
-  private BigDecimal credit_fee_amt;
-  private int total_install_cnt;
-  private int cur_install_cnt;
-  private BigDecimal balance_amt;
-  private String prod_type;
+    private String card_id;
+    private String paid_dtime;
+    private BigDecimal paid_amt;
+    private String currency_code;
+    private String merchant_name;
+    private BigDecimal credit_fee_amt;
+    private int total_install_cnt;
+    private int cur_install_cnt;
+    private BigDecimal balance_amt;
+    private String prod_type;
 }

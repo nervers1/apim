@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResOAuthError {
-  private String error;
-  private String error_description;
+    private String error;
+    private String error_description;
 }

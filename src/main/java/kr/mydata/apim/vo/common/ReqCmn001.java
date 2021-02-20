@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * API 목록 조회 (공통) - 입력
  * api: /apis
@@ -18,10 +21,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ReqCmn001 extends APIEntity {
-  // 접근토큰
-  private String authorization;
-  // 기관코드
-  private String org_code;
-
+public class ReqCmn001 {
+    @NotNull(message = "org_code 값이 반드시 있어야 합니다.")
+    @Size(min = 1, max = 7, message = "org_code 값은 1 ~ 7 자리 입니다.")
+    private String org_code;
 }

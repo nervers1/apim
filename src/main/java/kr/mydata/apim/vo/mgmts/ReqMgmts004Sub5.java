@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReqMgmts004Sub5 {
-  private String status_code;
-  private int status_cnt;
+    private String status_code;
+    private int status_cnt;
 }

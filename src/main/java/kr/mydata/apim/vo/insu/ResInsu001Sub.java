@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResInsu001Sub {
-  private String insu_num;
-  private String is_consent;
-  private String prod_name;
-  private String insu_type;
-  private String insu_status;
+    private String insu_num;
+    private String is_consent;
+    private String prod_name;
+    private String insu_type;
+    private String insu_status;
 }

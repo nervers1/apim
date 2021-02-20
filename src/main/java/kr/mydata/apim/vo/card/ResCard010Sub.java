@@ -14,9 +14,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResCard010Sub {
-  private String req_date;
-  private double min_pay_rate;
-  private BigDecimal min_pay_amt;
-  private double agreed_pay_rate;
-  private BigDecimal remained_amt;
+    private String req_date;
+    private double min_pay_rate;
+    private BigDecimal min_pay_amt;
+    private double agreed_pay_rate;
+    private BigDecimal remained_amt;
 }

@@ -14,9 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResIRP001 {
-  private String rsp_code;
-  private String rsp_msg;
-  private String search_timestamp;
-  private int irp_cnt;
-  private List<ResIRP001Sub> irp_list;
+    private String rsp_code;
+    private String rsp_msg;
+    private String search_timestamp;
+    private int irp_cnt;
+    private List<ResIRP001Sub> irp_list;
 }

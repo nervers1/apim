@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResEfin001Sub2 {
-  private String pay_org_code;
-  private String pay_id;
-  private String is_primary;
+    private String pay_org_code;
+    private String pay_id;
+    private String is_primary;
 }

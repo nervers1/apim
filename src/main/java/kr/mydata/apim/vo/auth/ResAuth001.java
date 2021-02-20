@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResAuth001 {
-  private String code;
-  private String state;
+    private String code;
+    private String state;
 }

@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ReqAuth004 extends APIEntity {
-  private String org_code;
-  private String token;
-  private String token_type_hint;
-  private String client_id;
-  private String client_secret;
+    private String org_code;
+    private String token;
+    private String token_type_hint;
+    private String client_id;
+    private String client_secret;
 }

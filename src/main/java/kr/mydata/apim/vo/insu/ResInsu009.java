@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResInsu009 {
-  private String rsp_code;
-  private String rsp_msg;
-  private String search_timestamp;
-  private String loan_start_date;
-  private String loan_exp_date;
-  private String repay_method;
-  private String insu_num;
+    private String rsp_code;
+    private String rsp_msg;
+    private String search_timestamp;
+    private String loan_start_date;
+    private String loan_exp_date;
+    private String repay_method;
+    private String insu_num;
 }

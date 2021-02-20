@@ -8,6 +8,7 @@ import kr.mydata.apim.vo.common.ResCmn002;
 
 public interface CommonService {
 
-  ResCmn001 listAPI(ReqCmn001 req, String api_id, String own_org_cd, String inderstry) throws JsonProcessingException;
-  ResCmn002 listConsents(ReqCmn002 req, String api_id, String own_org_cd, String inderstry) throws JsonProcessingException;
+    ResCmn001 listAPI(ReqCmn001 req, String api_id, String own_org_cd, String industry) throws JsonProcessingException, Exception;
+
+    ResCmn002 listConsents(ReqCmn002 req, String api_id, String own_org_cd, String industry) throws JsonProcessingException, Exception;
 }

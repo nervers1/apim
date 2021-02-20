@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResCard006Sub {
-  private String seqno;
-  private String pay_due_date;
-  private BigDecimal pay_amt;
+    private String seqno;
+    private String pay_due_date;
+    private BigDecimal pay_amt;
 }

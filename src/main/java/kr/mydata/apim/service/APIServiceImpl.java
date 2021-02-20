@@ -14,41 +14,41 @@ import java.time.LocalDateTime;
 @Service
 public class APIServiceImpl implements APIService {
 
-  final DataSource dataSource;
-  final JdbcTemplate jdbcTemplate;
+    final DataSource dataSource;
+    final JdbcTemplate jdbcTemplate;
 
-  public APIServiceImpl(DataSource dataSource, JdbcTemplate jdbcTemplate) {
-    this.dataSource = dataSource;
-    this.jdbcTemplate = jdbcTemplate;
-  }
-
-
-  @Override
-  public int insertJSONBObject() throws Exception{
-    try (Connection connection = dataSource.getConnection()) {
-      String URL = connection.getMetaData().getURL();
-      Statement statement = connection.createStatement();
-      String sql = "SELECT now()";
-      ResultSet resultSet = statement.executeQuery(sql);
-
-
-      log.debug("connection : {}", connection);
-      log.debug("URL : {}", URL);
-      log.debug("Result : {}", resultSet);
-
-      String result = jdbcTemplate.queryForObject(sql, String.class);
-      log.debug("template result : {}", result);
-      log.debug("template resultSet : {}", resultSet);
+    public APIServiceImpl(DataSource dataSource, JdbcTemplate jdbcTemplate) {
+        this.dataSource = dataSource;
+        this.jdbcTemplate = jdbcTemplate;
     }
 
-    return 0;
-  }
 
-  @Override
-  public LocalDateTime getDate() throws Exception {
-    String sql = "SELECT now()";
-    LocalDateTime result = jdbcTemplate.queryForObject(sql, LocalDateTime.class);
+    @Override
+    public int insertJSONBObject() throws Exception {
+        try (Connection connection = dataSource.getConnection()) {
+            String URL = connection.getMetaData().getURL();
+            Statement statement = connection.createStatement();
+            String sql = "SELECT now()";
+            ResultSet resultSet = statement.executeQuery(sql);
 
-    return result;
-  }
+
+            log.debug("connection : {}", connection);
+            log.debug("URL : {}", URL);
+            log.debug("Result : {}", resultSet);
+
+            String result = jdbcTemplate.queryForObject(sql, String.class);
+            log.debug("template result : {}", result);
+            log.debug("template resultSet : {}", resultSet);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public LocalDateTime getDate() throws Exception {
+        String sql = "SELECT now()";
+        LocalDateTime result = jdbcTemplate.queryForObject(sql, LocalDateTime.class);
+
+        return result;
+    }
 }

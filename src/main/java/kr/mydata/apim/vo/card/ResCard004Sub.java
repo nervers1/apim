@@ -13,10 +13,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResCard004Sub {
-  private String seqno;
-  private BigDecimal charge_amt;
-  private int charge_day;
-  private int charge_month;
-  private String paid_out_date;
-  private String card_type;
+    private String seqno;
+    private BigDecimal charge_amt;
+    private int charge_day;
+    private int charge_month;
+    private String paid_out_date;
+    private String card_type;
 }

@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResCard009 {
-  private String rsp_code;
-  private String rsp_msg;
-  private String search_timestamp;
-  private String is_loan_revolving;
-  private String is_loan_short_term;
-  private String is_loan_long_term;
+    private String rsp_code;
+    private String rsp_msg;
+    private String search_timestamp;
+    private String is_loan_revolving;
+    private String is_loan_short_term;
+    private String is_loan_long_term;
 }

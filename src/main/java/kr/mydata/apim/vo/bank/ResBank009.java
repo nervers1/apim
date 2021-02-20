@@ -13,10 +13,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResBank009 {
-  private String rsp_code;
-  private String rsp_msg;
-  private String search_timestamp;
-  private BigDecimal balance_amt;
-  private BigDecimal loan_principal;
-  private String int_repay_date;
+    private String rsp_code;
+    private String rsp_msg;
+    private String search_timestamp;
+    private BigDecimal balance_amt;
+    private BigDecimal loan_principal;
+    private String int_repay_date;
 }

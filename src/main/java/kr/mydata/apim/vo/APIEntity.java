@@ -26,18 +26,18 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class APIEntity implements Serializable {
-  private int seq_no;
-  private int busr;
-  private int api_id;
-  private String org_cd;
-  private String own_org_cd;
-  private String ast_id;
-  private String scope;
-  private String res_data;
-  private int api_ver;
-  private String data_nm;
-  private String reg_dt;
-  private String mod_dt;
-  private String mod_id;
-  private String reg_id;
+    private int seq_no;
+    private int busr;
+    private int api_id;
+    private String org_cd;
+    private String own_org_cd;
+    private String ast_id;
+    private String scope;
+    private String res_data;
+    private int api_ver;
+    private String data_nm;
+    private String reg_dt;
+    private String mod_dt;
+    private String mod_id;
+    private String reg_id;
 }

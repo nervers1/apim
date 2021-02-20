@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ReqCard002 extends APIEntity {
-  private String authorization;
-  private String org_code;
-  private String search_timestamp;
+    private String authorization;
+    private String org_code;
+    private String search_timestamp;
 }

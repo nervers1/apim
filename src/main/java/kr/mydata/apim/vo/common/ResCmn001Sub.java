@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResCmn001Sub {
-  private String api_uri;
+    private String api_uri;
 }

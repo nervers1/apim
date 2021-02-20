@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public interface APIService {
 
-  int insertJSONBObject() throws Exception;
+    int insertJSONBObject() throws Exception;
 
-   LocalDateTime getDate() throws Exception;
+    LocalDateTime getDate() throws Exception;
 }

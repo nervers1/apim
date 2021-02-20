@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResMgmts003Sub3 {
-  private String client_ip;
+    private String client_ip;
 }

@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ReqEfin003 extends APIEntity {
-  private String authorization;
-  private String org_code;
-  private String sub_key;
-  private String search_timestamp;
+    private String authorization;
+    private String org_code;
+    private String sub_key;
+    private String search_timestamp;
 }

@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResMgmts003Sub {
-  private String org_code;
-  private int service_cnt;
-  private List<ResMgmts003Sub2> service_list;
+    private String org_code;
+    private int service_cnt;
+    private List<ResMgmts003Sub2> service_list;
 }

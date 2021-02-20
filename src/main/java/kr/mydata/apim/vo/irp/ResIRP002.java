@@ -15,14 +15,14 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResIRP002 {
-  private String rsp_code;
-  private String rsp_msg;
-  private String search_timestamp;
-  @JsonAlias({"accumulated_amt", "accmulated_amt"})
-  private BigDecimal accumulated_amt;
-  private BigDecimal eval_amt;
-  private BigDecimal accumulated_employer_amt;
-  private BigDecimal accumulated_employee_amt;
-  private String issue_date;
-  private String first_deposit_date;
+    private String rsp_code;
+    private String rsp_msg;
+    private String search_timestamp;
+    @JsonAlias({"accumulated_amt", "accmulated_amt"})
+    private BigDecimal accumulated_amt;
+    private BigDecimal eval_amt;
+    private BigDecimal accumulated_employer_amt;
+    private BigDecimal accumulated_employee_amt;
+    private String issue_date;
+    private String first_deposit_date;
 }

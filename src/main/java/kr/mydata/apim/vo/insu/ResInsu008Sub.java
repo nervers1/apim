@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResInsu008Sub {
-  private String prod_name;
-  private String account_num;
-  private String is_consent;
-  private String account_type;
-  private String account_status;
+    private String prod_name;
+    private String account_num;
+    private String is_consent;
+    private String account_type;
+    private String account_status;
 }

@@ -14,13 +14,13 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResInvest002 {
-  private String rsp_code;
-  private String rsp_msg;
-  private String search_timestamp;
-  private String issue_date;
-  private String is_tax_benefits;
-  private BigDecimal withholdings_amt;
-  private BigDecimal credit_loan_amt;
-  private BigDecimal mortgage_amt;
-  private String currency_code;
+    private String rsp_code;
+    private String rsp_msg;
+    private String search_timestamp;
+    private String issue_date;
+    private String is_tax_benefits;
+    private BigDecimal withholdings_amt;
+    private BigDecimal credit_loan_amt;
+    private BigDecimal mortgage_amt;
+    private String currency_code;
 }

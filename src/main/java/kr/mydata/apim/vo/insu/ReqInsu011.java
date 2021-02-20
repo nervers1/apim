@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ReqInsu011 extends APIEntity {
-  private String authorization;
-  private String org_code;
-  private String account_num;
-  private String from_dtime;
-  private String to_dtime;
-  private String next_page;
-  private int limit;
+    private String authorization;
+    private String org_code;
+    private String account_num;
+    private String from_dtime;
+    private String to_dtime;
+    private String next_page;
+    private int limit;
 }

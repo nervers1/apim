@@ -14,11 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResInsu011Sub {
-  private String trans_no;
-  private String trans_dtime;
-  private String currency_code;
-  private BigDecimal loan_paid_amt;
-  private BigDecimal int_paid_amt;
-  private int int_cnt;
-  private List<ResInsu011Sub2> int_list;
+    private String trans_no;
+    private String trans_dtime;
+    private String currency_code;
+    private BigDecimal loan_paid_amt;
+    private BigDecimal int_paid_amt;
+    private int int_cnt;
+    private List<ResInsu011Sub2> int_list;
 }

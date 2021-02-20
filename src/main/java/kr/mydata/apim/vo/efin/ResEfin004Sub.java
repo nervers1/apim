@@ -13,12 +13,12 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResEfin004Sub {
-  private String trans_type;
-  private String fob_name;
-  private String trans_dtime;
-  private BigDecimal trans_amt;
-  private BigDecimal balance_amt;
-  private String trans_org_code;
-  private String trans_id;
-  private String trans_memo;
+    private String trans_type;
+    private String fob_name;
+    private String trans_dtime;
+    private BigDecimal trans_amt;
+    private BigDecimal balance_amt;
+    private String trans_org_code;
+    private String trans_id;
+    private String trans_memo;
 }

@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReqMgmts004Sub {
-  private String statistics_date;
-  private int org_cnt;
-  private List<ReqMgmts004Sub2> org_list;
+    private String statistics_date;
+    private int org_cnt;
+    private List<ReqMgmts004Sub2> org_list;
 }

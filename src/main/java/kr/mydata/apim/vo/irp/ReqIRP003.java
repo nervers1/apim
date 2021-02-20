@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ReqIRP003 extends APIEntity {
-  private String authorization;
-  private String org_code;
-  private String account_num;
-  private String search_timestamp;
+    private String authorization;
+    private String org_code;
+    private String account_num;
+    private String search_timestamp;
 }

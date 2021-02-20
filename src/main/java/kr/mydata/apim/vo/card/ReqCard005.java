@@ -2,7 +2,6 @@ package kr.mydata.apim.vo.card;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import kr.mydata.apim.vo.APIEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,10 +17,10 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReqCard005 extends APIEntity {
-  private String authorization;
-  private String org_code;
-  private int seqno;
-  private int charge_month;
-  private String next_page;
-  private int limit;
+    private String authorization;
+    private String org_code;
+    private int seqno;
+    private int charge_month;
+    private String next_page;
+    private int limit;
 }

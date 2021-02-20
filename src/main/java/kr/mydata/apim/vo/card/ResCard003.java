@@ -13,9 +13,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResCard003 {
-  private String rsp_code;
-  private String rsp_msg;
-  private String search_timestamp;
-  private int point_cnt;
-  private List<ResCard003Sub> point_list;
+    private String rsp_code;
+    private String rsp_msg;
+    private String search_timestamp;
+    private int point_cnt;
+    private List<ResCard003Sub> point_list;
 }

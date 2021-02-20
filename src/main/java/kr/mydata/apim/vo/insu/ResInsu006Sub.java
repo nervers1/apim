@@ -14,10 +14,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResInsu006Sub {
-  private String trans_date;
-  private int trans_applied_month;
-  private int trans_no;
-  private BigDecimal paid_amt;
-  private String currency_code;
-  private String pay_method;
+    private String trans_date;
+    private int trans_applied_month;
+    private int trans_no;
+    private BigDecimal paid_amt;
+    private String currency_code;
+    private String pay_method;
 }

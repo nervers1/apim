@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ApimApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ApimApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ApimApplication.class, args);
+    }
 
 }

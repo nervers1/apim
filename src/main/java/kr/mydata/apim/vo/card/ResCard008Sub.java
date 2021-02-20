@@ -15,15 +15,15 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResCard008Sub {
-  private String approved_num;
-  private String status;
-  private String pay_type;
-  private String approved_dtime;
-  private String cancel_dtime;
-  private String merchant_name;
-  private BigDecimal approved_amt;
-  @JsonAlias({"country_code", "contry_code"})
-  private String country_code; // 오타수정
-  private String currency_code;
-  private BigDecimal krw_amt;
+    private String approved_num;
+    private String status;
+    private String pay_type;
+    private String approved_dtime;
+    private String cancel_dtime;
+    private String merchant_name;
+    private BigDecimal approved_amt;
+    @JsonAlias({"country_code", "contry_code"})
+    private String country_code; // 오타수정
+    private String currency_code;
+    private BigDecimal krw_amt;
 }

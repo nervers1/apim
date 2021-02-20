@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResIRP001Sub {
-  private int seqno;
-  private String prod_name;
-  private String account_num;
-  private String is_consent;
-  private String account_status;
+    private int seqno;
+    private String prod_name;
+    private String account_num;
+    private String is_consent;
+    private String account_status;
 }

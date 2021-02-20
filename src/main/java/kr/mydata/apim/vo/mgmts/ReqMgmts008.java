@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ReqMgmts008 extends APIEntity {
-  private String authorization;
-  private String mydata_org_code;
-  private String inquiry_date;
+    private String authorization;
+    private String mydata_org_code;
+    private String inquiry_date;
 }

@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResInsu002Sub {
-  private String insured_no;
-  private String insured_name;
+    private String insured_no;
+    private String insured_name;
 }

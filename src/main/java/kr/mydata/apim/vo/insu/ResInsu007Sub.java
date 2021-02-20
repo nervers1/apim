@@ -13,8 +13,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResInsu007Sub {
-  private BigDecimal face_amt;
-  private int trans_no;
-  private BigDecimal paid_amt;
-  private String pay_method;
+    private BigDecimal face_amt;
+    private int trans_no;
+    private BigDecimal paid_amt;
+    private String pay_method;
 }

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResIRP004Sub {
-  private String trans_dtime;
-  private String trans_type;
-  private BigDecimal trans_amt;
+    private String trans_dtime;
+    private String trans_type;
+    private BigDecimal trans_amt;
 }

@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResLoan004Sub2 {
-  private String int_start_date;
-  private String int_end_date;
-  private double int_rate;
-  private String int_type;
+    private String int_start_date;
+    private String int_end_date;
+    private double int_rate;
+    private String int_type;
 }

@@ -13,11 +13,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResMgmts003Sub2 {
-  private String service_name;
-  private String op_type;
-  private String client_id;
-  private String client_secret;
-  private String redirect_uri;
-  private int client_ip_cnt;
-  private List<ResMgmts003Sub3> client_ip_list;
+    private String service_name;
+    private String op_type;
+    private String client_id;
+    private String client_secret;
+    private String redirect_uri;
+    private int client_ip_cnt;
+    private List<ResMgmts003Sub3> client_ip_list;
 }

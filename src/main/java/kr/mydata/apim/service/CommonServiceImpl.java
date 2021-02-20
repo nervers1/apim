@@ -15,48 +15,50 @@ import org.springframework.stereotype.Service;
 @Log4j2
 @Service
 public class CommonServiceImpl implements CommonService {
-  private final JdbcTemplate jdbcTemplate;
-  private final ObjectMapper mapper = new ObjectMapper();
+    private final JdbcTemplate jdbcTemplate;
+    private final ObjectMapper mapper = new ObjectMapper();
 
-  public CommonServiceImpl(JdbcTemplate jdbcTemplate) {
-    this.jdbcTemplate = jdbcTemplate;
-  }
+    public CommonServiceImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
-  /**
-   * 공통 API - API 목록 조회 (공통)
-   * @param req
-   * @param api_id
-   * @param own_org_cd
-   * @param inderstry
-   * @return
-   */
-  @Override
-  public ResCmn001 listAPI(ReqCmn001 req, String api_id, String own_org_cd, String inderstry) throws JsonProcessingException {
-    log.info("inderstry : {}", inderstry);
-    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
-    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
-    // to JSON
-    mapper.registerModule(new JavaTimeModule());
-    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-    return mapper.readValue(res, ResCmn001.class);
-  }
+    /**
+     * 공통 API - API 목록 조회 (공통)
+     *
+     * @param req
+     * @param api_id
+     * @param own_org_cd
+     * @param industry
+     * @return
+     */
+    @Override
+    public ResCmn001 listAPI(ReqCmn001 req, String api_id, String own_org_cd, String industry) throws Exception {
+        log.info("industry : {}", industry);
+        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
+        String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
+        // to JSON
+        mapper.registerModule(new JavaTimeModule());
+        mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+        return mapper.readValue(res, ResCmn001.class);
+    }
 
-  /**
-   * 공통 API - 전송요구 내역 조회 (공통)
-   * @param req
-   * @param api_id
-   * @param own_org_cd
-   * @param inderstry
-   * @return
-   */
-  @Override
-  public ResCmn002 listConsents(ReqCmn002 req, String api_id, String own_org_cd, String inderstry) throws JsonProcessingException {
-    log.info("inderstry : {}", inderstry);
-    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
-    String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
-    // to JSON
-    mapper.registerModule(new JavaTimeModule());
-    mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-    return mapper.readValue(res, ResCmn002.class);
-  }
+    /**
+     * 공통 API - 전송요구 내역 조회 (공통)
+     *
+     * @param req
+     * @param api_id
+     * @param own_org_cd
+     * @param industry
+     * @return
+     */
+    @Override
+    public ResCmn002 listConsents(ReqCmn002 req, String api_id, String own_org_cd, String industry) throws Exception {
+        log.info("industry : {}", industry);
+        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
+        String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
+        // to JSON
+        mapper.registerModule(new JavaTimeModule());
+        mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+        return mapper.readValue(res, ResCmn002.class);
+    }
 }

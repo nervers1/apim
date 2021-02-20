@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ReqInsu003 extends APIEntity {
-  private String authorization;
-  private String org_code;
-  private String insu_num;
-  private String insured_no;
-  private String search_timestamp;
+    private String authorization;
+    private String org_code;
+    private String insu_num;
+    private String insured_no;
+    private String search_timestamp;
 }

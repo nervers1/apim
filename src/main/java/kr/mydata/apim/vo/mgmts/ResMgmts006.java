@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResMgmts006 {
-  private String rsp_code;
-  private String rsp_msg;
-  private String availability;
+    private String rsp_code;
+    private String rsp_msg;
+    private String availability;
 }

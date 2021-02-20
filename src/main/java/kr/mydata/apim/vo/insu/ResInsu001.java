@@ -13,9 +13,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResInsu001 {
-  private String rsp_code;
-  private String rsp_msg;
-  private String search_timestamp;
-  private int insu_cnt;
-  private List<ResInsu001Sub> insu_list;
+    private String rsp_code;
+    private String rsp_msg;
+    private String search_timestamp;
+    private int insu_cnt;
+    private List<ResInsu001Sub> insu_list;
 }

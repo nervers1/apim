@@ -13,12 +13,12 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResIRP003Sub {
-  private String irp_name;
-  private String irp_type;
-  private BigDecimal eval_amt;
-  private BigDecimal inv_principal;
-  private int fund_num;
-  private String open_date;
-  private String exp_date;
-  private Double int_rate;
+    private String irp_name;
+    private String irp_type;
+    private BigDecimal eval_amt;
+    private BigDecimal inv_principal;
+    private int fund_num;
+    private String open_date;
+    private String exp_date;
+    private Double int_rate;
 }

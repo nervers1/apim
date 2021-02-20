@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResInvest001Sub {
-  private String account_num;
-  private String is_consent;
-  private String account_name;
-  private String account_type;
-  private String account_status;
+    private String account_num;
+    private String is_consent;
+    private String account_name;
+    private String account_type;
+    private String account_status;
 }

@@ -14,11 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReqMgmts004Sub4 {
-  private String tm_slot;
-  private int rsp_med;
-  private int rsp_avg;
-  private BigDecimal rsp_total;
-  private int rsp_stdev;
-  private int api_status_cnt;
-  private List<ReqMgmts004Sub5> api_status_list;
+    private String tm_slot;
+    private int rsp_med;
+    private int rsp_avg;
+    private BigDecimal rsp_total;
+    private int rsp_stdev;
+    private int api_status_cnt;
+    private List<ReqMgmts004Sub5> api_status_list;
 }

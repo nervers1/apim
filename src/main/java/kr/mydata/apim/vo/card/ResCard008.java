@@ -15,11 +15,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResCard008 {
-  private String rsp_code;
-  private String rsp_msg;
-  private String next_page;
-  @JsonAlias({"approval_cnt", "approval-cnt"})
-  private int approved_cnt; // 오타수정
-  @JsonAlias({"approved_list", "approval-list"})
-  private List<ResCard008Sub> approved_list; // 오타수정
+    private String rsp_code;
+    private String rsp_msg;
+    private String next_page;
+    @JsonAlias({"approval_cnt", "approval-cnt"})
+    private int approved_cnt; // 오타수정
+    @JsonAlias({"approved_list", "approval-list"})
+    private List<ResCard008Sub> approved_list; // 오타수정
 }

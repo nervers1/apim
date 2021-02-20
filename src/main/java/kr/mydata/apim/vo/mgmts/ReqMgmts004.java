@@ -16,11 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ReqMgmts004 extends APIEntity {
-  private String authorization;
-  private String mydata_org_code;
-  private String type;
-  private String client_id;
-  private String inquiry_date;
-  private int statistics_date_cnt;
-  private List<ReqMgmts004Sub> statistics_date_list;
+    private String authorization;
+    private String mydata_org_code;
+    private String type;
+    private String client_id;
+    private String inquiry_date;
+    private int statistics_date_cnt;
+    private List<ReqMgmts004Sub> statistics_date_list;
 }
