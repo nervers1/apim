@@ -8,6 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 @Log4j2
 @RestController
 @RequestMapping(value = "/v1/card")
@@ -30,20 +34,14 @@ public class CardController {
      */
     @GetMapping(value = "/cards", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard001> listCards(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                @ModelAttribute ReqCard001 req) {
+                                                @Valid ReqCard001 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResCard001 resCard001 = service.listCard(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resCard001, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		ResCard001 resCard001 = service.listCard(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resCard001, HttpStatus.OK);
     }
 
     /**
@@ -57,8 +55,8 @@ public class CardController {
      */
     @GetMapping(value = "/cards/{card_id}", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard002> cardBasic(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                @PathVariable(value = "card_id") String card_id,
-                                                ReqCard002 req) {
+                                                @NotEmpty(message = "card_id 값이 반드시 필요합니다.") @PathVariable(value = "card_id") String card_id,
+                                                ReqCard002 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("card_id : {}", card_id);
@@ -85,7 +83,7 @@ public class CardController {
      */
     @GetMapping(value = "/cards/point", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard003> cardPoint(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                ReqCard003 req) {
+                                                ReqCard003 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
 
@@ -108,7 +106,7 @@ public class CardController {
      */
     @GetMapping(value = "/cards/bills", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard004> cardBills(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                ReqCard004 req) {
+                                                ReqCard004 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
 
@@ -131,7 +129,7 @@ public class CardController {
      */
     @GetMapping(value = "/cards/bills/detail", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard005> cardBills(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                ReqCard005 req) {
+                                                ReqCard005 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
 
@@ -155,7 +153,7 @@ public class CardController {
      */
     @GetMapping(value = "/cards/payment", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard006> cardBills(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                ReqCard006 req) {
+                                                ReqCard006 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         try {
@@ -180,7 +178,7 @@ public class CardController {
     @GetMapping(value = "/cards/{card_id}/approval-domestic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard007> cardApprovalDomestic(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                                            @PathVariable(value = "card_id") String card_id,
-                                                           ReqCard007 req) {
+                                                           ReqCard007 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("card_id : {}", card_id);
@@ -210,7 +208,7 @@ public class CardController {
     @GetMapping(value = "/cards/{card_id}/approval-overseas", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard008> cardApprovalOverseas(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                                            @PathVariable(value = "card_id") String card_id,
-                                                           ReqCard008 req) {
+                                                           ReqCard008 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("card_id : {}", card_id);
@@ -237,7 +235,7 @@ public class CardController {
      */
     @GetMapping(value = "/loans", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard009> cardLoans(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                ReqCard009 req) {
+                                                ReqCard009 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -264,7 +262,7 @@ public class CardController {
      */
     @GetMapping(value = "/loans/revolving", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard010> cardLoanRevolving(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                        ReqCard010 req) {
+                                                        ReqCard010 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
@@ -289,7 +287,7 @@ public class CardController {
      */
     @GetMapping(value = "/loans/short-term", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard011> cardLoansShortTerm(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                         ReqCard011 req) {
+                                                         ReqCard011 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -316,7 +314,7 @@ public class CardController {
      */
     @GetMapping(value = "/loans/long-term", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard012> cardLoansLongTerm(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                        ReqCard012 req) {
+                                                        ReqCard012 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);

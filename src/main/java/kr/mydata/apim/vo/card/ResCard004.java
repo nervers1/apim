@@ -18,6 +18,6 @@ public class ResCard004 {
     private String rsp_code;
     private String rsp_msg;
     private String next_page;
-    private int bill_cnt;
+    private String bill_cnt;
     private List<ResCard004Sub> bill_list;
 }

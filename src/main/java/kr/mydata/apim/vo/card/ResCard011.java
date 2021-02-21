@@ -17,6 +17,6 @@ public class ResCard011 {
     private String rsp_code;
     private String rsp_msg;
     private String search_timestamp;
-    private int short_term_cnt;
+    private String short_term_cnt;
     private List<ResCard011Sub> short_term_list;
 }

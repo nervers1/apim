@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResCard003Sub {
     private String point_type;
-    private long remain_point_amt;
-    private long expiring_point_amt;
+    private String remain_point_amt;
+    private String expiring_point_amt;
 }

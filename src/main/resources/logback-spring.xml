@@ -20,20 +20,45 @@
         </encoder>
     </appender>
 
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/logs/was/api-server/api-server.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>/logs/was/api-server/hist_api-server.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%18.18t] %-50.50(%C{30}.%M:%L) : %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <logger name="jdbc" level="OFF"/>
+
     <logger name="jdbc.sqlonly" level="OFF"/>
+
     <logger name="jdbc.sqltiming" level="DEBUG">
         <appender-ref ref="JSONAPPENDER"/>
     </logger>
+
     <logger name="jdbc.audit" level="OFF"/>
+
     <logger name="jdbc.resultset" level="OFF"/>
+
     <logger name="jdbc.resultsettable" level="DEBUG">
         <appender-ref ref="JSONAPPENDER"/>
     </logger>
+
     <logger name="jdbc.connection" level="OFF"/>
 
-    <root level="DEBUG">
+    <logger name="org" level="OFF"/>
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="kr.mydata" level="DEBUG"/>
+
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
     </root>
 
 </configuration>

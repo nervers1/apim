@@ -17,7 +17,7 @@ public class ResCard010 {
     private String rsp_code;
     private String rsp_msg;
     private String search_timestamp;
-    private int revolving_month;
-    private int revolving_cnt;
+    private String revolving_month;
+    private String revolving_cnt;
     private List<ResCard010Sub> revolving_list;
 }

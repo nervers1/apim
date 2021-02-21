@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +16,6 @@ public class ResCard002 {
     private String is_cash_card;
     private String linked_bank_code;
     private String card_brand;
-    private BigDecimal annual_fee;
+    private String annual_fee;
     private String issue_date;
 }

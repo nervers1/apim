@@ -1,6 +1,5 @@
 package kr.mydata.apim.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -10,9 +9,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -34,18 +32,18 @@ public class CardServiceImpl implements CardService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResCard001 listCard(ReqCard001 req, String api_id, String own_org_cd) throws JsonProcessingException {
-        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id;
-        // Card
-        String res = jdbcTemplate.queryForObject(sql, String.class);
-        // to JSON
+    public ResCard001 listCard(ReqCard001 req, String api_id, String own_org_cd) throws Exception {
+
+        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
+        String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-        ResCard001 resCard001 = mapper.readValue(res, ResCard001.class);
-        return resCard001;
+
+        return mapper.readValue(res, ResCard001.class);
     }
 
     /**
@@ -56,26 +54,18 @@ public class CardServiceImpl implements CardService {
      * @param own_org_cd
      * @param card_id
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResCard002 cardBasic(ReqCard002 req, String api_id, String own_org_cd, String card_id) throws JsonProcessingException {
-        Map<String, String> search_timestamp = new HashMap<>();
-        search_timestamp.put("search_timestamp", req.getSearch_timestamp());
-        String strTimeStamp = mapper.writeValueAsString(search_timestamp);
-//    String sql = "SELECT res_data FROM tb_test_data WHERE api_id = " + api_id + " and res_data @> '" + strTimeStamp + "'::jsonb";
-        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and ast_id = ?";
+    public ResCard002 cardBasic(ReqCard002 req, String api_id, String own_org_cd, String card_id) throws Exception {
 
-        // Card
-        String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, card_id);
-        log.info("res : {}", res);
+        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
+        String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), card_id);
 
-        // to JSON
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        ResCard002 resCard002 = mapper.readValue(res, ResCard002.class);
-        return resCard002;
+        return mapper.readValue(res, ResCard002.class);
     }
 
     /**
@@ -85,16 +75,17 @@ public class CardServiceImpl implements CardService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResCard003 cardPoint(ReqCard003 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResCard003 cardPoint(ReqCard003 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         return mapper.readValue(res, ResCard003.class);
     }
 
@@ -105,27 +96,34 @@ public class CardServiceImpl implements CardService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResCard004 cardBills(ReqCard004 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResCard004 cardBills(ReqCard004 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-        ResCard004 ResCard004 = mapper.readValue(res, ResCard004.class);
 
-        List<ResCard004Sub> trans_list = ResCard004.getBill_list();
+        ResCard004 resCard004 = mapper.readValue(res, ResCard004.class);
+
+        List<ResCard004Sub> bill_list = resCard004.getBill_list();
+
+        // Comparable 구현하여 내림차순 정렬
+        Collections.sort(bill_list);
+
         int page = Util.getPage(req.getNext_page());
-        trans_list = trans_list.stream()
-                .skip(req.getLimit() * (page - 1))
-                .limit(req.getLimit())
+        bill_list = bill_list.stream()
+                .skip(page)
+                .limit(Integer.valueOf(req.getLimit()))
                 .collect(Collectors.toList());
-        ResCard004.setBill_list(trans_list);
-        ResCard004.setNext_page(Util.getNextPage(ResCard004.getBill_cnt(), page, req.getLimit()));
-        return ResCard004;
+        resCard004.setBill_list(bill_list);
+        resCard004.setNext_page(Util.getNextPage(Integer.valueOf(resCard004.getBill_cnt()), page, Integer.valueOf(req.getLimit())));
+        resCard004.setBill_cnt(String.valueOf(bill_list.size()));
+
+        return resCard004;
     }
 
 
@@ -136,28 +134,34 @@ public class CardServiceImpl implements CardService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResCard005 cardBillsDetail(ReqCard005 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResCard005 cardBillsDetail(ReqCard005 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        ResCard005 ResCard005 = mapper.readValue(res, ResCard005.class);
+        ResCard005 resCard005 = mapper.readValue(res, ResCard005.class);
 
-        List<ResCard005Sub> trans_list = ResCard005.getBill_detail_list();
+        List<ResCard005Sub> bill_detail_list = resCard005.getBill_detail_list();
+
+        // Comparable 구현하여 내림차순 정렬
+        Collections.sort(bill_detail_list);
+
         int page = Util.getPage(req.getNext_page());
-        trans_list = trans_list.stream()
-                .skip(req.getLimit() * (page - 1))
-                .limit(req.getLimit())
-                .collect(Collectors.toList());
-        ResCard005.setBill_detail_list(trans_list);
-        ResCard005.setNext_page(Util.getNextPage(ResCard005.getBill_detail_cnt(), page, req.getLimit()));
-        return ResCard005;
+        bill_detail_list = bill_detail_list.stream()
+                             .skip(page)
+                             .limit(Integer.valueOf(req.getLimit()))
+                             .collect(Collectors.toList());
+        resCard005.setBill_detail_list(bill_detail_list);
+        resCard005.setNext_page(Util.getNextPage(Integer.valueOf(resCard005.getBill_detail_cnt()), page, Integer.valueOf(req.getLimit())));
+        resCard005.setBill_detail_cnt(String.valueOf(bill_detail_list.size()));
+
+        return resCard005;
     }
 
     /**
@@ -167,16 +171,17 @@ public class CardServiceImpl implements CardService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResCard006 cardPayment(ReqCard006 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResCard006 cardPayment(ReqCard006 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         return mapper.readValue(res, ResCard006.class);
     }
 
@@ -188,15 +193,17 @@ public class CardServiceImpl implements CardService {
      * @param own_org_cd
      * @param card_id
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResCard007 cardApprovalDomestic(ReqCard007 req, String api_id, String own_org_cd, String card_id) throws JsonProcessingException {
+    public ResCard007 cardApprovalDomestic(ReqCard007 req, String api_id, String own_org_cd, String card_id) throws Exception {
+
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), card_id);
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         return mapper.readValue(res, ResCard007.class);
     }
 
@@ -208,15 +215,17 @@ public class CardServiceImpl implements CardService {
      * @param own_org_cd
      * @param card_id
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResCard008 cardApprovalOverseas(ReqCard008 req, String api_id, String own_org_cd, String card_id) throws JsonProcessingException {
+    public ResCard008 cardApprovalOverseas(ReqCard008 req, String api_id, String own_org_cd, String card_id) throws Exception {
+
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), card_id);
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         return mapper.readValue(res, ResCard008.class);
     }
 
@@ -227,15 +236,17 @@ public class CardServiceImpl implements CardService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResCard009 cardLoans(ReqCard009 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResCard009 cardLoans(ReqCard009 req, String api_id, String own_org_cd) throws Exception {
+
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         return mapper.readValue(res, ResCard009.class);
     }
 
@@ -246,15 +257,17 @@ public class CardServiceImpl implements CardService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResCard010 cardLoansRevolving(ReqCard010 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResCard010 cardLoansRevolving(ReqCard010 req, String api_id, String own_org_cd) throws Exception {
+
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         return mapper.readValue(res, ResCard010.class);
     }
 
@@ -265,15 +278,17 @@ public class CardServiceImpl implements CardService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResCard011 cardLoansShortTerm(ReqCard011 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResCard011 cardLoansShortTerm(ReqCard011 req, String api_id, String own_org_cd) throws Exception {
+
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         return mapper.readValue(res, ResCard011.class);
     }
 
@@ -284,15 +299,17 @@ public class CardServiceImpl implements CardService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResCard012 cardLoansLongTerm(ReqCard012 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResCard012 cardLoansLongTerm(ReqCard012 req, String api_id, String own_org_cd) throws Exception {
+
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
-        // to JSON
+
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         return mapper.readValue(res, ResCard012.class);
     }
 }

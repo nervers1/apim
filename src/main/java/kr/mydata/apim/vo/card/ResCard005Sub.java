@@ -1,11 +1,8 @@
 package kr.mydata.apim.vo.card;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 /**
  * 청구 추가정보 조회 - 상세
@@ -13,15 +10,21 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResCard005Sub {
+public class ResCard005Sub implements Comparable<ResCard005Sub> {
     private String card_id;
     private String paid_dtime;
-    private BigDecimal paid_amt;
+    private String paid_amt;
     private String currency_code;
     private String merchant_name;
-    private BigDecimal credit_fee_amt;
-    private int total_install_cnt;
-    private int cur_install_cnt;
-    private BigDecimal balance_amt;
+    private String credit_fee_amt;
+    private String total_install_cnt;
+    private String cur_install_cnt;
+    private String balance_amt;
     private String prod_type;
+
+    @Override
+    public int compareTo(ResCard005Sub o) {
+        // 결제년월일 기준 내림차순 정렬
+        return o.getPaid_dtime().compareTo(this.paid_dtime);
+    }
 }
