@@ -34,7 +34,7 @@ public class ObjectRowMapper implements RowMapper {
                 }
                 // Modify the permissions of the corresponding filed
 
-                boolean accessFlag = field.canAccess(nt);
+                boolean accessFlag = field.isAccessible();
                 field.setAccessible(true);
                 String value = rs.getString(field.getName());
                 value = value == null ? "" : value;
