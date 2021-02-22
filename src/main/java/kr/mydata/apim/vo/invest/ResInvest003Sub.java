@@ -5,17 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
-import kr.mydata.apim.vo.bank.ResBank004Sub;
-
 /**
  * 계좌 거래내역 조회 - 상세
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResInvest003Sub  implements Comparable<ResInvest003Sub> {
+public class ResInvest003Sub implements Comparable<ResInvest003Sub> {
     private String prod_name;
     private String prod_code;
     private String trans_dtime;
@@ -27,10 +23,10 @@ public class ResInvest003Sub  implements Comparable<ResInvest003Sub> {
     private String settle_amt;
     private String balance_amt;
     private String currency_code;
-    
+
     @Override
     public int compareTo(ResInvest003Sub o) {
-        // 거래일자 기준 내림차순 정렬
+        // 거래일시 기준 내림차순 정렬
         return o.trans_dtime.compareTo(this.trans_dtime);
     }
 }
