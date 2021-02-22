@@ -1,7 +1,6 @@
 package kr.mydata.apim.vo.efin;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import kr.mydata.apim.vo.APIEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ReqEfin005{
+public class ReqEfin005 {
     private String authorization;
     private String org_code;
     private String sub_key;

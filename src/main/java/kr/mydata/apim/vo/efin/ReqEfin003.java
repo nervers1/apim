@@ -1,6 +1,5 @@
 package kr.mydata.apim.vo.efin;
 
-import kr.mydata.apim.vo.APIEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ReqEfin003{
+public class ReqEfin003 {
     private String authorization;
     private String org_code;
     private String sub_key;

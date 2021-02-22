@@ -4,17 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
-import kr.mydata.apim.vo.bank.ResBank004Sub;
-
 /**
  * 결제내역 조회 - 상세
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResEfin005Sub implements Comparable<ResEfin005Sub>  {
+public class ResEfin005Sub implements Comparable<ResEfin005Sub> {
     private String trans_type;
     private String fob_name;
     private String trans_num;
@@ -26,7 +22,7 @@ public class ResEfin005Sub implements Comparable<ResEfin005Sub>  {
     private String merchant_name;
     private String trans_title;
     private String pay_method;
-    
+
 
     @Override
     public int compareTo(ResEfin005Sub o) {

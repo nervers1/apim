@@ -1,8 +1,6 @@
 package kr.mydata.apim.vo.efin;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
-import kr.mydata.apim.vo.bank.ResBank004Sub;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +20,7 @@ public class ResEfin005 implements Comparable<ResEfin005> {
     private String next_page;
     private String trans_cnt;
     private List<ResEfin005Sub> trans_list;
-    
+
     @Override
     public int compareTo(ResEfin005 o) {
         // 거래일자 기준 내림차순 정렬
