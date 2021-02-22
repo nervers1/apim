@@ -17,7 +17,7 @@ public class ResInsu010 {
     private String rsp_msg;
     private String search_timestamp;
     private String currency_code;
-    private BigDecimal balance_amt;
-    private BigDecimal loan_principal;
+    private String balance_amt;
+    private String loan_principal;
     private String next_int_repay_date;
 }

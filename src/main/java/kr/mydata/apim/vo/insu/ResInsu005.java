@@ -19,11 +19,11 @@ public class ResInsu005 {
     private String search_timestamp;
     private String pay_due;
     private String pay_cycle;
-    private int pay_cnt;
+    private String pay_cnt;
     private String pay_org_code;
     private String pay_date;
     private String pay_end_date;
-    private BigDecimal pay_amt;
+    private String pay_amt;
     private String currency_code;
     private String is_auto_pay;
 }

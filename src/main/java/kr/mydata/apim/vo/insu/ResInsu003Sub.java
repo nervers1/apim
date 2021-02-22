@@ -16,7 +16,7 @@ public class ResInsu003Sub {
     private String contract_name;
     private String contract_status;
     private String contract_exp_date;
-    private BigDecimal contract_face_amt;
+    private String contract_face_amt;
     private String currency_code;
     private String is_required;
 }

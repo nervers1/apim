@@ -12,9 +12,15 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResInsu007Sub {
-    private BigDecimal face_amt;
-    private int trans_no;
-    private BigDecimal paid_amt;
+public class ResInsu007Sub implements Comparable<ResInsu007Sub> {
+    private String face_amt;
+    private String trans_no;
+    private String paid_amt;
     private String pay_method;
+ 
+    @Override
+    public int compareTo(ResInsu007Sub o) {
+        // 거래일자 기준 내림차순 정렬
+        return o.trans_no.compareTo(this.trans_no);
+    }
 }

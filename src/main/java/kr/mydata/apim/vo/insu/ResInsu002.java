@@ -27,6 +27,6 @@ public class ResInsu002 {
     private String pension_rcv_start_date;
     private String pension_rcv_cycle;
     private String is_loanable;
-    private int insured_count;
+    private String insured_count;
     private List<ResInsu002Sub> insured_list;
 }

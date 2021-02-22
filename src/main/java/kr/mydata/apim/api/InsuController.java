@@ -3,6 +3,9 @@ package kr.mydata.apim.api;
 import kr.mydata.apim.service.InsuService;
 import kr.mydata.apim.vo.insu.*;
 import lombok.extern.log4j.Log4j2;
+
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +33,7 @@ public class InsuController {
     @GetMapping(value = "/insurances", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu001> listInsu(@RequestHeader(value = "x-api-id") String api_id,
                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                               ReqInsu001 req) {
+                                               @Valid ReqInsu001 req) {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -58,7 +61,7 @@ public class InsuController {
     @PostMapping(value = "/insurances/basic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu002> insuBasic(@RequestHeader(value = "x-api-id") String api_id,
                                                 @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                @RequestBody ReqInsu002 req) {
+                                                @Valid @RequestBody ReqInsu002 req) {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -87,7 +90,7 @@ public class InsuController {
     @PostMapping(value = "/insurances/contracts", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu003> insuContracts(@RequestHeader(value = "x-api-id") String api_id,
                                                     @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                    @RequestBody ReqInsu003 req) {
+                                                    @Valid @RequestBody ReqInsu003 req) {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -116,7 +119,7 @@ public class InsuController {
     @PostMapping(value = "/insurances/car", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu004> insuCar(@RequestHeader(value = "x-api-id") String api_id,
                                               @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                              @RequestBody ReqInsu004 req) {
+                                              @Valid @RequestBody ReqInsu004 req) {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -145,7 +148,7 @@ public class InsuController {
     @PostMapping(value = "/insurances/payment", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu005> insuPayment(@RequestHeader(value = "x-api-id") String api_id,
                                                   @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                  @RequestBody ReqInsu005 req) {
+                                                  @Valid @RequestBody ReqInsu005 req) {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -174,7 +177,7 @@ public class InsuController {
     @PostMapping(value = "/insurances/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu006> insuTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                                        @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                       @RequestBody ReqInsu006 req) {
+                                                       @Valid @RequestBody ReqInsu006 req) {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -203,7 +206,7 @@ public class InsuController {
     @PostMapping(value = "/insurances/car/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu007> insuCarTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                                           @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                          @RequestBody ReqInsu007 req) {
+                                                          @Valid @RequestBody ReqInsu007 req) {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -231,7 +234,7 @@ public class InsuController {
      */
     @GetMapping(value = "/loans", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu008> loans(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                            ReqInsu008 req) {
+    		@Valid ReqInsu008 req) {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -259,7 +262,7 @@ public class InsuController {
      */
     @PostMapping(value = "/loans/basic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu009> insuLoansBasic(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                     @RequestBody ReqInsu009 req) {
+    		@Valid @RequestBody ReqInsu009 req) {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -287,7 +290,7 @@ public class InsuController {
      */
     @PostMapping(value = "/loans/detail", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu010> insuLoansDetail(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                      @RequestBody ReqInsu010 req) {
+    		@Valid @RequestBody ReqInsu010 req) {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -315,7 +318,7 @@ public class InsuController {
      */
     @PostMapping(value = "/loans/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu011> insuLoansTransactions(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                            @RequestBody ReqInsu011 req) {
+    		@Valid @RequestBody ReqInsu011 req) {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);

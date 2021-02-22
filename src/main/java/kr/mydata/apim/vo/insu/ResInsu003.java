@@ -16,6 +16,6 @@ public class ResInsu003 {
     private String rsp_code;
     private String rsp_msg;
     private String search_timestamp;
-    private int contract_cnt;
+    private String contract_cnt;
     private List<ResInsu003Sub> contract_list;
 }

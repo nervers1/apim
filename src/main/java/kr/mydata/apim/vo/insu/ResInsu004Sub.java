@@ -24,5 +24,5 @@ public class ResInsu004Sub {
     private String contract_driver;
     private String is_own_dmg_coverage;
     private String self_pay_rate;
-    private BigDecimal self_pay_amt;
+    private String self_pay_amt;
 }
