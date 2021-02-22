@@ -17,7 +17,7 @@ public class ResLoan002 {
     private String holder_name;
     private String issue_date;
     private String exp_date;
-    private double last_offered_rate;
+    private String last_offered_rate;
     private String repay_date;
     private String repay_method;
     private String repay_org_code;

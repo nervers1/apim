@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -13,14 +12,19 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResLoan004Sub {
+public class ResLoan004Sub implements Comparable<ResLoan004Sub> {
     private String trans_dtime;
     private String trans_no;
     private String trans_type;
-    private BigDecimal trans_amt;
-    private BigDecimal balance_amt;
-    private BigDecimal trans_principal_amt;
-    private BigDecimal trans_int_amt;
-    private int int_cnt;
+    private String trans_amt;
+    private String balance_amt;
+    private String trans_principal_amt;
+    private String trans_int_amt;
+    private String int_cnt;
     private List<ResLoan004Sub2> int_list;
+
+    @Override
+    public int compareTo(ResLoan004Sub o) {
+        return o.getTrans_dtime().compareTo(this.trans_dtime);
+    }
 }
