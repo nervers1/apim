@@ -18,6 +18,6 @@ public class ResInvest001 {
     private String rsp_msg;
     private String search_timestamp;
     private String reg_date;
-    private int account_cnt;
+    private String account_cnt;
     private List<ResInvest001Sub> account_list;
 }

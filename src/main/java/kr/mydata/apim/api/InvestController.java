@@ -31,19 +31,13 @@ public class InvestController {
     @GetMapping(value = "/accounts", produces = "application/json; charset=UTF-8")
     public ResponseEntity listAccount(@RequestHeader(value = "x-api-id") String api_id,
                                       @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                      ReqInvest001 req) {
+                                      @Valid ReqInvest001 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResInvest001 resInvest001 = service.listAccount(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInvest001, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		ResInvest001 resInvest001 = service.listAccount(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInvest001, HttpStatus.OK);
     }
 
     /**
@@ -57,19 +51,13 @@ public class InvestController {
     @PostMapping(value = "/accounts/basic", produces = "application/json; charset=UTF-8")
     public ResponseEntity listBasic(@RequestHeader(value = "x-api-id", required = false) String api_id,
                                     @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
-                                    @Valid @RequestBody ReqInvest002 req) {
+                                    @Valid @RequestBody ReqInvest002 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResInvest002 resInvest002 = service.listBasic(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInvest002, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		ResInvest002 resInvest002 = service.listBasic(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInvest002, HttpStatus.OK);
     }
 
     /**
@@ -83,20 +71,14 @@ public class InvestController {
     @PostMapping(value = "/accounts/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity listTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                            @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                           @RequestBody ReqInvest003 req) {
+                                           @Valid @RequestBody ReqInvest003 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResInvest003 resInvest003 = service.listTransactions(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInvest003, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+		ResInvest003 resInvest003 = service.listTransactions(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInvest003, HttpStatus.OK);
+	}
 
     /**
      * 금융투자업권 - 계좌 상품정보 조회
@@ -109,18 +91,12 @@ public class InvestController {
     @PostMapping(value = "/accounts/products", produces = "application/json; charset=UTF-8")
     public ResponseEntity listProducts(@RequestHeader(value = "x-api-id") String api_id,
                                        @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                       @RequestBody ReqInvest004 req) {
+                                       @Valid @RequestBody ReqInvest004 req) throws Exception {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResInvest004 resInvest004 = service.listProducts(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInvest004, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		ResInvest004 resInvest004 = service.listProducts(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInvest004, HttpStatus.OK);
     }
 }

@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,13 +85,19 @@ public class InvestServiceImpl implements InvestService {
         ResInvest003 resVo = mapper.readValue(res, ResInvest003.class);
         List<ResInvest003Sub> trans_list = resVo.getTrans_list();
 
+        // Comparable 구현하여 내림차순 정렬
+        Collections.sort(trans_list);
+
+        // next_page 는 조회 마지막 row_num 으로 들어옴.
         int page = Util.getPage(req.getNext_page());
         trans_list = trans_list.stream()
-                .skip(req.getLimit() * (page - 1))
-                .limit(req.getLimit())
+                .skip(page)
+                .limit(Integer.valueOf(req.getLimit()))
                 .collect(Collectors.toList());
         resVo.setTrans_list(trans_list);
-        resVo.setNext_page(Util.getNextPage(resVo.getTrans_cnt(), page, req.getLimit()));
+        resVo.setNext_page(Util.getNextPage(Integer.valueOf(resVo.getTrans_cnt()), page, Integer.valueOf(req.getLimit())));
+        resVo.setTrans_cnt(String.valueOf(trans_list.size()));
+        
         return resVo;
     }
 

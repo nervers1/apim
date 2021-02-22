@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ReqInvest002 extends APIEntity {
+public class ReqInvest002{
     private String org_code;
     private String account_num;
     private String search_timestamp;

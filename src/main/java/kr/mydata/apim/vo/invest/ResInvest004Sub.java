@@ -18,15 +18,15 @@ public class ResInvest004Sub {
     private String prod_type_detail;
     private String prod_code;
     private String prod_name;
-    private BigDecimal purchase_amt;
-    private BigDecimal holding_num;
-    private BigDecimal avail_for_sale_num;
-    private BigDecimal eval_amt;
+    private String purchase_amt;
+    private String holding_num;
+    private String avail_for_sale_num;
+    private String eval_amt;
     private String issue_date;
-    private BigDecimal paid_in_amt;
-    private BigDecimal withdrawal_amt;
+    private String paid_in_amt;
+    private String withdrawal_amt;
     private String last_paid_in_date;
-    private BigDecimal received_amt;
+    private String received_amt;
     @JsonAlias({"currency_code", "currenct_code"})
     private String currency_code;
 }
