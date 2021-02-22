@@ -154,9 +154,9 @@ public class CardServiceImpl implements CardService {
 
         int page = Util.getPage(req.getNext_page());
         bill_detail_list = bill_detail_list.stream()
-                             .skip(page)
-                             .limit(Integer.valueOf(req.getLimit()))
-                             .collect(Collectors.toList());
+                .skip(page)
+                .limit(Integer.valueOf(req.getLimit()))
+                .collect(Collectors.toList());
         resCard005.setBill_detail_list(bill_detail_list);
         resCard005.setNext_page(Util.getNextPage(Integer.valueOf(resCard005.getBill_detail_cnt()), page, Integer.valueOf(req.getLimit())));
         resCard005.setBill_detail_cnt(String.valueOf(bill_detail_list.size()));
