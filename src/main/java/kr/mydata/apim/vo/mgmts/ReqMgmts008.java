@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ReqMgmts008 extends APIEntity {
+public class ReqMgmts008{
     private String authorization;
     private String mydata_org_code;
     private String inquiry_date;

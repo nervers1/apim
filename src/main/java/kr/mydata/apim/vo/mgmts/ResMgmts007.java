@@ -16,6 +16,6 @@ public class ResMgmts007 {
     private String rsp_code;
     private String rsp_msg;
     private String is_member;
-    private int service_cnt;
+    private String service_cnt;
     private List<ResMgmts007Sub> service_list;
 }

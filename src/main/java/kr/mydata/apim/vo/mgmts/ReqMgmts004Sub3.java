@@ -14,6 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class ReqMgmts004Sub3 {
     private String api_type;
-    private int tm_slot_cnt;
+    private String tm_slot_cnt;
     private List<ReqMgmts004Sub4> tm_slot_list;
 }

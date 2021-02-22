@@ -15,6 +15,6 @@ import java.util.List;
 public class ResMgmts007Sub {
     private String service_name;
     private String client_id;
-    private int consent_cnt;
+    private String consent_cnt;
     private List<ResMgmts007Sub2> consent_list;
 }

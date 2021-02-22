@@ -18,6 +18,6 @@ public class ResMgmts003Sub2 {
     private String client_id;
     private String client_secret;
     private String redirect_uri;
-    private int client_ip_cnt;
+    private String client_ip_cnt;
     private List<ResMgmts003Sub3> client_ip_list;
 }
