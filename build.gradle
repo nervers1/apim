@@ -42,7 +42,3 @@ dependencies {
 	implementation 'org.hibernate.validator:hibernate-validator:6.0.10.Final'
 
 }
-
-test {
-	useJUnitPlatform()
-}
