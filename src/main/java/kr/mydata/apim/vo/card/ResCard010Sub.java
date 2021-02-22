@@ -10,10 +10,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResCard010Sub {
+public class ResCard010Sub implements Comparable<ResCard010Sub> {
     private String req_date;
     private String min_pay_rate;
     private String min_pay_amt;
     private String agreed_pay_rate;
     private String remained_amt;
+
+    @Override
+    public int compareTo(ResCard010Sub o) {
+        return o.getReq_date().compareTo(this.req_date);
+    }
 }

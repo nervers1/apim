@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResCard007Sub {
+public class ResCard007Sub implements Comparable<ResCard007Sub> {
     private String approved_num;
     private String status;
     private String pay_type;
@@ -19,4 +19,9 @@ public class ResCard007Sub {
     private String merchant_name;
     private String approved_amt;
     private String total_install_cnt;
+
+    @Override
+    public int compareTo(ResCard007Sub o) {
+        return o.getApproved_dtime().compareTo(approved_dtime);
+    }
 }
