@@ -20,7 +20,7 @@ public class ResInsu002 {
     private String is_renewable;
     private String issue_date;
     private String exp_date;
-    private BigDecimal face_amt;
+    private String face_amt;
     private String currency_code;
     private String is_variable;
     private String is_universal;
