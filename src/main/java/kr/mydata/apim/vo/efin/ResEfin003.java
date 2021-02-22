@@ -18,6 +18,6 @@ public class ResEfin003 {
     private String charge_account_num;
     private String charge_option;
     private String charge_day;
-    private int charge_base_amt;
-    private int charge_amt;
+    private String charge_base_amt;
+    private String charge_amt;
 }

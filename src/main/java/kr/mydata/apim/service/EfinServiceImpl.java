@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -107,13 +108,18 @@ public class EfinServiceImpl implements EfinService {
 
         ResEfin004 ResEfin004 = mapper.readValue(res, ResEfin004.class);
         List<ResEfin004Sub> trans_list = ResEfin004.getTrans_list();
+        
+        Collections.sort(trans_list);
+        
+        // next_page 는 조회 마지막 row_num 으로 들어옴.
         int page = Util.getPage(req.getNext_page());
         trans_list = trans_list.stream()
-                .skip(req.getLimit() * (page - 1))
-                .limit(req.getLimit())
+                .skip(page)
+                .limit(Integer.valueOf(req.getLimit()))
                 .collect(Collectors.toList());
         ResEfin004.setTrans_list(trans_list);
-        ResEfin004.setNext_page(Util.getNextPage(ResEfin004.getTrans_cnt(), page, req.getLimit()));
+        ResEfin004.setNext_page(Util.getNextPage(Integer.valueOf(ResEfin004.getTrans_cnt()), page, Integer.valueOf(req.getLimit())));
+        ResEfin004.setTrans_cnt(String.valueOf(trans_list.size()));
         return ResEfin004;
     }
 
@@ -136,13 +142,20 @@ public class EfinServiceImpl implements EfinService {
 
         ResEfin005 ResEfin005 = mapper.readValue(res, ResEfin005.class);
         List<ResEfin005Sub> trans_list = ResEfin005.getTrans_list();
+        
+        // Comparable 구현하여 내림차순 정렬
+        Collections.sort(trans_list);
+        
+        // next_page 는 조회 마지막 row_num 으로 들어옴.
         int page = Util.getPage(req.getNext_page());
         trans_list = trans_list.stream()
-                .skip(req.getLimit() * (page - 1))
-                .limit(req.getLimit())
+                .skip(page)
+                .limit(Integer.valueOf(req.getLimit()))
                 .collect(Collectors.toList());
         ResEfin005.setTrans_list(trans_list);
-        ResEfin005.setNext_page(Util.getNextPage(ResEfin005.getTrans_cnt(), page, req.getLimit()));
+        ResEfin005.setNext_page(Util.getNextPage(Integer.valueOf(ResEfin005.getTrans_cnt()), page, Integer.valueOf(req.getLimit())));
+        ResEfin005.setTrans_cnt(String.valueOf(trans_list.size()));
+
         return ResEfin005;
     }
 }

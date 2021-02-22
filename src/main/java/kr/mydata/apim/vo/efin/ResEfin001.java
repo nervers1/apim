@@ -20,6 +20,6 @@ public class ResEfin001 {
     private String reg_date; // 불필요한 항목 : 테스트 데이터에서 빼주세요
     private String search_timestamp;
     private String name;
-    private int account_cnt;
+    private String account_cnt;
     private List<ResEfin001Sub> account_list;
 }

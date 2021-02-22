@@ -14,10 +14,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class ResEfin002Sub {
     private String fob_name;
-    private BigDecimal total_balance_amt;
-    private BigDecimal charge_balance_amt;
-    private BigDecimal reserve_balance_amt;
-    private BigDecimal reserve_due_amt;
-    private BigDecimal exp_due_amt;
-    private int limit_amt;
+    private String total_balance_amt;
+    private String charge_balance_amt;
+    private String reserve_balance_amt;
+    private String reserve_due_amt;
+    private String exp_due_amt;
+    private String limit_amt;
 }

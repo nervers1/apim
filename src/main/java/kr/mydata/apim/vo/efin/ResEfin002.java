@@ -16,6 +16,6 @@ public class ResEfin002 {
     private String rsp_code;
     private String rsp_msg;
     private String search_timestamp;
-    private int fob_cnt;
+    private String fob_cnt;
     private List<ResEfin002Sub> fob_list;
 }

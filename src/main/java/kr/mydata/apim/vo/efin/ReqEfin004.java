@@ -16,12 +16,12 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
-public class ReqEfin004 extends APIEntity {
+public class ReqEfin004{
     private String authorization;
     private String org_code;
     private String sub_key;
     private String from_dtime;
     private String to_dtime;
     private String next_page;
-    private int limit;
+    private String limit;
 }

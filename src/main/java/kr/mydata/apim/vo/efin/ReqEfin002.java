@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ReqEfin002 extends APIEntity {
+public class ReqEfin002{
     private String authorization;
     private String org_code;
     private String sub_key;
