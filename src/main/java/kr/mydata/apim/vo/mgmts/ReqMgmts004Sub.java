@@ -23,5 +23,7 @@ public class ReqMgmts004Sub {
 	@NotNull(message = "org_cnt 값이 반드시 있어야 합니다.")
     @Size(min = 1, max = 5, message = "org_cnt 값은 1 ~ 5 자리 입니다.")
     private String org_cnt;
+	
+	@NotNull(message = "org_list 값이 반드시 있어야 합니다.")
     private List<ReqMgmts004Sub2> org_list;
 }

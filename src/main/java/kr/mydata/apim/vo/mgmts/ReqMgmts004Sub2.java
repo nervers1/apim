@@ -40,5 +40,6 @@ public class ReqMgmts004Sub2 {
     @Size(min = 1, max = 7, message = "api_type_cnt 값은 1 ~ 7 자리 입니다.")
     private String api_type_cnt;
 	
+	@NotNull(message = "api_type_list 값이 반드시 있어야 합니다.")
     private List<ReqMgmts004Sub3> api_type_list;
 }
