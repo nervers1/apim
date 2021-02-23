@@ -16,6 +16,6 @@ public class ResMgmts002 {
     private String rsp_code;
     private String rsp_msg;
     private String search_timestamp;
-    private int org_cnt;
+    private String org_cnt;
     private List<ResMgmts002Sub> org_list;
 }
