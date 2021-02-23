@@ -27,7 +27,7 @@ public class ReqMgmts004{
     private String mydata_org_code;
 	
 	@NotNull(message = "type 값이 반드시 있어야 합니다.")
-    @Size(min = 1, max = 1, message = "type 값은1 자리 입니다.")
+    @Size(min = 1, max = 1, message = "type 값은 1 자리 입니다.")
     private String type;
 	
 	@NotNull(message = "client_id 값이 반드시 있어야 합니다.")

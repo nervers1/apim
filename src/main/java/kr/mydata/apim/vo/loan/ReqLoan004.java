@@ -38,6 +38,6 @@ public class ReqLoan004 {
     private String next_page;
 
     @NotNull(message = "limit 값이 반드시 있어야 합니다.")
-    @Size(min = 1, max = 3, message = "limit 값은 14 자리 입니다.")
+    @Size(min = 1, max = 3, message = "limit 값은 3 자리 입니다.")
     private String limit;
 }
