@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Log4j2
-@RequestMapping(value = "/v1/bank")
+@RequestMapping(value = "/bank")
 @RestController
 public class BankController {
 

@@ -11,7 +11,7 @@ import javax.validation.Valid;
 
 @Log4j2
 @RestController
-@RequestMapping(value = "/v1/invest")
+@RequestMapping(value = "/invest")
 public class InvestController {
 
     private final InvestService service;

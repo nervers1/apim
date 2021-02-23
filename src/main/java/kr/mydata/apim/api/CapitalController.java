@@ -3,15 +3,14 @@ package kr.mydata.apim.api;
 import kr.mydata.apim.service.CapitalService;
 import kr.mydata.apim.vo.loan.*;
 import lombok.extern.log4j.Log4j2;
-
-import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Log4j2
-@RequestMapping(value = "/v1/capital")
+@RequestMapping(value = "/capital")
 @RestController
 public class CapitalController {
 
@@ -31,8 +30,9 @@ public class CapitalController {
      * @return
      */
     @GetMapping(value = "/loans", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResLoan001> loans(@RequestHeader(value = "x-api-id") String api_id, @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-    		@Valid ReqLoan001 req) throws Exception {
+    public ResponseEntity<ResLoan001> loans(@RequestHeader(value = "x-api-id") String api_id,
+											@RequestHeader(value = "x-own-org-cd") String own_org_cd,
+    										@Valid ReqLoan001 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);

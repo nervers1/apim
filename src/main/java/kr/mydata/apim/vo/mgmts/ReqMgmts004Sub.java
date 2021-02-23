@@ -17,13 +17,13 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class ReqMgmts004Sub {
 	@NotNull(message = "statistics_date 값이 반드시 있어야 합니다.")
-    @Size(min = 14, max = 14, message = "statistics_date 값은 14 자리 입니다.")
+    @Size(min = 8, max = 8, message = "statistics_date 값은 8 자리 입니다.")
     private String statistics_date;
-	
+
 	@NotNull(message = "org_cnt 값이 반드시 있어야 합니다.")
-    @Size(min = 1, max = 5, message = "org_cnt 값은 1 ~ 5 자리 입니다.")
+    @Size(min = 1, max = 3, message = "org_cnt 값은 1 ~ 3 자리 입니다.")
     private String org_cnt;
-	
+
 	@NotNull(message = "org_list 값이 반드시 있어야 합니다.")
     private List<ReqMgmts004Sub2> org_list;
 }

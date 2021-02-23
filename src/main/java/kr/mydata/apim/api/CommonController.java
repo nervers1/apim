@@ -40,7 +40,7 @@ public class CommonController {
      * @return
      * @thorws Exception
      */
-    @GetMapping(value = "/v1/{industry}/apis", produces = "application/json; charset=UTF-8")
+    @GetMapping(value = "/{industry}/apis", produces = "application/json; charset=UTF-8")
     public ResponseEntity listAccount(@RequestHeader(value = "x-api-id") String api_id,
                                       @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                       @PathVariable String industry,
@@ -48,12 +48,9 @@ public class CommonController {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
-        try {
-            ResCmn001 resCmn001 = common.listAPI(req, api_id, own_org_cd, industry);
-            return new ResponseEntity<>(resCmn001, HttpStatus.OK);
-        } catch (EmptyResultDataAccessException e) {
-            return new ResponseEntity<>(new ErrorResponse("50001", "시스템 장애가 발생하였습니다. 관리자에게 문의해주세요."), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
+        ResCmn001 resCmn001 = common.listAPI(req, api_id, own_org_cd, industry);
+        return new ResponseEntity<>(resCmn001, HttpStatus.OK);
     }
 
     /**
@@ -66,7 +63,7 @@ public class CommonController {
      * @return
      * @throws Exception
      */
-    @GetMapping(value = "/v1/{industry}/consents", produces = "application/json; charset=UTF-8")
+    @GetMapping(value = "/{industry}/consents", produces = "application/json; charset=UTF-8")
     public ResponseEntity listConsents(@RequestHeader(value = "x-api-id") String api_id,
                                        @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                        @PathVariable String industry,
@@ -75,12 +72,10 @@ public class CommonController {
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
-        try {
-            ResCmn002 resCmn002 = common.listConsents(req, api_id, own_org_cd, industry);
-            return new ResponseEntity<>(resCmn002, HttpStatus.OK);
-        } catch (EmptyResultDataAccessException e) {
-            return new ResponseEntity<>(new ErrorResponse("50001", "시스템 장애가 발생하였습니다. 관리자에게 문의해주세요."), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
+        ResCmn002 resCmn002 = common.listConsents(req, api_id, own_org_cd, industry);
+        return new ResponseEntity<>(resCmn002, HttpStatus.OK);
+
     }
 
 

@@ -1,6 +1,5 @@
 package kr.mydata.apim.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -32,10 +31,10 @@ public class InvestServiceImpl implements InvestService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInvest001 listAccount(ReqInvest001 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInvest001 listAccount(ReqInvest001 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
@@ -52,10 +51,10 @@ public class InvestServiceImpl implements InvestService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInvest002 listBasic(ReqInvest002 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInvest002 listBasic(ReqInvest002 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
@@ -72,10 +71,10 @@ public class InvestServiceImpl implements InvestService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInvest003 listTransactions(ReqInvest003 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInvest003 listTransactions(ReqInvest003 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
@@ -97,7 +96,7 @@ public class InvestServiceImpl implements InvestService {
         resVo.setTrans_list(trans_list);
         resVo.setNext_page(Util.getNextPage(Integer.valueOf(resVo.getTrans_cnt()), page, Integer.valueOf(req.getLimit())));
         resVo.setTrans_cnt(String.valueOf(trans_list.size()));
-        
+
         return resVo;
     }
 
@@ -108,10 +107,10 @@ public class InvestServiceImpl implements InvestService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInvest004 listProducts(ReqInvest004 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInvest004 listProducts(ReqInvest004 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());

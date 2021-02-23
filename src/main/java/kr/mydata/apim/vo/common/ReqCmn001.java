@@ -1,6 +1,5 @@
 package kr.mydata.apim.vo.common;
 
-import kr.mydata.apim.vo.APIEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

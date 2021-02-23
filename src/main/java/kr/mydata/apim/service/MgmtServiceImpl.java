@@ -1,6 +1,5 @@
 package kr.mydata.apim.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -23,7 +22,7 @@ public class MgmtServiceImpl implements MgmtService {
     }
 
     @Override
-    public ResOAuth001 token(ReqOAuth001 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResOAuth001 token(ReqOAuth001 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd);
         // to JSON
@@ -33,7 +32,7 @@ public class MgmtServiceImpl implements MgmtService {
     }
 
     @Override
-    public ResMgmts002 orgs(ReqMgmts002 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResMgmts002 orgs(ReqMgmts002 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd);
         // to JSON
@@ -43,7 +42,7 @@ public class MgmtServiceImpl implements MgmtService {
     }
 
     @Override
-    public ResMgmts003 services(ReqMgmts003 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResMgmts003 services(ReqMgmts003 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd);
         // to JSON
@@ -53,9 +52,9 @@ public class MgmtServiceImpl implements MgmtService {
     }
 
     @Override
-    public ResMgmts004 statistics(ReqMgmts004 req, String api_id, String own_org_cd) throws JsonProcessingException {
-        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ?";
-        String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd);
+    public ResMgmts004 statistics(ReqMgmts004 req, String api_id, String own_org_cd) throws Exception {
+        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_code = ?";
+        String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getMydata_org_code());
         // to JSON
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
@@ -63,7 +62,7 @@ public class MgmtServiceImpl implements MgmtService {
     }
 
     @Override
-    public ResMgmts006 status(ReqMgmts006 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResMgmts006 status(ReqMgmts006 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
         // to JSON
@@ -73,7 +72,7 @@ public class MgmtServiceImpl implements MgmtService {
     }
 
     @Override
-    public ResMgmts007 consents(ReqMgmts007 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResMgmts007 consents(ReqMgmts007 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
         // to JSON
@@ -83,9 +82,9 @@ public class MgmtServiceImpl implements MgmtService {
     }
 
     @Override
-    public ResMgmts008 reqStatistics(ReqMgmts008 req, String api_id, String own_org_cd) throws JsonProcessingException {
-        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ?";
-        String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd);
+    public ResMgmts008 reqStatistics(ReqMgmts008 req, String api_id, String own_org_cd) throws Exception {
+        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
+        String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getMydata_org_code());
         // to JSON
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);

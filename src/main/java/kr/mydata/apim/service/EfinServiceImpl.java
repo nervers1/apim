@@ -1,6 +1,5 @@
 package kr.mydata.apim.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -14,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-;
+
 
 
 @Service
@@ -34,10 +33,10 @@ public class EfinServiceImpl implements EfinService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResEfin001 accounts(ReqEfin001 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResEfin001 accounts(ReqEfin001 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd,
                 req.getOrg_code());
@@ -54,10 +53,10 @@ public class EfinServiceImpl implements EfinService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResEfin002 balance(ReqEfin002 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResEfin002 balance(ReqEfin002 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd,
                 req.getOrg_code(), req.getSub_key());
@@ -74,10 +73,10 @@ public class EfinServiceImpl implements EfinService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResEfin003 charge(ReqEfin003 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResEfin003 charge(ReqEfin003 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd,
                 req.getOrg_code(), req.getSub_key());
@@ -94,11 +93,11 @@ public class EfinServiceImpl implements EfinService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
     public ResEfin004 prepaidTransactions(ReqEfin004 req, String api_id, String own_org_cd)
-            throws JsonProcessingException {
+            throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd,
                 req.getOrg_code(), req.getSub_key());
@@ -108,9 +107,9 @@ public class EfinServiceImpl implements EfinService {
 
         ResEfin004 ResEfin004 = mapper.readValue(res, ResEfin004.class);
         List<ResEfin004Sub> trans_list = ResEfin004.getTrans_list();
-        
+
         Collections.sort(trans_list);
-        
+
         // next_page 는 조회 마지막 row_num 으로 들어옴.
         int page = Util.getPage(req.getNext_page());
         trans_list = trans_list.stream()
@@ -130,10 +129,10 @@ public class EfinServiceImpl implements EfinService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResEfin005 transactions(ReqEfin005 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResEfin005 transactions(ReqEfin005 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getSub_key());
         // to JSON
@@ -142,10 +141,10 @@ public class EfinServiceImpl implements EfinService {
 
         ResEfin005 ResEfin005 = mapper.readValue(res, ResEfin005.class);
         List<ResEfin005Sub> trans_list = ResEfin005.getTrans_list();
-        
+
         // Comparable 구현하여 내림차순 정렬
         Collections.sort(trans_list);
-        
+
         // next_page 는 조회 마지막 row_num 으로 들어옴.
         int page = Util.getPage(req.getNext_page());
         trans_list = trans_list.stream()

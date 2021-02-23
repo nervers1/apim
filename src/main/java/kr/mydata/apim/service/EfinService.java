@@ -1,6 +1,5 @@
 package kr.mydata.apim.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.mydata.apim.vo.efin.*;
 
 public interface EfinService {
@@ -12,9 +11,9 @@ public interface EfinService {
      * @param api_id     String
      * @param own_org_cd String
      * @return ResEfin001
-     * @throws JsonProcessingException e
+     * @throws Exception e
      */
-    ResEfin001 accounts(ReqEfin001 req, String api_id, String own_org_cd) throws JsonProcessingException;
+    ResEfin001 accounts(ReqEfin001 req, String api_id, String own_org_cd) throws Exception;
 
     /**
      * 전자금융 - 전자지급수단 잔액정보 조회
@@ -23,9 +22,9 @@ public interface EfinService {
      * @param api_id     String
      * @param own_org_cd String
      * @return ResEfin002
-     * @throws JsonProcessingException e
+     * @throws Exception e
      */
-    ResEfin002 balance(ReqEfin002 req, String api_id, String own_org_cd) throws JsonProcessingException;
+    ResEfin002 balance(ReqEfin002 req, String api_id, String own_org_cd) throws Exception;
 
     /**
      * 전자금융 - 전자지급수단 자동충전정보 조회
@@ -34,9 +33,9 @@ public interface EfinService {
      * @param api_id     String
      * @param own_org_cd String
      * @return ResEfin004
-     * @throws JsonProcessingException e
+     * @throws Exception e
      */
-    ResEfin003 charge(ReqEfin003 req, String api_id, String own_org_cd) throws JsonProcessingException;
+    ResEfin003 charge(ReqEfin003 req, String api_id, String own_org_cd) throws Exception;
 
     /**
      * 전자금융 - 선불 거래내역 조회
@@ -45,9 +44,9 @@ public interface EfinService {
      * @param api_id     String
      * @param own_org_cd String
      * @return ResEfin004
-     * @throws JsonProcessingException e
+     * @throws Exception e
      */
-    ResEfin004 prepaidTransactions(ReqEfin004 req, String api_id, String own_org_cd) throws JsonProcessingException;
+    ResEfin004 prepaidTransactions(ReqEfin004 req, String api_id, String own_org_cd) throws Exception;
 
     /**
      * 전자금융 - 결제내역 조회
@@ -56,7 +55,7 @@ public interface EfinService {
      * @param api_id     String
      * @param own_org_cd String
      * @return ResEfin005
-     * @throws JsonProcessingException e
+     * @throws Exception e
      */
-    ResEfin005 transactions(ReqEfin005 req, String api_id, String own_org_cd) throws JsonProcessingException;
+    ResEfin005 transactions(ReqEfin005 req, String api_id, String own_org_cd) throws Exception;
 }

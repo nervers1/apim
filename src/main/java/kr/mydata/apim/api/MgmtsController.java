@@ -3,12 +3,11 @@ package kr.mydata.apim.api;
 import kr.mydata.apim.service.MgmtService;
 import kr.mydata.apim.vo.mgmts.*;
 import lombok.extern.log4j.Log4j2;
-
-import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Log4j2
 @RequestMapping(value = "/mgmts")
@@ -39,7 +38,6 @@ public class MgmtsController {
 
 		ResMgmts002 res = service.orgs(req, api_id, own_org_cd);
 		return new ResponseEntity<>(res, HttpStatus.OK);
-
 	}
 
 
@@ -62,7 +60,6 @@ public class MgmtsController {
 
 		ResMgmts003 res = service.services(req, api_id, own_org_cd);
 		return new ResponseEntity<>(res, HttpStatus.OK);
-
     }
 
 
@@ -85,7 +82,6 @@ public class MgmtsController {
 
 		ResMgmts004 res = service.statistics(req, api_id, own_org_cd);
 		return new ResponseEntity<>(res, HttpStatus.OK);
-
     }
 
 
@@ -108,7 +104,6 @@ public class MgmtsController {
 
 		ResMgmts006 res = service.status(req, api_id, own_org_cd);
 		return new ResponseEntity<>(res, HttpStatus.OK);
-
     }
 
 
@@ -131,7 +126,6 @@ public class MgmtsController {
 
         ResMgmts007 res = service.consents(req, api_id, own_org_cd);
 		return new ResponseEntity<>(res, HttpStatus.OK);
-
     }
 
 
@@ -154,6 +148,5 @@ public class MgmtsController {
 
 		ResMgmts008 res = service.reqStatistics(req, api_id, own_org_cd);
 		return new ResponseEntity<>(res, HttpStatus.OK);
-
 	}
 }

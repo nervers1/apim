@@ -44,7 +44,7 @@ public class IRPController {
      * @param req        ReqIRP001
      * @return ResIRP001
      */
-    @GetMapping(value = "/v1/{industry}/irps", produces = "application/json; charset=UTF-8")
+    @GetMapping(value = "/{industry}/irps", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResIRP001> listAccount(@RequestHeader(value = "x-api-id") String api_id,
                                                  @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                                  @PathVariable String industry,
@@ -66,7 +66,7 @@ public class IRPController {
      * @param req        ReqIRP002
      * @return ResIRP002
      */
-    @PostMapping(value = "/v1/{industry}/irps/basic", produces = "application/json; charset=UTF-8")
+    @PostMapping(value = "/{industry}/irps/basic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResIRP002> irpBasic(@RequestHeader(value = "x-api-id") String api_id,
                                               @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                               @PathVariable String industry,
@@ -89,7 +89,7 @@ public class IRPController {
      * @param req        ReqIRP003
      * @return ResIRP003
      */
-    @PostMapping(value = "/v1/{industry}/irps/detail", produces = "application/json; charset=UTF-8")
+    @PostMapping(value = "/{industry}/irps/detail", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResIRP003> irpDetail(@RequestHeader(value = "x-api-id") String api_id,
                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                                @PathVariable String industry,
@@ -112,7 +112,7 @@ public class IRPController {
      * @param req        ReqIRP004
      * @return ResIRP004
      */
-    @PostMapping(value = "/v1/{industry}/irps/transactions", produces = "application/json; charset=UTF-8")
+    @PostMapping(value = "/{industry}/irps/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResIRP004> irpTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                                      @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                                      @PathVariable String industry,

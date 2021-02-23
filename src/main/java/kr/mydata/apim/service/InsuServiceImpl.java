@@ -1,11 +1,9 @@
 package kr.mydata.apim.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import kr.mydata.apim.api.util.Util;
-import kr.mydata.apim.vo.bank.ResBank004Sub;
 import kr.mydata.apim.vo.insu.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -32,10 +30,10 @@ public class InsuServiceImpl implements InsuService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInsu001 listInsu(ReqInsu001 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInsu001 listInsu(ReqInsu001 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
@@ -52,10 +50,10 @@ public class InsuServiceImpl implements InsuService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInsu002 insuBasic(ReqInsu002 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInsu002 insuBasic(ReqInsu002 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getInsu_num());
@@ -72,10 +70,10 @@ public class InsuServiceImpl implements InsuService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInsu003 insuContracts(ReqInsu003 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInsu003 insuContracts(ReqInsu003 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getInsu_num());
@@ -92,10 +90,10 @@ public class InsuServiceImpl implements InsuService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInsu004 insuCar(ReqInsu004 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInsu004 insuCar(ReqInsu004 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getInsu_num());
@@ -112,10 +110,10 @@ public class InsuServiceImpl implements InsuService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInsu005 insuPayment(ReqInsu005 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInsu005 insuPayment(ReqInsu005 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getInsu_num());
@@ -132,10 +130,10 @@ public class InsuServiceImpl implements InsuService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInsu006 insuTransactions(ReqInsu006 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInsu006 insuTransactions(ReqInsu006 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getInsu_num());
@@ -147,7 +145,7 @@ public class InsuServiceImpl implements InsuService {
 
         // Comparable 구현하여 내림차순 정렬
         Collections.sort(trans_list);
-        
+
         int page = Util.getPage(req.getNext_page());
         trans_list = trans_list.stream()
                 .skip(page)
@@ -166,10 +164,10 @@ public class InsuServiceImpl implements InsuService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInsu007 insuCarTransactions(ReqInsu007 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInsu007 insuCarTransactions(ReqInsu007 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getInsu_num());
@@ -181,7 +179,7 @@ public class InsuServiceImpl implements InsuService {
 
         // Comparable 구현하여 내림차순 정렬
         Collections.sort(trans_list);
-        
+
         int page = Util.getPage(req.getNext_page());
         trans_list = trans_list.stream()
                 .skip(page)
@@ -200,10 +198,10 @@ public class InsuServiceImpl implements InsuService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInsu008 insuLoans(ReqInsu008 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInsu008 insuLoans(ReqInsu008 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
@@ -220,10 +218,10 @@ public class InsuServiceImpl implements InsuService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInsu009 insuLoansBasic(ReqInsu009 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInsu009 insuLoansBasic(ReqInsu009 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
@@ -240,10 +238,10 @@ public class InsuServiceImpl implements InsuService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInsu010 insuLoansDetail(ReqInsu010 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInsu010 insuLoansDetail(ReqInsu010 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
@@ -260,10 +258,10 @@ public class InsuServiceImpl implements InsuService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResInsu011 insuLoansTransactions(ReqInsu011 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResInsu011 insuLoansTransactions(ReqInsu011 req, String api_id, String own_org_cd) throws Exception {
 
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
@@ -275,7 +273,7 @@ public class InsuServiceImpl implements InsuService {
 
         // Comparable 구현하여 내림차순 정렬
         Collections.sort(trans_list);
-        
+
      // next_page 는 조회 마지막 row_num 으로 들어옴.
         int page = Util.getPage(req.getNext_page());
         trans_list = trans_list.stream()
@@ -285,7 +283,7 @@ public class InsuServiceImpl implements InsuService {
         resVo.setTrans_list(trans_list);
         resVo.setNext_page(Util.getNextPage(Integer.valueOf(resVo.getTrans_cnt()), page, Integer.valueOf(req.getLimit())));
         resVo.setTrans_cnt(String.valueOf(trans_list.size()));
-        
+
         return resVo;
     }
 }

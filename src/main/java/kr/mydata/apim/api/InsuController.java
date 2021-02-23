@@ -3,16 +3,15 @@ package kr.mydata.apim.api;
 import kr.mydata.apim.service.InsuService;
 import kr.mydata.apim.vo.insu.*;
 import lombok.extern.log4j.Log4j2;
-
-import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @Log4j2
-@RequestMapping(value = "/v1/insu")
+@RequestMapping(value = "/insu")
 public class InsuController {
 
     private final InsuService service;

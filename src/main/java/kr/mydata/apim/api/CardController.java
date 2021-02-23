@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Log4j2
 @RestController
-@RequestMapping(value = "/v1/card")
+@RequestMapping(value = "/card")
 public class CardController {
 
     private final CardService service;

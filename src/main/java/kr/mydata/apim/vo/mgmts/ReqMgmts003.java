@@ -17,9 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ReqMgmts003{
-	@NotNull(message = "authorization 값이 반드시 있어야 합니다.")
-    private String authorization;
-	
+
 	@NotNull(message = "search_timestamp 값이 반드시 있어야 합니다.")
     @Size(min = 14, max = 14, message = "search_timestamp 값은 14 자리 입니다.")
     private String search_timestamp;

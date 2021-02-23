@@ -1,7 +1,6 @@
 package kr.mydata.apim.service;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -33,10 +32,10 @@ public class CapitalServiceImpl implements CapitalService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResLoan001 loans(ReqLoan001 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResLoan001 loans(ReqLoan001 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
         // to JSON
@@ -52,10 +51,10 @@ public class CapitalServiceImpl implements CapitalService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResLoan002 basic(ReqLoan002 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResLoan002 basic(ReqLoan002 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
         // to JSON
@@ -71,10 +70,10 @@ public class CapitalServiceImpl implements CapitalService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResLoan003 detail(ReqLoan003 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResLoan003 detail(ReqLoan003 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
         // to JSON
@@ -90,10 +89,10 @@ public class CapitalServiceImpl implements CapitalService {
      * @param api_id
      * @param own_org_cd
      * @return
-     * @throws JsonProcessingException
+     * @throws Exception
      */
     @Override
-    public ResLoan004 transactions(ReqLoan004 req, String api_id, String own_org_cd) throws JsonProcessingException {
+    public ResLoan004 transactions(ReqLoan004 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ? and ast_id = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code(), req.getAccount_num());
         // to JSON

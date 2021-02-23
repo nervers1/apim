@@ -16,15 +16,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ReqMgmts007{
-	
-	@NotNull(message = "authorization 값이 반드시 있어야 합니다.")
-    private String authorization;
-	
+public class ReqMgmts007 {
+
 	@NotNull(message = "org_code 값이 반드시 있어야 합니다.")
     @Size(min = 1, max = 7, message = "org_code 값은 1 ~ 7 자리 입니다.")
     private String org_code;
-	
+
 	@NotNull(message = "user_ci 값이 반드시 있어야 합니다.")
     private String user_ci;
 }

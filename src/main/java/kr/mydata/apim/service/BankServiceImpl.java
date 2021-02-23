@@ -37,8 +37,8 @@ public class BankServiceImpl implements BankService {
     @Override
     public ResBank001 listAccount(ReqBank001 req, String api_id, String own_org_cd) throws Exception {
 
-        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ?";
-        String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd);
+        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
+        String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
 
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
@@ -58,8 +58,8 @@ public class BankServiceImpl implements BankService {
     @Override
     public ResBank002 inqBasicInfo(ReqBank002 req, String api_id, String own_org_cd) throws Exception {
 
-        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and ast_id = ?";
-        String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), req.getAccount_num());
+        String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and ast_id = ? and org_cd = ?";
+        String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), req.getAccount_num(), req.getOrg_code());
 
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
