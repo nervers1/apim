@@ -33,21 +33,15 @@ public class InsuController {
     @GetMapping(value = "/insurances", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu001> listInsu(@RequestHeader(value = "x-api-id") String api_id,
                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                               @Valid ReqInsu001 req) {
+                                               @Valid ReqInsu001 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
-        log.info("req : {}", req);
+		log.info("req : {}", req);
 
-        try {
-            ResInsu001 resInsu001 = service.listInsu(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu001, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+		ResInsu001 resInsu001 = service.listInsu(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu001, HttpStatus.OK);
+	}
 
 
     /**
@@ -61,20 +55,14 @@ public class InsuController {
     @PostMapping(value = "/insurances/basic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu002> insuBasic(@RequestHeader(value = "x-api-id") String api_id,
                                                 @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                @Valid @RequestBody ReqInsu002 req) {
+                                                @Valid @RequestBody ReqInsu002 req) throws Exception {
 
         log.info("api_id : {}", api_id);
-        log.info("own_org_cd : {}", own_org_cd);
-        log.info("req : {}", req);
+		log.info("own_org_cd : {}", own_org_cd);
+		log.info("req : {}", req);
 
-        try {
-            ResInsu002 resInsu002 = service.insuBasic(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu002, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		ResInsu002 resInsu002 = service.insuBasic(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu002, HttpStatus.OK);
 
     }
 
@@ -90,22 +78,16 @@ public class InsuController {
     @PostMapping(value = "/insurances/contracts", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu003> insuContracts(@RequestHeader(value = "x-api-id") String api_id,
                                                     @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                    @Valid @RequestBody ReqInsu003 req) {
+                                                    @Valid @RequestBody ReqInsu003 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResInsu003 resInsu003 = service.insuContracts(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu003, HttpStatus.OK);
+		ResInsu003 resInsu003 = service.insuContracts(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu003, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
+	}
 
 
     /**
@@ -119,22 +101,16 @@ public class InsuController {
     @PostMapping(value = "/insurances/car", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu004> insuCar(@RequestHeader(value = "x-api-id") String api_id,
                                               @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                              @Valid @RequestBody ReqInsu004 req) {
+                                              @Valid @RequestBody ReqInsu004 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
-        log.info("req : {}", req);
+		log.info("req : {}", req);
 
-        try {
-            ResInsu004 resInsu004 = service.insuCar(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu004, HttpStatus.OK);
+		ResInsu004 resInsu004 = service.insuCar(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu004, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
+	}
 
 
     /**
@@ -148,22 +124,16 @@ public class InsuController {
     @PostMapping(value = "/insurances/payment", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu005> insuPayment(@RequestHeader(value = "x-api-id") String api_id,
                                                   @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                  @Valid @RequestBody ReqInsu005 req) {
+                                                  @Valid @RequestBody ReqInsu005 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResInsu005 resInsu005 = service.insuPayment(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu005, HttpStatus.OK);
+		ResInsu005 resInsu005 = service.insuPayment(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu005, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
+	}
 
 
     /**
@@ -177,22 +147,16 @@ public class InsuController {
     @PostMapping(value = "/insurances/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu006> insuTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                                        @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                       @Valid @RequestBody ReqInsu006 req) {
+                                                       @Valid @RequestBody ReqInsu006 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResInsu006 resInsu006 = service.insuTransactions(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu006, HttpStatus.OK);
+		ResInsu006 resInsu006 = service.insuTransactions(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu006, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
+	}
 
 
     /**
@@ -206,23 +170,16 @@ public class InsuController {
     @PostMapping(value = "/insurances/car/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu007> insuCarTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                                           @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                          @Valid @RequestBody ReqInsu007 req) {
+                                                          @Valid @RequestBody ReqInsu007 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResInsu007 resInsu007 = service.insuCarTransactions(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu007, HttpStatus.OK);
+		ResInsu007 resInsu007 = service.insuCarTransactions(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu007, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
-
+	}
 
     /**
      * 보험업권 - 대출상품 목록 조회
@@ -235,23 +192,16 @@ public class InsuController {
     @GetMapping(value = "/loans", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu008> loans(@RequestHeader(value = "x-api-id") String api_id,
                                             @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                            @Valid ReqInsu008 req) {
+                                            @Valid ReqInsu008 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResInsu008 resInsu008 = service.insuLoans(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu008, HttpStatus.OK);
+		ResInsu008 resInsu008 = service.insuLoans(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu008, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
-
+	}
 
     /**
      * 보험업권 - 대출상품 기본정보 조회
@@ -264,23 +214,16 @@ public class InsuController {
     @PostMapping(value = "/loans/basic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu009> insuLoansBasic(@RequestHeader(value = "x-api-id") String api_id,
                                                      @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                     @Valid @RequestBody ReqInsu009 req) {
+                                                     @Valid @RequestBody ReqInsu009 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
-        log.info("req : {}", req);
+		log.info("req : {}", req);
 
-        try {
-            ResInsu009 resInsu009 = service.insuLoansBasic(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu009, HttpStatus.OK);
+		ResInsu009 resInsu009 = service.insuLoansBasic(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu009, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
-
+	}
 
     /**
      * 보험업권 - 대출상품 추가정보 조회
@@ -293,23 +236,16 @@ public class InsuController {
     @PostMapping(value = "/loans/detail", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu010> insuLoansDetail(@RequestHeader(value = "x-api-id") String api_id,
                                                       @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                      @Valid @RequestBody ReqInsu010 req) {
+                                                      @Valid @RequestBody ReqInsu010 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResInsu010 resInsu010 = service.insuLoansDetail(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu010, HttpStatus.OK);
+		ResInsu010 resInsu010 = service.insuLoansDetail(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu010, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
-
+	}
 
     /**
      * 보험업권 - 대출상품 거래내역 조회
@@ -322,19 +258,13 @@ public class InsuController {
     @PostMapping(value = "/loans/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu011> insuLoansTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                                             @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                            @Valid @RequestBody ReqInsu011 req) {
+                                                            @Valid @RequestBody ReqInsu011 req) throws Exception {
 
         log.info("api_id : {}", api_id);
-        log.info("own_org_cd : {}", own_org_cd);
-        log.info("req : {}", req);
+		log.info("own_org_cd : {}", own_org_cd);
+		log.info("req : {}", req);
 
-        try {
-            ResInsu011 resInsu011 = service.insuLoansTransactions(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu011, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+		ResInsu011 resInsu011 = service.insuLoansTransactions(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu011, HttpStatus.OK);
+	}
 }
