@@ -38,14 +38,8 @@ public class EfinController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResEfin001 resInsu001 = service.accounts(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu001, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		ResEfin001 resInsu001 = service.accounts(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu001, HttpStatus.OK);
 
     }
 
@@ -66,14 +60,8 @@ public class EfinController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResEfin002 resInsu002 = service.balance(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu002, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		ResEfin002 resInsu002 = service.balance(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu002, HttpStatus.OK);
 
     }
 
@@ -94,16 +82,10 @@ public class EfinController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResEfin003 resInsu003 = service.charge(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu003, HttpStatus.OK);
+		ResEfin003 resInsu003 = service.charge(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu003, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
+	}
 
     /**
      * 전자금융 - 선불 거래내역 조회
@@ -122,16 +104,10 @@ public class EfinController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResEfin004 resInsu004 = service.prepaidTransactions(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resInsu004, HttpStatus.OK);
+		ResEfin004 resInsu004 = service.prepaidTransactions(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resInsu004, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
+	}
 
     /**
      * 전자금융 - 결제내역 조회
@@ -150,14 +126,8 @@ public class EfinController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResEfin005 resEfin005 = service.transactions(req, api_id, own_org_cd);
-            return new ResponseEntity<>(resEfin005, HttpStatus.OK);
+		ResEfin005 resEfin005 = service.transactions(req, api_id, own_org_cd);
+		return new ResponseEntity<>(resEfin005, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
+	}
 }

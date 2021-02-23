@@ -35,18 +35,12 @@ public class MgmtsController {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
-        log.info("req : {}", req);
+		log.info("req : {}", req);
 
-        try {
-            ResMgmts002 res = service.orgs(req, api_id, own_org_cd);
-            return new ResponseEntity<>(res, HttpStatus.OK);
+		ResMgmts002 res = service.orgs(req, api_id, own_org_cd);
+		return new ResponseEntity<>(res, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
+	}
 
 
     /**
@@ -66,14 +60,8 @@ public class MgmtsController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResMgmts003 res = service.services(req, api_id, own_org_cd);
-            return new ResponseEntity<>(res, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		ResMgmts003 res = service.services(req, api_id, own_org_cd);
+		return new ResponseEntity<>(res, HttpStatus.OK);
 
     }
 
@@ -95,14 +83,8 @@ public class MgmtsController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResMgmts004 res = service.statistics(req, api_id, own_org_cd);
-            return new ResponseEntity<>(res, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		ResMgmts004 res = service.statistics(req, api_id, own_org_cd);
+		return new ResponseEntity<>(res, HttpStatus.OK);
 
     }
 
@@ -124,14 +106,8 @@ public class MgmtsController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResMgmts006 res = service.status(req, api_id, own_org_cd);
-            return new ResponseEntity<>(res, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		ResMgmts006 res = service.status(req, api_id, own_org_cd);
+		return new ResponseEntity<>(res, HttpStatus.OK);
 
     }
 
@@ -153,14 +129,8 @@ public class MgmtsController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        try {
-            ResMgmts007 res = service.consents(req, api_id, own_org_cd);
-            return new ResponseEntity<>(res, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        ResMgmts007 res = service.consents(req, api_id, own_org_cd);
+		return new ResponseEntity<>(res, HttpStatus.OK);
 
     }
 
@@ -178,18 +148,12 @@ public class MgmtsController {
                                                      @RequestHeader(value = "x-own-org-cd") String own_org_cd,
                                                      @Valid ReqMgmts008 req) throws Exception {
 
-        log.info("api_id : {}", api_id);
-        log.info("own_org_cd : {}", own_org_cd);
-        log.info("req : {}", req);
+		log.info("api_id : {}", api_id);
+		log.info("own_org_cd : {}", own_org_cd);
+		log.info("req : {}", req);
 
-        try {
-            ResMgmts008 res = service.reqStatistics(req, api_id, own_org_cd);
-            return new ResponseEntity<>(res, HttpStatus.OK);
+		ResMgmts008 res = service.reqStatistics(req, api_id, own_org_cd);
+		return new ResponseEntity<>(res, HttpStatus.OK);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
+	}
 }
