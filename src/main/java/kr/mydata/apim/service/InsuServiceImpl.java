@@ -274,7 +274,7 @@ public class InsuServiceImpl implements InsuService {
         // Comparable 구현하여 내림차순 정렬
         Collections.sort(trans_list);
 
-     // next_page 는 조회 마지막 row_num 으로 들어옴.
+        // next_page 는 조회 마지막 row_num 으로 들어옴.
         int page = Util.getPage(req.getNext_page());
         trans_list = trans_list.stream()
                 .skip(page)

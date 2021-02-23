@@ -1,6 +1,5 @@
 package kr.mydata.apim.vo.irp;
 
-import kr.mydata.apim.vo.bank.ResBank004Sub;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

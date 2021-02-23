@@ -36,11 +36,11 @@ public class InsuController {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
-		log.info("req : {}", req);
+        log.info("req : {}", req);
 
-		ResInsu001 resInsu001 = service.listInsu(req, api_id, own_org_cd);
-		return new ResponseEntity<>(resInsu001, HttpStatus.OK);
-	}
+        ResInsu001 resInsu001 = service.listInsu(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resInsu001, HttpStatus.OK);
+    }
 
 
     /**
@@ -57,11 +57,11 @@ public class InsuController {
                                                 @Valid @RequestBody ReqInsu002 req) throws Exception {
 
         log.info("api_id : {}", api_id);
-		log.info("own_org_cd : {}", own_org_cd);
-		log.info("req : {}", req);
+        log.info("own_org_cd : {}", own_org_cd);
+        log.info("req : {}", req);
 
-		ResInsu002 resInsu002 = service.insuBasic(req, api_id, own_org_cd);
-		return new ResponseEntity<>(resInsu002, HttpStatus.OK);
+        ResInsu002 resInsu002 = service.insuBasic(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resInsu002, HttpStatus.OK);
 
     }
 
@@ -83,10 +83,10 @@ public class InsuController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-		ResInsu003 resInsu003 = service.insuContracts(req, api_id, own_org_cd);
-		return new ResponseEntity<>(resInsu003, HttpStatus.OK);
+        ResInsu003 resInsu003 = service.insuContracts(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resInsu003, HttpStatus.OK);
 
-	}
+    }
 
 
     /**
@@ -104,12 +104,12 @@ public class InsuController {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
-		log.info("req : {}", req);
+        log.info("req : {}", req);
 
-		ResInsu004 resInsu004 = service.insuCar(req, api_id, own_org_cd);
-		return new ResponseEntity<>(resInsu004, HttpStatus.OK);
+        ResInsu004 resInsu004 = service.insuCar(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resInsu004, HttpStatus.OK);
 
-	}
+    }
 
 
     /**
@@ -129,10 +129,10 @@ public class InsuController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-		ResInsu005 resInsu005 = service.insuPayment(req, api_id, own_org_cd);
-		return new ResponseEntity<>(resInsu005, HttpStatus.OK);
+        ResInsu005 resInsu005 = service.insuPayment(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resInsu005, HttpStatus.OK);
 
-	}
+    }
 
 
     /**
@@ -152,10 +152,10 @@ public class InsuController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-		ResInsu006 resInsu006 = service.insuTransactions(req, api_id, own_org_cd);
-		return new ResponseEntity<>(resInsu006, HttpStatus.OK);
+        ResInsu006 resInsu006 = service.insuTransactions(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resInsu006, HttpStatus.OK);
 
-	}
+    }
 
 
     /**
@@ -175,10 +175,10 @@ public class InsuController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-		ResInsu007 resInsu007 = service.insuCarTransactions(req, api_id, own_org_cd);
-		return new ResponseEntity<>(resInsu007, HttpStatus.OK);
+        ResInsu007 resInsu007 = service.insuCarTransactions(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resInsu007, HttpStatus.OK);
 
-	}
+    }
 
     /**
      * 보험업권 - 대출상품 목록 조회
@@ -197,10 +197,10 @@ public class InsuController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-		ResInsu008 resInsu008 = service.insuLoans(req, api_id, own_org_cd);
-		return new ResponseEntity<>(resInsu008, HttpStatus.OK);
+        ResInsu008 resInsu008 = service.insuLoans(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resInsu008, HttpStatus.OK);
 
-	}
+    }
 
     /**
      * 보험업권 - 대출상품 기본정보 조회
@@ -217,12 +217,12 @@ public class InsuController {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
-		log.info("req : {}", req);
+        log.info("req : {}", req);
 
-		ResInsu009 resInsu009 = service.insuLoansBasic(req, api_id, own_org_cd);
-		return new ResponseEntity<>(resInsu009, HttpStatus.OK);
+        ResInsu009 resInsu009 = service.insuLoansBasic(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resInsu009, HttpStatus.OK);
 
-	}
+    }
 
     /**
      * 보험업권 - 대출상품 추가정보 조회
@@ -241,10 +241,10 @@ public class InsuController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-		ResInsu010 resInsu010 = service.insuLoansDetail(req, api_id, own_org_cd);
-		return new ResponseEntity<>(resInsu010, HttpStatus.OK);
+        ResInsu010 resInsu010 = service.insuLoansDetail(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resInsu010, HttpStatus.OK);
 
-	}
+    }
 
     /**
      * 보험업권 - 대출상품 거래내역 조회
@@ -260,10 +260,10 @@ public class InsuController {
                                                             @Valid @RequestBody ReqInsu011 req) throws Exception {
 
         log.info("api_id : {}", api_id);
-		log.info("own_org_cd : {}", own_org_cd);
-		log.info("req : {}", req);
+        log.info("own_org_cd : {}", own_org_cd);
+        log.info("req : {}", req);
 
-		ResInsu011 resInsu011 = service.insuLoansTransactions(req, api_id, own_org_cd);
-		return new ResponseEntity<>(resInsu011, HttpStatus.OK);
-	}
+        ResInsu011 resInsu011 = service.insuLoansTransactions(req, api_id, own_org_cd);
+        return new ResponseEntity<>(resInsu011, HttpStatus.OK);
+    }
 }
