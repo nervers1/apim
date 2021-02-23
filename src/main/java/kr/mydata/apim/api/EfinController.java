@@ -3,6 +3,9 @@ package kr.mydata.apim.api;
 import kr.mydata.apim.service.EfinService;
 import kr.mydata.apim.vo.efin.*;
 import lombok.extern.log4j.Log4j2;
+
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +32,7 @@ public class EfinController {
     @GetMapping(value = "/accounts", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin001> accounts(@RequestHeader(value = "x-api-id") String api_id,
                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                               ReqEfin001 req) {
+                                               @Valid ReqEfin001 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -57,7 +60,7 @@ public class EfinController {
     @PostMapping(value = "/accounts/balance", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin002> balance(@RequestHeader(value = "x-api-id") String api_id,
                                               @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                              @RequestBody ReqEfin002 req) {
+                                              @Valid @RequestBody ReqEfin002 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -85,7 +88,7 @@ public class EfinController {
     @PostMapping(value = "/accounts/charge", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin003> charge(@RequestHeader(value = "x-api-id") String api_id,
                                              @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                             @RequestBody ReqEfin003 req) {
+                                             @Valid @RequestBody ReqEfin003 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -113,7 +116,7 @@ public class EfinController {
     @PostMapping(value = "/accounts/prepaid-transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin004> prepaidTransactions(@RequestHeader(value = "x-api-id") String api_id,
                                                           @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                          @RequestBody ReqEfin004 req) {
+                                                          @Valid @RequestBody ReqEfin004 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -141,7 +144,7 @@ public class EfinController {
     @PostMapping(value = "/accounts/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin005> transactions(@RequestHeader(value = "x-api-id") String api_id,
                                                    @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                   @RequestBody ReqEfin005 req) {
+                                                   @Valid @RequestBody ReqEfin005 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);

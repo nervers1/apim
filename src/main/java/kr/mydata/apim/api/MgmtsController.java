@@ -3,6 +3,9 @@ package kr.mydata.apim.api;
 import kr.mydata.apim.service.MgmtService;
 import kr.mydata.apim.vo.mgmts.*;
 import lombok.extern.log4j.Log4j2;
+
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +31,7 @@ public class MgmtsController {
     @GetMapping(value = "/orgs", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts002> orgs(@RequestHeader(value = "x-api-id") String api_id,
                                             @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                            ReqMgmts002 req) {
+                                            @Valid ReqMgmts002 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -57,7 +60,7 @@ public class MgmtsController {
     @GetMapping(value = "/services", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts003> services(@RequestHeader(value = "x-api-id") String api_id,
                                                 @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                ReqMgmts003 req) {
+                                                @Valid ReqMgmts003 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -86,7 +89,7 @@ public class MgmtsController {
     @PostMapping(value = "/statistics", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts004> statistics(@RequestHeader(value = "x-api-id") String api_id,
                                                   @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                  @RequestBody ReqMgmts004 req) {
+                                                  @Valid @RequestBody ReqMgmts004 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -115,7 +118,7 @@ public class MgmtsController {
     @GetMapping(value = "/status", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts006> status(@RequestHeader(value = "x-api-id") String api_id,
                                               @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                              ReqMgmts006 req) {
+                                              @Valid ReqMgmts006 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -144,7 +147,7 @@ public class MgmtsController {
     @GetMapping(value = "/consents", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts007> consents(@RequestHeader(value = "x-api-id") String api_id,
                                                 @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                ReqMgmts007 req) {
+                                                @Valid ReqMgmts007 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -173,7 +176,7 @@ public class MgmtsController {
     @GetMapping(value = "/req-statistics", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts008> reqStatistics(@RequestHeader(value = "x-api-id") String api_id,
                                                      @RequestHeader(value = "x-own-org-cd") String own_org_cd,
-                                                     ReqMgmts008 req) {
+                                                     @Valid ReqMgmts008 req) throws Exception {
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
