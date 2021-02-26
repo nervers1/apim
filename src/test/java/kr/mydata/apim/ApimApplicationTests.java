@@ -1,12 +1,18 @@
 package kr.mydata.apim;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
 class ApimApplicationTests {
+	public static void main(String [] args) {
+		String header = "Bearer ASDF";
+		int index = header.indexOf("Bearer");
 
-	@Test
+		System.out.println(index);
+
+		if (index > 0) {
+
+		}
+
+	}
+
 	void contextLoads() {
 	}
 

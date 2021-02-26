@@ -3,6 +3,7 @@ package kr.mydata.apim.service;
 import kr.mydata.apim.vo.bank.*;
 
 public interface BankService {
+
     /**
      * 은행업권 : 계좌 목록 조회
      *

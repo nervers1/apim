@@ -1,10 +1,15 @@
 package kr.mydata.apim.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import kr.mydata.apim.base.exception.AuthorizationException;
 import kr.mydata.apim.service.BankService;
 import kr.mydata.apim.vo.bank.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -14,10 +19,66 @@ import javax.validation.Valid;
 @RestController
 public class BankController {
 
-    private final BankService service;
+    private final BankService  service;
+    private final ObjectMapper mapper = new ObjectMapper();
+    private final JdbcTemplate jdbcTemplate;
 
-    public BankController(BankService service) {
+    public BankController(BankService service,
+                          JdbcTemplate jdbcTemplate) {
         this.service = service;
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public String checkApiId(String api_id, String uri) throws Exception {
+
+        log.error("uri - {}", uri);
+
+        if (ObjectUtils.isEmpty(api_id)) {
+            // @formatter:off
+            String preSql = "SELECT b.id "
+                + "        FROM apx_api_resource a, apx_api_resource_method b "
+                + "       WHERE a.uri = '" + uri + "'"
+                + "         AND b.resource_version_id = a.target_version";
+            // @formatter:on
+
+            String preRes = jdbcTemplate.queryForObject(preSql, String.class);
+
+            api_id = mapper.readValue(preRes, String.class);
+        }
+
+        return api_id;
+    }
+
+    public String checkOwnOrgCd(String own_org_cd, String authorization, String xFsiSvcDataKey) throws Exception {
+
+        if (ObjectUtils.isEmpty(own_org_cd)) {
+            if (authorization.startsWith("Bearer ")) {
+                authorization = authorization.substring(7);
+            }
+
+            if(StringUtils.hasLength(xFsiSvcDataKey) && "Y".equals(xFsiSvcDataKey)) {
+                // @formatter:off
+                String ownOrgCdSql = "SELECT b.organization_id "
+                    + "             FROM apx_oauth_token a, apx_app b "
+                    + "            WHERE a.access_token = '" + authorization + "'"
+                    + "              AND b.id = a.app_id";
+
+                String ownOrgCdRes = jdbcTemplate.queryForObject(ownOrgCdSql,
+                                                                 String.class);
+                // @formatter:on
+
+                if(null == ownOrgCdRes || !StringUtils.hasLength(ownOrgCdRes)) {
+                    throw new AuthorizationException();
+                }
+
+                own_org_cd = mapper.readValue(ownOrgCdRes,
+                                              String.class);
+            } else {
+                own_org_cd = "0000000000";
+            }
+        }
+
+        return own_org_cd;
     }
 
     /**
@@ -29,9 +90,14 @@ public class BankController {
      * @return ResBank001
      */
     @GetMapping(value = "/accounts", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResBank001> accounts(@RequestHeader(value = "x-api-id") String api_id,
-                                               @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+    public ResponseEntity<ResBank001> accounts(@RequestHeader(value = "Authorization") String authorization,
+                                               @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                               @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                               @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                @Valid ReqBank001 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/bank/accounts");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -50,9 +116,14 @@ public class BankController {
      * @return ResBank002
      */
     @PostMapping(value = "/accounts/deposit/basic", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResBank002> accountsBasic(@RequestHeader(value = "x-api-id") String api_id,
-                                                    @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+    public ResponseEntity<ResBank002> accountsBasic(@RequestHeader(value = "Authorization") String authorization,
+                                                    @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                    @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                    @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                     @Valid @RequestBody ReqBank002 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/bank/accounts/deposit/basic");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -71,9 +142,14 @@ public class BankController {
      * @return ResBank003
      */
     @PostMapping(value = "/accounts/deposit/detail", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResBank003> accountDetail(@RequestHeader(value = "x-api-id") String api_id,
-                                                    @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+    public ResponseEntity<ResBank003> accountDetail(@RequestHeader(value = "Authorization") String authorization,
+                                                    @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                    @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                    @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                     @Valid @RequestBody ReqBank003 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/bank/accounts/deposit/detail");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -93,9 +169,14 @@ public class BankController {
      * @return ResBank004
      */
     @PostMapping(value = "/accounts/deposit/transactions", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResBank004> listTransactions(@RequestHeader(value = "x-api-id") String api_id,
-                                                       @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+    public ResponseEntity<ResBank004> listTransactions(@RequestHeader(value = "Authorization") String authorization,
+                                                       @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                       @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                       @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                        @Valid @RequestBody ReqBank004 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/bank/accounts/deposit/transactions");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -115,9 +196,14 @@ public class BankController {
      * @return ResponseEntity
      */
     @PostMapping(value = "/accounts/invest/basic", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResBank005> investBasic(@RequestHeader(value = "x-api-id") String api_id,
-                                                  @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+    public ResponseEntity<ResBank005> investBasic(@RequestHeader(value = "Authorization") String authorization,
+                                                  @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                  @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                  @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                   @Valid @RequestBody ReqBank005 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/bank/accounts/invest/basic");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -136,9 +222,15 @@ public class BankController {
      * @return ResponseEntity
      */
     @PostMapping(value = "/accounts/invest/detail", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResBank006> investDetail(@RequestHeader(value = "x-api-id") String api_id,
-                                                   @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+    public ResponseEntity<ResBank006> investDetail(@RequestHeader(value = "Authorization") String authorization,
+                                                   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                   @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                   @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                    @Valid @RequestBody ReqBank006 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/bank/accounts/invest/detail");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
@@ -156,9 +248,15 @@ public class BankController {
      * @return ResponseEntity
      */
     @PostMapping(value = "/accounts/invest/transactions", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResBank007> investTransactions(@RequestHeader(value = "x-api-id") String api_id,
-                                                         @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+    public ResponseEntity<ResBank007> investTransactions(@RequestHeader(value = "Authorization") String authorization,
+                                                         @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                         @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                         @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                          @Valid @RequestBody ReqBank007 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/bank/accounts/invest/transactions");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
@@ -177,9 +275,15 @@ public class BankController {
      * @return ResponseEntity
      */
     @PostMapping(value = "/accounts/loan/basic", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResBank008> loanBasic(@RequestHeader(value = "x-api-id") String api_id,
-                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+    public ResponseEntity<ResBank008> loanBasic(@RequestHeader(value = "Authorization") String authorization,
+                                                @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                 @Valid @RequestBody ReqBank008 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/bank/accounts/loan/basic");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
@@ -198,9 +302,15 @@ public class BankController {
      * @return ResponseEntity
      */
     @PostMapping(value = "/accounts/loan/detail", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResBank009> loanDetail(@RequestHeader(value = "x-api-id") String api_id,
-                                                 @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+    public ResponseEntity<ResBank009> loanDetail(@RequestHeader(value = "Authorization") String authorization,
+                                                 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                 @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                 @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                  @Valid @RequestBody ReqBank009 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/bank/accounts/loan/detail");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
@@ -218,9 +328,15 @@ public class BankController {
      * @return ResponseEntity
      */
     @PostMapping(value = "/accounts/loan/transactions", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResBank010> loanTransactions(@RequestHeader(value = "x-api-id") String api_id,
-                                                       @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+    public ResponseEntity<ResBank010> loanTransactions(@RequestHeader(value = "Authorization") String authorization,
+                                                       @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                       @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                       @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                        @Valid @RequestBody ReqBank010 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/bank/accounts/loan/transactions");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
