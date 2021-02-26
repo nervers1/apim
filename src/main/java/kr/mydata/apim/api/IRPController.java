@@ -110,8 +110,8 @@ public class IRPController {
     @GetMapping(value = "/{industry}/irps", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResIRP001> listAccount(@RequestHeader(value = "Authorization") String authorization,
                                                  @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                 @RequestHeader(value = "x-api-id") String api_id,
-                                                 @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                 @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                 @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                  @PathVariable String industry,
                                                  @Valid ReqIRP001 req) throws Exception {
 
@@ -139,8 +139,8 @@ public class IRPController {
     @PostMapping(value = "/{industry}/irps/basic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResIRP002> irpBasic(@RequestHeader(value = "Authorization") String authorization,
                                               @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                              @RequestHeader(value = "x-api-id") String api_id,
-                                              @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                              @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                              @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                               @PathVariable String industry,
                                               @Valid @RequestBody ReqIRP002 req) throws Exception {
 
@@ -168,8 +168,8 @@ public class IRPController {
     @PostMapping(value = "/{industry}/irps/detail", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResIRP003> irpDetail(@RequestHeader(value = "Authorization") String authorization,
                                                @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                               @RequestHeader(value = "x-api-id") String api_id,
-                                               @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                               @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                               @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                @PathVariable String industry,
                                                @Valid @RequestBody ReqIRP003 req) throws Exception {
 
@@ -197,8 +197,8 @@ public class IRPController {
     @PostMapping(value = "/{industry}/irps/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResIRP004> irpTransactions(@RequestHeader(value = "Authorization") String authorization,
                                                      @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                     @RequestHeader(value = "x-api-id") String api_id,
-                                                     @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                     @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                     @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                      @PathVariable String industry,
                                                      @Valid @RequestBody ReqIRP004 req) throws Exception {
 

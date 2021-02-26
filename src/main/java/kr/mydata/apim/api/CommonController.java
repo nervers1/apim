@@ -100,8 +100,8 @@ public class CommonController {
     @GetMapping(value = "/{industry}/apis", produces = "application/json; charset=UTF-8")
     public ResponseEntity listAccount(@RequestHeader(value = "Authorization") String authorization,
                                       @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                      @RequestHeader(value = "x-api-id") String api_id,
-                                      @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                      @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                      @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                       @PathVariable String industry,
                                       @Valid ReqCmn001 req) throws Exception {
 
@@ -129,8 +129,8 @@ public class CommonController {
     @GetMapping(value = "/{industry}/consents", produces = "application/json; charset=UTF-8")
     public ResponseEntity listConsents(@RequestHeader(value = "Authorization") String authorization,
                                        @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                       @RequestHeader(value = "x-api-id") String api_id,
-                                       @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                       @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                       @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                        @PathVariable String industry,
                                        @Valid ReqCmn002 req) throws Exception {
 

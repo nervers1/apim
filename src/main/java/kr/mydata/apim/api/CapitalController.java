@@ -93,8 +93,8 @@ public class CapitalController {
     @GetMapping(value = "/loans", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResLoan001> loans(@RequestHeader(value = "Authorization") String authorization,
 											@RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											@RequestHeader(value = "x-api-id") String api_id,
-                                            @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+											@RequestHeader(value = "x-api-id", required = false) String api_id,
+                                            @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                             @Valid ReqLoan001 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/capital/loans");
@@ -120,8 +120,8 @@ public class CapitalController {
     @PostMapping(value = "/loans/basic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResLoan002> basic(@RequestHeader(value = "Authorization") String authorization,
 											@RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											@RequestHeader(value = "x-api-id") String api_id,
-                                            @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+											@RequestHeader(value = "x-api-id", required = false) String api_id,
+                                            @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                             @Valid @RequestBody ReqLoan002 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/capital/loans/basic");
@@ -148,8 +148,8 @@ public class CapitalController {
     @PostMapping(value = "/loans/detail", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResLoan003> detail(@RequestHeader(value = "Authorization") String authorization,
 											 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											 @RequestHeader(value = "x-api-id") String api_id,
-                                             @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+											 @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                             @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                              @Valid @RequestBody ReqLoan003 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/capital/loans/detail");
@@ -176,8 +176,8 @@ public class CapitalController {
     @PostMapping(value = "/loans/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResLoan004> transactions(@RequestHeader(value = "Authorization") String authorization,
 												   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-												   @RequestHeader(value = "x-api-id") String api_id,
-                                                   @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+												   @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                   @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                    @Valid @RequestBody ReqLoan004 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/capital/loans/transactions");

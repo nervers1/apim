@@ -85,8 +85,8 @@ public class OAuthController {
     @GetMapping(value = "/authorize", produces = "application/json; charset=UTF-8")
     public ResponseEntity authorize(@RequestHeader(value = "Authorization") String authorization,
                                     @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                    @RequestHeader(value = "x-api-id") String api_id,
-                                    @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                    @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                    @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                     @Valid ReqAuth001 req) throws Exception {
 
         api_id = checkApiId(api_id, "/oauth/2.0/authorize");
@@ -111,8 +111,8 @@ public class OAuthController {
     @PostMapping(value = "/token", produces = "application/json; charset=UTF-8")
     public ResponseEntity token(@RequestHeader(value = "Authorization") String authorization,
                                 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                @RequestHeader(value = "x-api-id") String api_id,
-                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                 @Valid ReqAuth002 req) throws Exception {
 
         api_id = checkApiId(api_id, "/oauth/2.0/token");
@@ -137,8 +137,8 @@ public class OAuthController {
     @GetMapping(value = "/token", produces = "application/json; charset=UTF-8")
     public ResponseEntity token(@RequestHeader(value = "Authorization") String authorization,
                                 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                @RequestHeader(value = "x-api-id") String api_id,
-                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                 @Valid ReqAuth003 req) throws Exception {
 
         api_id = checkApiId(api_id, "/oauth/2.0/token");
@@ -162,8 +162,8 @@ public class OAuthController {
     @GetMapping(value = "/revoke", produces = "application/json; charset=UTF-8")
     public void revoke(@RequestHeader(value = "Authorization") String authorization,
                        @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                       @RequestHeader(value = "x-api-id") String api_id,
-                       @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                       @RequestHeader(value = "x-api-id", required = false) String api_id,
+                       @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                        @Valid ReqAuth004 req) throws Exception {
 
         api_id = checkApiId(api_id, "/oauth/2.0/revoke");

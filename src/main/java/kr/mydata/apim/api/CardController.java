@@ -94,8 +94,8 @@ public class CardController {
     @GetMapping(value = "/cards", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard001> listCards(@RequestHeader(value = "Authorization") String authorization,
                                                 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                @RequestHeader(value = "x-api-id") String api_id,
-                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                 @Valid ReqCard001 req) throws Exception {
 
         api_id = checkApiId(api_id, "/card/cards");
@@ -121,8 +121,8 @@ public class CardController {
     @GetMapping(value = "/cards/{card_id}", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard002> cardBasic(@RequestHeader(value = "Authorization") String authorization,
                                                 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                @RequestHeader(value = "x-api-id") String api_id,
-                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                 @NotEmpty(message = "card_id 값이 반드시 필요합니다.") @PathVariable(value = "card_id") String card_id,
                                                 @Valid ReqCard002 req) throws Exception {
 
@@ -149,8 +149,8 @@ public class CardController {
     @GetMapping(value = "/cards/point", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard003> cardPoint(@RequestHeader(value = "Authorization") String authorization,
                                                 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                @RequestHeader(value = "x-api-id") String api_id,
-                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                 @Valid ReqCard003 req) throws Exception {
 
         api_id = checkApiId(api_id, "/card/cards/point");
@@ -175,8 +175,8 @@ public class CardController {
     @GetMapping(value = "/cards/bills", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard004> cardBills(@RequestHeader(value = "Authorization") String authorization,
                                                 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                @RequestHeader(value = "x-api-id") String api_id,
-                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                 @Valid ReqCard004 req) throws Exception {
 
         api_id = checkApiId(api_id, "/card/cards/bills");
@@ -201,8 +201,8 @@ public class CardController {
     @GetMapping(value = "/cards/bills/detail", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard005> cardBills(@RequestHeader(value = "Authorization") String authorization,
                                                 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                @RequestHeader(value = "x-api-id") String api_id,
-                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                 @Valid ReqCard005 req) throws Exception {
 
         api_id = checkApiId(api_id, "/card/cards/bills/detail");
@@ -228,8 +228,8 @@ public class CardController {
     @GetMapping(value = "/cards/payment", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard006> cardBills(@RequestHeader(value = "Authorization") String authorization,
                                                 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                @RequestHeader(value = "x-api-id") String api_id,
-                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                 @Valid ReqCard006 req) throws Exception {
 
         api_id = checkApiId(api_id, "/card/cards/payment");
@@ -256,8 +256,8 @@ public class CardController {
     @GetMapping(value = "/cards/{card_id}/approval-domestic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard007> cardApprovalDomestic(@RequestHeader(value = "Authorization") String authorization,
                                                            @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                           @RequestHeader(value = "x-api-id") String api_id,
-                                                           @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                           @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                           @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                            @NotEmpty(message = "card_id 값이 반드시 필요합니다.") @PathVariable(value = "card_id") String card_id,
                                                            @Valid ReqCard007 req) throws Exception {
 
@@ -287,8 +287,8 @@ public class CardController {
     @GetMapping(value = "/cards/{card_id}/approval-overseas", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard008> cardApprovalOverseas(@RequestHeader(value = "Authorization") String authorization,
                                                            @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                           @RequestHeader(value = "x-api-id") String api_id,
-                                                           @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                           @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                           @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                            @NotEmpty(message = "card_id 값이 반드시 필요합니다.") @PathVariable(value = "card_id") String card_id,
                                                            @Valid ReqCard008 req) throws Exception {
 
@@ -315,8 +315,8 @@ public class CardController {
     @GetMapping(value = "/loans", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard009> cardLoans(@RequestHeader(value = "Authorization") String authorization,
                                                 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                @RequestHeader(value = "x-api-id") String api_id,
-                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                 @Valid ReqCard009 req) throws Exception {
 
         api_id = checkApiId(api_id, "/card/cards/{card_id}/approval-overseas");
@@ -341,8 +341,8 @@ public class CardController {
     @GetMapping(value = "/loans/revolving", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard010> cardLoanRevolving(@RequestHeader(value = "Authorization") String authorization,
                                                         @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                        @RequestHeader(value = "x-api-id") String api_id,
-                                                        @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                        @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                        @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                         @Valid ReqCard010 req) throws Exception {
 
         api_id = checkApiId(api_id, "/card/cards/{card_id}/approval-overseas");
@@ -368,8 +368,8 @@ public class CardController {
     @GetMapping(value = "/loans/short-term", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard011> cardLoansShortTerm(@RequestHeader(value = "Authorization") String authorization,
                                                          @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                         @RequestHeader(value = "x-api-id") String api_id,
-                                                         @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                         @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                         @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                          @Valid ReqCard011 req) throws Exception {
 
         api_id = checkApiId(api_id, "/card/cards/{card_id}/approval-overseas");
@@ -395,8 +395,8 @@ public class CardController {
     @GetMapping(value = "/loans/long-term", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResCard012> cardLoansLongTerm(@RequestHeader(value = "Authorization") String authorization,
                                                         @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                        @RequestHeader(value = "x-api-id") String api_id,
-                                                        @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+                                                        @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                        @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                         @Valid ReqCard012 req) throws Exception {
 
         api_id = checkApiId(api_id, "/card/cards/{card_id}/approval-overseas");

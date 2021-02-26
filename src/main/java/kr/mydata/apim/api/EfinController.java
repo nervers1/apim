@@ -93,8 +93,8 @@ public class EfinController {
     @GetMapping(value = "/accounts", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin001> accounts(@RequestHeader(value = "Authorization") String authorization,
 											   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											   @RequestHeader(value = "x-api-id") String api_id,
-                                               @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+											   @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                               @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                @Valid ReqEfin001 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/efin/accounts");
@@ -120,8 +120,8 @@ public class EfinController {
     @PostMapping(value = "/accounts/balance", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin002> balance(@RequestHeader(value = "Authorization") String authorization,
 											  @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											  @RequestHeader(value = "x-api-id") String api_id,
-                                              @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+											  @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                              @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                               @Valid @RequestBody ReqEfin002 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/efin/accounts/balance");
@@ -147,8 +147,8 @@ public class EfinController {
     @PostMapping(value = "/accounts/charge", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin003> charge(@RequestHeader(value = "Authorization") String authorization,
 											 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											 @RequestHeader(value = "x-api-id") String api_id,
-                                             @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+											 @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                             @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                              @Valid @RequestBody ReqEfin003 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/efin/accounts/charge");
@@ -174,8 +174,8 @@ public class EfinController {
     @PostMapping(value = "/accounts/prepaid-transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin004> prepaidTransactions(@RequestHeader(value = "Authorization") String authorization,
 														  @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-														  @RequestHeader(value = "x-api-id") String api_id,
-                                                          @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+														  @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                          @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                           @Valid @RequestBody ReqEfin004 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/efin/accounts/prepaid-transactions");
@@ -201,8 +201,8 @@ public class EfinController {
     @PostMapping(value = "/accounts/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin005> transactions(@RequestHeader(value = "Authorization") String authorization,
 												   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-												   @RequestHeader(value = "x-api-id") String api_id,
-                                                   @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+												   @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                   @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                    @Valid @RequestBody ReqEfin005 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/efin/accounts/transactions");

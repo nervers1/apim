@@ -93,8 +93,8 @@ public class InvestController {
     @GetMapping(value = "/accounts", produces = "application/json; charset=UTF-8")
     public ResponseEntity listAccount(@RequestHeader(value = "Authorization") String authorization,
 									  @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-									  @RequestHeader(value = "x-api-id") String api_id,
-                                      @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+									  @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                      @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                       @Valid ReqInvest001 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/invest/accounts");
@@ -145,8 +145,8 @@ public class InvestController {
     @PostMapping(value = "/accounts/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity listTransactions(@RequestHeader(value = "Authorization") String authorization,
 										   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-										   @RequestHeader(value = "x-api-id") String api_id,
-                                           @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+										   @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                           @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                            @Valid @RequestBody ReqInvest003 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/invest/accounts/transactions");
@@ -171,8 +171,8 @@ public class InvestController {
     @PostMapping(value = "/accounts/products", produces = "application/json; charset=UTF-8")
     public ResponseEntity listProducts(@RequestHeader(value = "Authorization") String authorization,
 									   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-									   @RequestHeader(value = "x-api-id") String api_id,
-                                       @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+									   @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                       @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                        @Valid @RequestBody ReqInvest004 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/invest/accounts/products");

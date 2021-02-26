@@ -93,8 +93,8 @@ public class MgmtsController {
     @GetMapping(value = "/orgs", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts002> orgs(@RequestHeader(value = "Authorization") String authorization,
 											@RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											@RequestHeader(value = "x-api-id") String api_id,
-                                            @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+											@RequestHeader(value = "x-api-id", required = false) String api_id,
+                                            @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                             @Valid ReqMgmts002 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/mgmts/orgs");
@@ -120,8 +120,8 @@ public class MgmtsController {
     @GetMapping(value = "/services", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts003> services(@RequestHeader(value = "Authorization") String authorization,
 												@RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-												@RequestHeader(value = "x-api-id") String api_id,
-                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+												@RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                 @Valid ReqMgmts003 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/mgmts/services");
@@ -147,8 +147,8 @@ public class MgmtsController {
     @PostMapping(value = "/statistics", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts004> statistics(@RequestHeader(value = "Authorization") String authorization,
 												  @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-												  @RequestHeader(value = "x-api-id") String api_id,
-                                                  @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+												  @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                  @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                   @Valid @RequestBody ReqMgmts004 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/mgmts/statistics");
@@ -174,8 +174,8 @@ public class MgmtsController {
     @GetMapping(value = "/status", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts006> status(@RequestHeader(value = "Authorization") String authorization,
 											  @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											  @RequestHeader(value = "x-api-id") String api_id,
-                                              @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+											  @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                              @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                               @Valid ReqMgmts006 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/mgmts/status");
@@ -201,8 +201,8 @@ public class MgmtsController {
     @GetMapping(value = "/consents", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts007> consents(@RequestHeader(value = "Authorization") String authorization,
 												@RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-												@RequestHeader(value = "x-api-id") String api_id,
-                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+												@RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                 @Valid ReqMgmts007 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/mgmts/consents");
@@ -228,8 +228,8 @@ public class MgmtsController {
     @GetMapping(value = "/req-statistics", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts008> reqStatistics(@RequestHeader(value = "Authorization") String authorization,
 													 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-													 @RequestHeader(value = "x-api-id") String api_id,
-                                                     @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+													 @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                     @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                      @Valid ReqMgmts008 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/mgmts/req-statistics");

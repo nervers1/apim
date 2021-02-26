@@ -93,8 +93,8 @@ public class InsuController {
     @GetMapping(value = "/insurances", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu001> listInsu(@RequestHeader(value = "Authorization") String authorization,
 											   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											   @RequestHeader(value = "x-api-id") String api_id,
-                                               @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+											   @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                               @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                @Valid ReqInsu001 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/insu/insurances");
@@ -120,8 +120,8 @@ public class InsuController {
     @PostMapping(value = "/insurances/basic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu002> insuBasic(@RequestHeader(value = "Authorization") String authorization,
 												@RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-												@RequestHeader(value = "x-api-id") String api_id,
-                                                @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+												@RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                 @Valid @RequestBody ReqInsu002 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/insu/insurances/basic");
@@ -148,8 +148,8 @@ public class InsuController {
     @PostMapping(value = "/insurances/contracts", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu003> insuContracts(@RequestHeader(value = "Authorization") String authorization,
 													@RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-													@RequestHeader(value = "x-api-id") String api_id,
-                                                    @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+													@RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                    @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                     @Valid @RequestBody ReqInsu003 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/insu/insurances/contracts");
@@ -176,8 +176,8 @@ public class InsuController {
     @PostMapping(value = "/insurances/car", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu004> insuCar(@RequestHeader(value = "Authorization") String authorization,
 											  @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											  @RequestHeader(value = "x-api-id") String api_id,
-                                              @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+											  @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                              @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                               @Valid @RequestBody ReqInsu004 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/insu/insurances/car");
@@ -204,8 +204,8 @@ public class InsuController {
     @PostMapping(value = "/insurances/payment", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu005> insuPayment(@RequestHeader(value = "Authorization") String authorization,
 												  @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-												  @RequestHeader(value = "x-api-id") String api_id,
-                                                  @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+												  @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                  @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                   @Valid @RequestBody ReqInsu005 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/insu/insurances/payment");
@@ -232,8 +232,8 @@ public class InsuController {
     @PostMapping(value = "/insurances/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu006> insuTransactions(@RequestHeader(value = "Authorization") String authorization,
 													   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-													   @RequestHeader(value = "x-api-id") String api_id,
-                                                       @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+													   @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                       @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                        @Valid @RequestBody ReqInsu006 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/insu/insurances/transactions");
@@ -260,8 +260,8 @@ public class InsuController {
     @PostMapping(value = "/insurances/car/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu007> insuCarTransactions(@RequestHeader(value = "Authorization") String authorization,
 														  @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-														  @RequestHeader(value = "x-api-id") String api_id,
-                                                          @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+														  @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                          @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                           @Valid @RequestBody ReqInsu007 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/insu/insurances/car/transactions");
@@ -287,8 +287,8 @@ public class InsuController {
     @GetMapping(value = "/loans", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu008> loans(@RequestHeader(value = "Authorization") String authorization,
 											@RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											@RequestHeader(value = "x-api-id") String api_id,
-                                            @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+											@RequestHeader(value = "x-api-id", required = false) String api_id,
+                                            @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                             @Valid ReqInsu008 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/insu/loans");
@@ -314,8 +314,8 @@ public class InsuController {
     @PostMapping(value = "/loans/basic", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu009> insuLoansBasic(@RequestHeader(value = "Authorization") String authorization,
 													 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-													 @RequestHeader(value = "x-api-id") String api_id,
-                                                     @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+													 @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                     @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                      @Valid @RequestBody ReqInsu009 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/insu/loans/basic");
@@ -341,8 +341,8 @@ public class InsuController {
     @PostMapping(value = "/loans/detail", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu010> insuLoansDetail(@RequestHeader(value = "Authorization") String authorization,
 													  @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-													  @RequestHeader(value = "x-api-id") String api_id,
-                                                      @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+													  @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                      @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                       @Valid @RequestBody ReqInsu010 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/insu/loans/detail");
@@ -368,8 +368,8 @@ public class InsuController {
     @PostMapping(value = "/loans/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResInsu011> insuLoansTransactions(@RequestHeader(value = "Authorization") String authorization,
 															@RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-															@RequestHeader(value = "x-api-id") String api_id,
-                                                            @RequestHeader(value = "x-own-org-cd") String own_org_cd,
+															@RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                            @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                             @Valid @RequestBody ReqInsu011 req) throws Exception {
 
 		api_id = checkApiId(api_id, "/insu/loans/transactions");
