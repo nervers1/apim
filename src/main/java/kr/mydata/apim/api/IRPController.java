@@ -22,6 +22,7 @@ public class IRPController {
 
     /**
      * 은행, 금투, 보험 이외 업권으로 요청 시 에러 발생
+     *
      * @param industry
      * @throws Exception
      */

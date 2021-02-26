@@ -6,7 +6,6 @@ import kr.mydata.apim.base.exception.UnsupportedIndustryException;
 import kr.mydata.apim.base.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;

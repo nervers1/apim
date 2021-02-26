@@ -1,14 +1,12 @@
 package kr.mydata.apim.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.mydata.apim.base.response.ErrorResponse;
 import kr.mydata.apim.service.CommonService;
 import kr.mydata.apim.vo.common.ReqCmn001;
 import kr.mydata.apim.vo.common.ReqCmn002;
 import kr.mydata.apim.vo.common.ResCmn001;
 import kr.mydata.apim.vo.common.ResCmn002;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
