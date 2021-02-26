@@ -1,19 +1,19 @@
 package kr.mydata.apim;
 
 class ApimApplicationTests {
-	public static void main(String [] args) {
-		String header = "Bearer ASDF";
-		int index = header.indexOf("Bearer");
+    public static void main(String[] args) {
+        String header = "Bearer ASDF";
+        int index = header.indexOf("Bearer");
 
-		System.out.println(index);
+        System.out.println(index);
 
-		if (index > 0) {
+        if (index > 0) {
 
-		}
+        }
 
-	}
+    }
 
-	void contextLoads() {
-	}
+    void contextLoads() {
+    }
 
 }

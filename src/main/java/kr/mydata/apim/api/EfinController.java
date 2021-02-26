@@ -19,68 +19,68 @@ import javax.validation.Valid;
 @RequestMapping(value = "/efin")
 public class EfinController {
 
-    private final EfinService  service;
-	private final ObjectMapper mapper = new ObjectMapper();
-	private final JdbcTemplate jdbcTemplate;
+    private final EfinService service;
+    private final ObjectMapper mapper = new ObjectMapper();
+    private final JdbcTemplate jdbcTemplate;
 
     public EfinController(EfinService service,
-						  JdbcTemplate jdbcTemplate) {
+                          JdbcTemplate jdbcTemplate) {
         this.service = service;
-		this.jdbcTemplate = jdbcTemplate;
-	}
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
 
-	public String checkApiId(String api_id, String uri) throws Exception {
+    public String checkApiId(String api_id, String uri) throws Exception {
 
-		log.error("uri - {}", uri);
+        log.error("uri - {}", uri);
 
-		if (ObjectUtils.isEmpty(api_id)) {
-			// @formatter:off
-			String preSql = "SELECT b.id "
-				+ "        FROM apx_api_resource a, apx_api_resource_method b "
-				+ "       WHERE a.uri = '" + uri + "'"
-				+ "         AND b.resource_version_id = a.target_version";
-			// @formatter:on
+        if (ObjectUtils.isEmpty(api_id)) {
+            // @formatter:off
+            String preSql = "SELECT b.id "
+                    + "        FROM apx_api_resource a, apx_api_resource_method b "
+                    + "       WHERE a.uri = '" + uri + "'"
+                    + "         AND b.resource_version_id = a.target_version";
+            // @formatter:on
 
-			String preRes = jdbcTemplate.queryForObject(preSql, String.class);
+            String preRes = jdbcTemplate.queryForObject(preSql, String.class);
 
-			api_id = mapper.readValue(preRes, String.class);
-		}
+            api_id = mapper.readValue(preRes, String.class);
+        }
 
-		return api_id;
-	}
+        return api_id;
+    }
 
-	public String checkOwnOrgCd(String own_org_cd, String authorization, String xFsiSvcDataKey) throws Exception {
+    public String checkOwnOrgCd(String own_org_cd, String authorization, String xFsiSvcDataKey) throws Exception {
 
-		if (ObjectUtils.isEmpty(own_org_cd)) {
-			if (authorization.startsWith("Bearer ")) {
-				authorization = authorization.substring(7);
-			}
+        if (ObjectUtils.isEmpty(own_org_cd)) {
+            if (authorization.startsWith("Bearer ")) {
+                authorization = authorization.substring(7);
+            }
 
-			if(StringUtils.hasLength(xFsiSvcDataKey) && "Y".equals(xFsiSvcDataKey)) {
-				// @formatter:off
-				String ownOrgCdSql = "SELECT b.organization_id "
-					+ "             FROM apx_oauth_token a, apx_app b "
-					+ "            WHERE a.access_token = '" + authorization + "'"
-					+ "              AND b.id = a.app_id";
+            if (StringUtils.hasLength(xFsiSvcDataKey) && "Y".equals(xFsiSvcDataKey)) {
+                // @formatter:off
+                String ownOrgCdSql = "SELECT b.organization_id "
+                        + "             FROM apx_oauth_token a, apx_app b "
+                        + "            WHERE a.access_token = '" + authorization + "'"
+                        + "              AND b.id = a.app_id";
 
-				String ownOrgCdRes = jdbcTemplate.queryForObject(ownOrgCdSql,
-																 String.class);
-				// @formatter:on
+                String ownOrgCdRes = jdbcTemplate.queryForObject(ownOrgCdSql,
+                        String.class);
+                // @formatter:on
 
-				if(null == ownOrgCdRes || !StringUtils.hasLength(ownOrgCdRes)) {
-					throw new AuthorizationException();
-				}
+                if (null == ownOrgCdRes || !StringUtils.hasLength(ownOrgCdRes)) {
+                    throw new AuthorizationException();
+                }
 
-				own_org_cd = mapper.readValue(ownOrgCdRes,
-											  String.class);
-			} else {
-				own_org_cd = "0000000000";
-			}
-		}
+                own_org_cd = mapper.readValue(ownOrgCdRes,
+                        String.class);
+            } else {
+                own_org_cd = "0000000000";
+            }
+        }
 
-		return own_org_cd;
-	}
+        return own_org_cd;
+    }
 
     /**
      * 전자금융 - 전자지급수단 목록 조회
@@ -92,13 +92,13 @@ public class EfinController {
      */
     @GetMapping(value = "/accounts", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin001> accounts(@RequestHeader(value = "Authorization") String authorization,
-											   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											   @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                               @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                               @RequestHeader(value = "x-api-id", required = false) String api_id,
                                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                @Valid ReqEfin001 req) throws Exception {
 
-		api_id = checkApiId(api_id, "/efin/accounts");
-		own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+        api_id = checkApiId(api_id, "/efin/accounts");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -119,13 +119,13 @@ public class EfinController {
      */
     @PostMapping(value = "/accounts/balance", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin002> balance(@RequestHeader(value = "Authorization") String authorization,
-											  @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											  @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                              @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                              @RequestHeader(value = "x-api-id", required = false) String api_id,
                                               @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                               @Valid @RequestBody ReqEfin002 req) throws Exception {
 
-		api_id = checkApiId(api_id, "/efin/accounts/balance");
-		own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+        api_id = checkApiId(api_id, "/efin/accounts/balance");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -146,13 +146,13 @@ public class EfinController {
      */
     @PostMapping(value = "/accounts/charge", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin003> charge(@RequestHeader(value = "Authorization") String authorization,
-											 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-											 @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                             @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                             @RequestHeader(value = "x-api-id", required = false) String api_id,
                                              @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                              @Valid @RequestBody ReqEfin003 req) throws Exception {
 
-		api_id = checkApiId(api_id, "/efin/accounts/charge");
-		own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+        api_id = checkApiId(api_id, "/efin/accounts/charge");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -173,13 +173,13 @@ public class EfinController {
      */
     @PostMapping(value = "/accounts/prepaid-transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin004> prepaidTransactions(@RequestHeader(value = "Authorization") String authorization,
-														  @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-														  @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                          @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                          @RequestHeader(value = "x-api-id", required = false) String api_id,
                                                           @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                           @Valid @RequestBody ReqEfin004 req) throws Exception {
 
-		api_id = checkApiId(api_id, "/efin/accounts/prepaid-transactions");
-		own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+        api_id = checkApiId(api_id, "/efin/accounts/prepaid-transactions");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);
@@ -200,13 +200,13 @@ public class EfinController {
      */
     @PostMapping(value = "/accounts/transactions", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResEfin005> transactions(@RequestHeader(value = "Authorization") String authorization,
-												   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-												   @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                   @RequestHeader(value = "x-api-id", required = false) String api_id,
                                                    @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                    @Valid @RequestBody ReqEfin005 req) throws Exception {
 
-		api_id = checkApiId(api_id, "/efin/accounts/transactions");
-		own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+        api_id = checkApiId(api_id, "/efin/accounts/transactions");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
 
         log.info("api_id : {}", api_id);
         log.info("own_org_cd : {}", own_org_cd);

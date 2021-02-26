@@ -34,6 +34,7 @@ public class ExceptionAdvice {
 
         return new ResponseEntity<ErrorResponse>(er, HttpStatus.BAD_REQUEST);
     }
+
     /**
      * 유효하지 않은 토큰 에러
      *

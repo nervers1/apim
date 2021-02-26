@@ -19,7 +19,7 @@ import javax.validation.Valid;
 @RestController
 public class BankController {
 
-    private final BankService  service;
+    private final BankService service;
     private final ObjectMapper mapper = new ObjectMapper();
     private final JdbcTemplate jdbcTemplate;
 
@@ -36,9 +36,9 @@ public class BankController {
         if (ObjectUtils.isEmpty(api_id)) {
             // @formatter:off
             String preSql = "SELECT b.id "
-                + "        FROM apx_api_resource a, apx_api_resource_method b "
-                + "       WHERE a.uri = '" + uri + "'"
-                + "         AND b.resource_version_id = a.target_version";
+                    + "        FROM apx_api_resource a, apx_api_resource_method b "
+                    + "       WHERE a.uri = '" + uri + "'"
+                    + "         AND b.resource_version_id = a.target_version";
             // @formatter:on
 
             String preRes = jdbcTemplate.queryForObject(preSql, String.class);
@@ -56,23 +56,23 @@ public class BankController {
                 authorization = authorization.substring(7);
             }
 
-            if(StringUtils.hasLength(xFsiSvcDataKey) && "Y".equals(xFsiSvcDataKey)) {
+            if (StringUtils.hasLength(xFsiSvcDataKey) && "Y".equals(xFsiSvcDataKey)) {
                 // @formatter:off
                 String ownOrgCdSql = "SELECT b.organization_id "
-                    + "             FROM apx_oauth_token a, apx_app b "
-                    + "            WHERE a.access_token = '" + authorization + "'"
-                    + "              AND b.id = a.app_id";
+                        + "             FROM apx_oauth_token a, apx_app b "
+                        + "            WHERE a.access_token = '" + authorization + "'"
+                        + "              AND b.id = a.app_id";
 
                 String ownOrgCdRes = jdbcTemplate.queryForObject(ownOrgCdSql,
-                                                                 String.class);
+                        String.class);
                 // @formatter:on
 
-                if(null == ownOrgCdRes || !StringUtils.hasLength(ownOrgCdRes)) {
+                if (null == ownOrgCdRes || !StringUtils.hasLength(ownOrgCdRes)) {
                     throw new AuthorizationException();
                 }
 
                 own_org_cd = mapper.readValue(ownOrgCdRes,
-                                              String.class);
+                        String.class);
             } else {
                 own_org_cd = "0000000000";
             }
