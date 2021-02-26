@@ -13,6 +13,7 @@ import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 @Slf4j
 @ControllerAdvice
@@ -110,6 +111,17 @@ public class ExceptionAdvice {
         er.setRsp_msg("[API-SERVER] 지원하지않는 HttpRequestMethod로 API를 호출하였습니다.");
 
         return new ResponseEntity<ErrorResponse>(er, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResponseEntity<ErrorResponse> processNoHandlerFoundError(NoHandlerFoundException e) {
+        e.printStackTrace();
+
+        ErrorResponse er = new ErrorResponse();
+        er.setRsp_code("40401");
+        er.setRsp_msg("[API-SERVER] 요청하신 API URI가 존재하지 않습니다.");
+
+        return new ResponseEntity<ErrorResponse>(er, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)
