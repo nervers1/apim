@@ -68,7 +68,7 @@ public class CapitalController {
 																 String.class);
 				// @formatter:on
 
-				if(null == ownOrgCdRes || !StringUtils.hasLength(ownOrgCdRes)) {
+				if(!StringUtils.hasLength(ownOrgCdRes)) {
 					throw new AuthorizationException();
 				}
 
