@@ -15,10 +15,10 @@ public class ResIRP002 {
     private String rsp_code;
     private String rsp_msg;
     private String search_timestamp;
-    private String accumulated_amt;
+    private String accum_amt;
     private String eval_amt;
-    private String accumulated_employer_amt;
-    private String accumulated_employee_amt;
+    private String employer_amt;
+    private String employee_amt;
     private String issue_date;
     private String first_deposit_date;
 }

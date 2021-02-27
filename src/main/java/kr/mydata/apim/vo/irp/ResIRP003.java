@@ -16,6 +16,7 @@ public class ResIRP003 {
     private String rsp_code;
     private String rsp_msg;
     private String search_timestamp;
+    private String next_page;
     private String irp_cnt;
     private List<ResIRP003Sub> irp_list;
 }

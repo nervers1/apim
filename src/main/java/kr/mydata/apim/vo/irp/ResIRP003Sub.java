@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResIRP003Sub {
+public class ResIRP003Sub implements Comparable<ResIRP003Sub> {
     private String irp_name;
     private String irp_type;
     private String eval_amt;
@@ -19,4 +19,10 @@ public class ResIRP003Sub {
     private String open_date;
     private String exp_date;
     private String int_rate;
+
+    @Override
+    public int compareTo(ResIRP003Sub o) {
+        // 신규일 기준 내림차순 정렬
+        return o.open_date.compareTo(this.open_date);
+    }
 }

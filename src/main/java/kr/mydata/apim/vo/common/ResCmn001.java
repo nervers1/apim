@@ -29,7 +29,6 @@ import java.util.List;
 public class ResCmn001 {
     private String rsp_code;
     private String rsp_msg;
-    @JsonAlias({"version", " VERSION"})
     private String version;
     private String min_version;
     private String api_cnt;
