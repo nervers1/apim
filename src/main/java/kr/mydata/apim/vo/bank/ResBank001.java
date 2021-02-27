@@ -17,6 +17,7 @@ public class ResBank001 {
     private String rsp_msg;
     private String search_timestamp;
     private String reg_date;
+    private String next_page;
     private String account_cnt;
     private List<ResBank001Sub> account_list;
 }

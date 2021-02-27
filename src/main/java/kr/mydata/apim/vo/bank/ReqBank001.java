@@ -24,4 +24,11 @@ public class ReqBank001 {
     @NotNull(message = "search_timestamp 값이 반드시 있어야 합니다.")
     @Size(min = 1, max = 14, message = "search_timestamp 값은 14 자리 입니다.")
     private String search_timestamp;
+
+    @Size(min = 1, max = 1000, message = "next_page 값은 1 ~ 1000 자리 입니다.")
+    private String next_page;
+
+    @NotNull(message = "limit 값이 반드시 있어야 합니다.")
+    @Size(min = 1, max = 3, message = "limit 값은 1 ~ 3 자리 입니다.")
+    private String limit;
 }

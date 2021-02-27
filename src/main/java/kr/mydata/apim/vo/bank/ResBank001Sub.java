@@ -11,7 +11,7 @@ public class ResBank001Sub {
     private String account_num;
     private String is_consent;
     private String seqno;
-    private String currency_code;
+    private String is_foreign_deposit;
     private String prod_name;
     private String account_type;
     private String account_status;

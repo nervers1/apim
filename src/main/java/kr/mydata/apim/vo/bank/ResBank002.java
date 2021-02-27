@@ -21,6 +21,4 @@ public class ResBank002 {
     private String currency_code;
     private String commit_amt;
     private String monthly_paid_in_amt;
-    private String termination_amt;
-    private String last_offered_rate;
 }

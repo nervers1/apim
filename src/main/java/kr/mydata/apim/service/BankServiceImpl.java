@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +43,33 @@ public class BankServiceImpl implements BankService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        return mapper.readValue(res, ResBank001.class);
+        ResBank001 resVo = mapper.readValue(res, ResBank001.class);
+        List<ResBank001Sub> account_list = resVo.getAccount_list();
+
+        Collections.sort(account_list, new Comparator<ResBank001Sub>() {
+            @Override
+            public int compare(ResBank001Sub o1, ResBank001Sub o2) {
+                if(o1.getAccount_type().equals(o2.getAccount_type())) {
+                    // 같은 계좌유형이면 계좌번호 오름차순 정렬
+                    return o1.getAccount_num().compareTo(o2.getAccount_num());
+                } else {
+                    // 계좌유형 오름차순 정렬
+                    return o1.getAccount_type().compareTo(o2.getAccount_type());
+                }
+            }
+        });
+
+        // next_page 는 조회 마지막 row_num 으로 들어옴.
+        int page = Util.getPage(req.getNext_page());
+        account_list = account_list.stream()
+                .skip(page)
+                .limit(Integer.valueOf(req.getLimit()))
+                .collect(Collectors.toList());
+        resVo.setAccount_list(account_list);
+        resVo.setNext_page(Util.getNextPage(Integer.valueOf(resVo.getAccount_cnt()), page, Integer.valueOf(req.getLimit())));
+        resVo.setAccount_cnt(String.valueOf(account_list.size()));
+
+        return resVo;
     }
 
     /**
