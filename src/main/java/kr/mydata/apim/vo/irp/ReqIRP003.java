@@ -30,7 +30,7 @@ public class ReqIRP003 {
     private String seqno;
 
     @NotNull(message = "search_timestamp 값이 반드시 있어야 합니다.")
-    @Size(min = 1, max = 14, message = "search_timestamp 값은 14 자리 입니다.")
+    @Size(min = 1, max = 14, message = "search_timestamp 값은 1 ~ 14 자리 입니다.")
     private String search_timestamp;
 
     @Size(min = 1, max = 1000, message = "next_page 값은 1 ~ 1000 자리 입니다.")

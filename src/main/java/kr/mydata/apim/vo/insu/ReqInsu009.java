@@ -26,6 +26,6 @@ public class ReqInsu009 {
     private String account_num;
 
     @NotNull(message = "search_timestamp 값이 반드시 있어야 합니다.")
-    @Size(min = 1, max = 14, message = "search_timestamp 값은 14 자리 입니다.")
+    @Size(min = 1, max = 14, message = "search_timestamp 값은 1 ~ 14 자리 입니다.")
     private String search_timestamp;
 }

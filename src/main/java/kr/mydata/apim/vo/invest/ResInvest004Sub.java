@@ -24,7 +24,6 @@ public class ResInvest004Sub {
     private String paid_in_amt;
     private String withdrawal_amt;
     private String last_paid_in_date;
-    private String received_amt;
-    @JsonAlias({"currency_code", "currenct_code"})
+    private String rcv_amt;
     private String currency_code;
 }
