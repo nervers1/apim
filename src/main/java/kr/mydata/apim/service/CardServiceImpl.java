@@ -182,7 +182,11 @@ public class CardServiceImpl implements CardService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        return mapper.readValue(res, ResCard006.class);
+        ResCard006 resCard006 = mapper.readValue(res, ResCard006.class);
+
+        Collections.sort(resCard006.getPay_list());
+
+        return resCard006;
     }
 
     /**
@@ -204,7 +208,11 @@ public class CardServiceImpl implements CardService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        return mapper.readValue(res, ResCard007.class);
+        ResCard007 resCard007 = mapper.readValue(res, ResCard007.class);
+
+        Collections.sort(resCard007.getApproved_list());
+
+        return resCard007;
     }
 
     /**
@@ -226,7 +234,11 @@ public class CardServiceImpl implements CardService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        return mapper.readValue(res, ResCard008.class);
+        ResCard008 resCard008 = mapper.readValue(res, ResCard008.class);
+
+        Collections.sort(resCard008.getApproved_list());
+
+        return resCard008;
     }
 
     /**
@@ -268,7 +280,11 @@ public class CardServiceImpl implements CardService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        return mapper.readValue(res, ResCard010.class);
+        ResCard010 resCard010 = mapper.readValue(res, ResCard010.class);
+
+        Collections.sort(resCard010.getRevolving_list());
+
+        return resCard010;
     }
 
     /**
@@ -289,7 +305,11 @@ public class CardServiceImpl implements CardService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        return mapper.readValue(res, ResCard011.class);
+        ResCard011 resCard011 = mapper.readValue(res, ResCard011.class);
+
+        Collections.sort(resCard011.getShort_term_list());
+
+        return resCard011;
     }
 
     /**
@@ -310,6 +330,10 @@ public class CardServiceImpl implements CardService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        return mapper.readValue(res, ResCard012.class);
+        ResCard012 resCard012 = mapper.readValue(res, ResCard012.class);
+
+        Collections.sort(resCard012.getLong_term_list());
+
+        return resCard012;
     }
 }
