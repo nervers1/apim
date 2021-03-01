@@ -17,5 +17,5 @@ public class ResInsu010 {
     private String currency_code;
     private String balance_amt;
     private String loan_principal;
-    private String next_int_repay_date;
+    private String next_repay_date;
 }

@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResInsu004Sub {
     private String car_number;
-    @JsonAlias({"car_insu_type", "car_inst_type"})
     private String car_insu_type;
     private String car_name;
     private String start_date;

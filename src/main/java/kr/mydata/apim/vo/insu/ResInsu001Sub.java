@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResInsu001Sub {
+public class
+
+ResInsu001Sub {
     private String insu_num;
     private String is_consent;
     private String prod_name;

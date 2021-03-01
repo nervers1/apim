@@ -21,8 +21,8 @@ public class ReqInsu005 {
     @Size(min = 1, max = 10, message = "org_code 값은 1 ~ 10 자리 입니다.")
     private String org_code;
 
-    @NotNull(message = "org_code 값이 반드시 있어야 합니다.")
-    @Size(min = 1, max = 20, message = "org_code 값은 1 ~ 20 자리 입니다.")
+    @NotNull(message = "insu_num 값이 반드시 있어야 합니다.")
+    @Size(min = 1, max = 20, message = "insu_num 값은 1 ~ 20 자리 입니다.")
     private String insu_num;
 
     @NotNull(message = "search_timestamp 값이 반드시 있어야 합니다.")
