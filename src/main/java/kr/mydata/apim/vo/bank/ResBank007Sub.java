@@ -22,7 +22,7 @@ public class ResBank007Sub implements Comparable<ResBank007Sub> {
 
     @Override
     public int compareTo(ResBank007Sub o) {
-        // 거래일자 기준 내림차순 정렬
+        // 거래일시 기준 내림차순 정렬
         return o.trans_dtime.compareTo(this.trans_dtime);
     }
 

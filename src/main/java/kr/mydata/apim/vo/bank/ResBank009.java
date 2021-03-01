@@ -16,5 +16,5 @@ public class ResBank009 {
     private String search_timestamp;
     private String balance_amt;
     private String loan_principal;
-    private String int_repay_date;
+    private String next_repay_date;
 }
