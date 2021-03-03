@@ -8,6 +8,7 @@ import kr.mydata.apim.vo.card.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -107,23 +108,40 @@ public class CardServiceImpl implements CardService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        ResCard004 resCard004 = mapper.readValue(res, ResCard004.class);
+        ResCard004 resVo = mapper.readValue(res, ResCard004.class);
 
-        List<ResCard004Sub> bill_list = resCard004.getBill_list();
+        List<ResCard004Sub> bill_list = resVo.getBill_list();
 
         // Comparable 구현하여 내림차순 정렬
         Collections.sort(bill_list);
 
-        int page = Util.getPage(req.getNext_page());
+        // 거래일자 조건 처리
         bill_list = bill_list.stream()
-                .skip(page)
-                .limit(Integer.valueOf(req.getLimit()))
-                .collect(Collectors.toList());
-        resCard004.setBill_list(bill_list);
-        resCard004.setNext_page(Util.getNextPage(Integer.valueOf(resCard004.getBill_cnt()), page, Integer.valueOf(req.getLimit())));
-        resCard004.setBill_cnt(String.valueOf(bill_list.size()));
+                               .filter(obj -> obj.getCharge_month().compareTo(req.getFrom_month()) >= 0)
+                               .filter(obj -> obj.getCharge_month().compareTo(req.getTo_month()) <= 0)
+                               .collect(Collectors.toList());
 
-        return resCard004;
+        // next_page 는 조회 마지막 row_num 으로 들어옴.
+        int page = Util.getPage(req.getNext_page());
+
+        // limit + 1 개 조회처리
+        bill_list = bill_list.stream()
+                               .skip(page)
+                               .limit(Integer.valueOf(req.getLimit()) + 1)
+                               .collect(Collectors.toList());
+
+        // limit + 1 개 만큼 조회된거면 next_page 셋팅
+        resVo.setNext_page(Util.getNextPage(bill_list.size(), page, Integer.valueOf(req.getLimit())));
+
+        // next_page 가 존재하면 limit + 1개 만큼 조회된 것이므로 cnt 는 -1 처리
+        resVo.setBill_cnt((StringUtils.hasLength(resVo.getNext_page()))
+                           ? String.valueOf(bill_list.size() - 1) : String.valueOf(bill_list.size()));
+
+        // next_page 가 존재하면 limit + 1개만큼 조회된 것이므로 list 의 마지막 원소 제거
+        resVo.setBill_list((StringUtils.hasLength(resVo.getNext_page()))
+                            ? bill_list.subList(0, bill_list.size() - 1) : bill_list);
+
+        return resVo;
     }
 
 
@@ -145,23 +163,39 @@ public class CardServiceImpl implements CardService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        ResCard005 resCard005 = mapper.readValue(res, ResCard005.class);
+        ResCard005 resVo = mapper.readValue(res, ResCard005.class);
 
-        List<ResCard005Sub> bill_detail_list = resCard005.getBill_detail_list();
+        List<ResCard005Sub> bill_detail_list = resVo.getBill_detail_list();
 
         // Comparable 구현하여 내림차순 정렬
         Collections.sort(bill_detail_list);
 
-        int page = Util.getPage(req.getNext_page());
+        // 거래일자 조건 처리
         bill_detail_list = bill_detail_list.stream()
-                .skip(page)
-                .limit(Integer.valueOf(req.getLimit()))
-                .collect(Collectors.toList());
-        resCard005.setBill_detail_list(bill_detail_list);
-        resCard005.setNext_page(Util.getNextPage(Integer.valueOf(resCard005.getBill_detail_cnt()), page, Integer.valueOf(req.getLimit())));
-        resCard005.setBill_detail_cnt(String.valueOf(bill_detail_list.size()));
+                             .filter(obj -> obj.getPaid_dtime().substring(0, 6).compareTo(req.getCharge_month()) == 0)
+                             .collect(Collectors.toList());
 
-        return resCard005;
+        // next_page 는 조회 마지막 row_num 으로 들어옴.
+        int page = Util.getPage(req.getNext_page());
+
+        // limit + 1 개 조회처리
+        bill_detail_list = bill_detail_list.stream()
+                             .skip(page)
+                             .limit(Integer.valueOf(req.getLimit()) + 1)
+                             .collect(Collectors.toList());
+
+        // limit + 1 개 만큼 조회된거면 next_page 셋팅
+        resVo.setNext_page(Util.getNextPage(bill_detail_list.size(), page, Integer.valueOf(req.getLimit())));
+
+        // next_page 가 존재하면 limit + 1개 만큼 조회된 것이므로 cnt 는 -1 처리
+        resVo.setBill_detail_cnt((StringUtils.hasLength(resVo.getNext_page()))
+                          ? String.valueOf(bill_detail_list.size() - 1) : String.valueOf(bill_detail_list.size()));
+
+        // next_page 가 존재하면 limit + 1개만큼 조회된 것이므로 list 의 마지막 원소 제거
+        resVo.setBill_detail_list((StringUtils.hasLength(resVo.getNext_page()))
+                           ? bill_detail_list.subList(0, bill_detail_list.size() - 1) : bill_detail_list);
+
+        return resVo;
     }
 
     /**
@@ -208,11 +242,40 @@ public class CardServiceImpl implements CardService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        ResCard007 resCard007 = mapper.readValue(res, ResCard007.class);
+        ResCard007 resVo = mapper.readValue(res, ResCard007.class);
 
-        Collections.sort(resCard007.getApproved_list());
+        List<ResCard007Sub> approved_list = resVo.getApproved_list();
 
-        return resCard007;
+        // Comparable 구현하여 내림차순 정렬
+        Collections.sort(approved_list);
+
+        // 거래일자 조건 처리
+        approved_list = approved_list.stream()
+                             .filter(obj -> obj.getApproved_dtime().substring(0, 8).compareTo(req.getFrom_date()) >= 0)
+                             .filter(obj -> obj.getApproved_dtime().substring(0, 8).compareTo(req.getTo_date()) <= 0)
+                             .collect(Collectors.toList());
+
+        // next_page 는 조회 마지막 row_num 으로 들어옴.
+        int page = Util.getPage(req.getNext_page());
+
+        // limit + 1 개 조회처리
+        approved_list = approved_list.stream()
+                             .skip(page)
+                             .limit(Integer.valueOf(req.getLimit()) + 1)
+                             .collect(Collectors.toList());
+
+        // limit + 1 개 만큼 조회된거면 next_page 셋팅
+        resVo.setNext_page(Util.getNextPage(approved_list.size(), page, Integer.valueOf(req.getLimit())));
+
+        // next_page 가 존재하면 limit + 1개 만큼 조회된 것이므로 cnt 는 -1 처리
+        resVo.setApproved_cnt((StringUtils.hasLength(resVo.getNext_page()))
+                          ? String.valueOf(approved_list.size() - 1) : String.valueOf(approved_list.size()));
+
+        // next_page 가 존재하면 limit + 1개만큼 조회된 것이므로 list 의 마지막 원소 제거
+        resVo.setApproved_list((StringUtils.hasLength(resVo.getNext_page()))
+                           ? approved_list.subList(0, approved_list.size() - 1) : approved_list);
+
+        return resVo;
     }
 
     /**
@@ -234,11 +297,40 @@ public class CardServiceImpl implements CardService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        ResCard008 resCard008 = mapper.readValue(res, ResCard008.class);
+        ResCard008 resVo = mapper.readValue(res, ResCard008.class);
 
-        Collections.sort(resCard008.getApproved_list());
+        List<ResCard008Sub> approved_list = resVo.getApproved_list();
 
-        return resCard008;
+        // Comparable 구현하여 내림차순 정렬
+        Collections.sort(approved_list);
+
+        // 거래일자 조건 처리
+        approved_list = approved_list.stream()
+                                     .filter(obj -> obj.getApproved_dtime().substring(0, 8).compareTo(req.getFrom_date()) >= 0)
+                                     .filter(obj -> obj.getApproved_dtime().substring(0, 8).compareTo(req.getTo_date()) <= 0)
+                                     .collect(Collectors.toList());
+
+        // next_page 는 조회 마지막 row_num 으로 들어옴.
+        int page = Util.getPage(req.getNext_page());
+
+        // limit + 1 개 조회처리
+        approved_list = approved_list.stream()
+                                     .skip(page)
+                                     .limit(Integer.valueOf(req.getLimit()) + 1)
+                                     .collect(Collectors.toList());
+
+        // limit + 1 개 만큼 조회된거면 next_page 셋팅
+        resVo.setNext_page(Util.getNextPage(approved_list.size(), page, Integer.valueOf(req.getLimit())));
+
+        // next_page 가 존재하면 limit + 1개 만큼 조회된 것이므로 cnt 는 -1 처리
+        resVo.setApproved_cnt((StringUtils.hasLength(resVo.getNext_page()))
+                              ? String.valueOf(approved_list.size() - 1) : String.valueOf(approved_list.size()));
+
+        // next_page 가 존재하면 limit + 1개만큼 조회된 것이므로 list 의 마지막 원소 제거
+        resVo.setApproved_list((StringUtils.hasLength(resVo.getNext_page()))
+                               ? approved_list.subList(0, approved_list.size() - 1) : approved_list);
+
+        return resVo;
     }
 
     /**
