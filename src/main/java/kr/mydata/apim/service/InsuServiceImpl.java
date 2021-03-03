@@ -8,6 +8,7 @@ import kr.mydata.apim.vo.insu.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -140,20 +141,39 @@ public class InsuServiceImpl implements InsuService {
         // to JSON
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
         ResInsu006 resVo = mapper.readValue(res, ResInsu006.class);
         List<ResInsu006Sub> trans_list = resVo.getTrans_list();
 
         // Comparable 구현하여 내림차순 정렬
         Collections.sort(trans_list);
 
-        int page = Util.getPage(req.getNext_page());
+        // 거래일자 조건 처리
         trans_list = trans_list.stream()
-                .skip(page)
-                .limit(Integer.valueOf(req.getLimit()))
-                .collect(Collectors.toList());
-        resVo.setTrans_list(trans_list);
-        resVo.setNext_page(Util.getNextPage(Integer.valueOf(resVo.getTrans_cnt()), page, Integer.valueOf(req.getLimit())));
-        resVo.setTrans_cnt(String.valueOf(trans_list.size()));
+                               .filter(obj -> obj.getTrans_date().compareTo(req.getFrom_date()) >= 0)
+                               .filter(obj -> obj.getTrans_date().compareTo(req.getTo_date()) <= 0)
+                               .collect(Collectors.toList());
+
+        // next_page 는 조회 마지막 row_num 으로 들어옴.
+        int page = Util.getPage(req.getNext_page());
+
+        // limit + 1 개 조회처리
+        trans_list = trans_list.stream()
+                               .skip(page)
+                               .limit(Integer.valueOf(req.getLimit()) + 1)
+                               .collect(Collectors.toList());
+
+        // limit + 1 개 만큼 조회된거면 next_page 셋팅
+        resVo.setNext_page(Util.getNextPage(trans_list.size(), page, Integer.valueOf(req.getLimit())));
+
+        // next_page 가 존재하면 limit + 1개 만큼 조회된 것이므로 cnt 는 -1 처리
+        resVo.setTrans_cnt((StringUtils.hasLength(resVo.getNext_page()))
+                           ? String.valueOf(trans_list.size() - 1) : String.valueOf(trans_list.size()));
+
+        // next_page 가 존재하면 limit + 1개만큼 조회된 것이므로 list 의 마지막 원소 제거
+        resVo.setTrans_list((StringUtils.hasLength(resVo.getNext_page()))
+                            ? trans_list.subList(0, trans_list.size() - 1) : trans_list);
+
         return resVo;
     }
 
@@ -180,14 +200,26 @@ public class InsuServiceImpl implements InsuService {
         // Comparable 구현하여 내림차순 정렬
         Collections.sort(trans_list);
 
+        // next_page 는 조회 마지막 row_num 으로 들어옴.
         int page = Util.getPage(req.getNext_page());
+
+        // limit + 1 개 조회처리
         trans_list = trans_list.stream()
-                .skip(page)
-                .limit(Integer.valueOf(req.getLimit()))
-                .collect(Collectors.toList());
-        resVo.setTrans_list(trans_list);
-        resVo.setNext_page(Util.getNextPage(Integer.valueOf(resVo.getTrans_cnt()), page, Integer.valueOf(req.getLimit())));
-        resVo.setTrans_cnt(String.valueOf(trans_list.size()));
+                               .skip(page)
+                               .limit(Integer.valueOf(req.getLimit()) + 1)
+                               .collect(Collectors.toList());
+
+        // limit + 1 개 만큼 조회된거면 next_page 셋팅
+        resVo.setNext_page(Util.getNextPage(trans_list.size(), page, Integer.valueOf(req.getLimit())));
+
+        // next_page 가 존재하면 limit + 1개 만큼 조회된 것이므로 cnt 는 -1 처리
+        resVo.setTrans_cnt((StringUtils.hasLength(resVo.getNext_page()))
+                           ? String.valueOf(trans_list.size() - 1) : String.valueOf(trans_list.size()));
+
+        // next_page 가 존재하면 limit + 1개만큼 조회된 것이므로 list 의 마지막 원소 제거
+        resVo.setTrans_list((StringUtils.hasLength(resVo.getNext_page()))
+                            ? trans_list.subList(0, trans_list.size() - 1) : trans_list);
+
         return resVo;
     }
 
@@ -271,18 +303,35 @@ public class InsuServiceImpl implements InsuService {
         ResInsu011 resVo = mapper.readValue(res, ResInsu011.class);
         List<ResInsu011Sub> trans_list = resVo.getTrans_list();
 
+
         // Comparable 구현하여 내림차순 정렬
         Collections.sort(trans_list);
 
+        // 거래일자 조건 처리
+        trans_list = trans_list.stream()
+                               .filter(obj -> obj.getTrans_dtime().substring(0, 8).compareTo(req.getFrom_date()) >= 0)
+                               .filter(obj -> obj.getTrans_dtime().substring(0, 8).compareTo(req.getTo_date()) <= 0)
+                               .collect(Collectors.toList());
+
         // next_page 는 조회 마지막 row_num 으로 들어옴.
         int page = Util.getPage(req.getNext_page());
+
+        // limit + 1 개 조회처리
         trans_list = trans_list.stream()
-                .skip(page)
-                .limit(Integer.valueOf(req.getLimit()))
-                .collect(Collectors.toList());
-        resVo.setTrans_list(trans_list);
-        resVo.setNext_page(Util.getNextPage(Integer.valueOf(resVo.getTrans_cnt()), page, Integer.valueOf(req.getLimit())));
-        resVo.setTrans_cnt(String.valueOf(trans_list.size()));
+                               .skip(page)
+                               .limit(Integer.valueOf(req.getLimit()) + 1)
+                               .collect(Collectors.toList());
+
+        // limit + 1 개 만큼 조회된거면 next_page 셋팅
+        resVo.setNext_page(Util.getNextPage(trans_list.size(), page, Integer.valueOf(req.getLimit())));
+
+        // next_page 가 존재하면 limit + 1개 만큼 조회된 것이므로 cnt 는 -1 처리
+        resVo.setTrans_cnt((StringUtils.hasLength(resVo.getNext_page()))
+                           ? String.valueOf(trans_list.size() - 1) : String.valueOf(trans_list.size()));
+
+        // next_page 가 존재하면 limit + 1개만큼 조회된 것이므로 list 의 마지막 원소 제거
+        resVo.setTrans_list((StringUtils.hasLength(resVo.getNext_page()))
+                            ? trans_list.subList(0, trans_list.size() - 1) : trans_list);
 
         return resVo;
     }
