@@ -40,5 +40,7 @@ dependencies {
 	implementation 'org.hibernate:hibernate-entitymanager:5.4.27.Final'
 	implementation 'com.google.code.gson:gson:2.8.6'
 	implementation 'org.hibernate.validator:hibernate-validator:6.0.10.Final'
+	implementation 'org.apache.httpcomponents:httpclient:4.5'
+
 
 }

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.mydata.apim.base.exception.AuthorizationException;
 import kr.mydata.apim.service.MgmtService;
 import kr.mydata.apim.vo.mgmts.*;
+import kr.mydata.apim.vo.oauth.ReqOAuth001;
+import kr.mydata.apim.vo.oauth.ResOAuth001;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Log4j2
-@RequestMapping(value = "/mgmts")
 @RestController
 public class MgmtsController {
 
@@ -83,6 +84,32 @@ public class MgmtsController {
     }
 
     /**
+     * 지원 API - 종합포털제공 접근토큰 발급
+     *
+     * @param api_id
+     * @param own_org_cd
+     * @param req
+     * @return
+     */
+    @GetMapping(value = "/support/oauth/2.0/token", produces = "application/json; charset=UTF-8")
+    public ResponseEntity<ResOAuth001> supportToken(@RequestHeader(value = "Authorization") String authorization,
+                                                    @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                    @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                    @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
+                                                    @Valid ReqOAuth001 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/support/oauth/2.0/token");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+
+        log.info("api_id : {}", api_id);
+        log.info("own_org_cd : {}", own_org_cd);
+        log.info("req : {}", req);
+
+        ResOAuth001 res = service.supportToken(req, api_id, own_org_cd);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    /**
      * 지원 API - 기관정보 조회
      *
      * @param api_id
@@ -90,7 +117,7 @@ public class MgmtsController {
      * @param req
      * @return
      */
-    @GetMapping(value = "/orgs", produces = "application/json; charset=UTF-8")
+    @GetMapping(value = "/mgmts/orgs", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts002> orgs(@RequestHeader(value = "Authorization") String authorization,
                                             @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                             @RequestHeader(value = "x-api-id", required = false) String api_id,
@@ -117,7 +144,7 @@ public class MgmtsController {
      * @param req
      * @return
      */
-    @GetMapping(value = "/services", produces = "application/json; charset=UTF-8")
+    @GetMapping(value = "/mgmts/services", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts003> services(@RequestHeader(value = "Authorization") String authorization,
                                                 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                                 @RequestHeader(value = "x-api-id", required = false) String api_id,
@@ -144,7 +171,7 @@ public class MgmtsController {
      * @param req
      * @return
      */
-    @PostMapping(value = "/statistics", produces = "application/json; charset=UTF-8")
+    @PostMapping(value = "/mgmts/statistics", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts004> statistics(@RequestHeader(value = "Authorization") String authorization,
                                                   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                                   @RequestHeader(value = "x-api-id", required = false) String api_id,
@@ -162,6 +189,31 @@ public class MgmtsController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
+    /**
+     * 지원 API - 종합포털제공 접근토큰 발급
+     *
+     * @param api_id
+     * @param own_org_cd
+     * @param req
+     * @return
+     */
+    @GetMapping(value = "/company/oauth/2.0/token", produces = "application/json; charset=UTF-8")
+    public ResponseEntity<ResOAuth001> companyToken(@RequestHeader(value = "Authorization") String authorization,
+                                                    @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                    @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                    @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
+                                                    @Valid ReqOAuth001 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/company/oauth/2.0/token");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+
+        log.info("api_id : {}", api_id);
+        log.info("own_org_cd : {}", own_org_cd);
+        log.info("req : {}", req);
+
+        ResOAuth001 res = service.companyToken(req, api_id, own_org_cd);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
 
     /**
      * 지원 API - 데이터보유자 상태조회
@@ -171,7 +223,7 @@ public class MgmtsController {
      * @param req
      * @return
      */
-    @GetMapping(value = "/status", produces = "application/json; charset=UTF-8")
+    @GetMapping(value = "/mgmts/status", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts006> status(@RequestHeader(value = "Authorization") String authorization,
                                               @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                               @RequestHeader(value = "x-api-id", required = false) String api_id,
@@ -198,7 +250,7 @@ public class MgmtsController {
      * @param req
      * @return
      */
-    @GetMapping(value = "/consents", produces = "application/json; charset=UTF-8")
+    @GetMapping(value = "/mgmts/consents", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts007> consents(@RequestHeader(value = "Authorization") String authorization,
                                                 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                                 @RequestHeader(value = "x-api-id", required = false) String api_id,
@@ -225,7 +277,7 @@ public class MgmtsController {
      * @param req
      * @return
      */
-    @GetMapping(value = "/req-statistics", produces = "application/json; charset=UTF-8")
+    @GetMapping(value = "/mgmts/req-statistics", produces = "application/json; charset=UTF-8")
     public ResponseEntity<ResMgmts008> reqStatistics(@RequestHeader(value = "Authorization") String authorization,
                                                      @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                                      @RequestHeader(value = "x-api-id", required = false) String api_id,
