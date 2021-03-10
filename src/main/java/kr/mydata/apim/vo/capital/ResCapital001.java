@@ -12,11 +12,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResLoan001 {
+public class ResCapital001 {
     private String rsp_code;
     private String rsp_msg;
     private String search_timestamp;
     private String reg_date;
     private String account_cnt;
-    private List<ResLoan001Sub> account_list;
+    private List<ResCapital001Sub> account_list;
 }

@@ -13,7 +13,7 @@ public interface CapitalService {
      * @return
      * @throws JsonProcessingException
      */
-    ResLoan001 loans(ReqLoan001 req, String api_id, String own_org_cd) throws Exception;
+    ResCapital001 loans(ReqCapital001 req, String api_id, String own_org_cd) throws Exception;
 
     /**
      * 할부금융 업권 - 대출상품계좌 기본정보 조회
@@ -24,7 +24,7 @@ public interface CapitalService {
      * @return
      * @throws JsonProcessingException
      */
-    ResLoan002 basic(ReqLoan002 req, String api_id, String own_org_cd) throws Exception;
+    ResCapital002 basic(ReqCapital002 req, String api_id, String own_org_cd) throws Exception;
 
     /**
      * 할부금융 업권 - 대출상품계좌 추가정보 조회
@@ -35,7 +35,7 @@ public interface CapitalService {
      * @return
      * @throws JsonProcessingException
      */
-    ResLoan003 detail(ReqLoan003 req, String api_id, String own_org_cd) throws Exception;
+    ResCapital003 detail(ReqCapital003 req, String api_id, String own_org_cd) throws Exception;
 
     /**
      * 할부금융 업권 - 대출상품계좌 거래내역 조회
@@ -46,5 +46,27 @@ public interface CapitalService {
      * @return
      * @throws JsonProcessingException
      */
-    ResLoan004 transactions(ReqLoan004 req, String api_id, String own_org_cd) throws Exception;
+    ResCapital004 transactions(ReqCapital004 req, String api_id, String own_org_cd) throws Exception;
+
+    /**
+     * 할부금융 업권 - 운용리스 기본정보 조회
+     *
+     * @param req
+     * @param api_id
+     * @param own_org_cd
+     * @return
+     * @throws JsonProcessingException
+     */
+    ResCapital005 basicOplease(ReqCapital005 req, String api_id, String own_org_cd) throws Exception;
+
+    /**
+     * 할부금융 업권 - 운용리스 거래내역 조회
+     *
+     * @param req
+     * @param api_id
+     * @param own_org_cd
+     * @return
+     * @throws JsonProcessingException
+     */
+    ResCapital006 transactionsOplease(ReqCapital006 req, String api_id, String own_org_cd) throws Exception;
 }

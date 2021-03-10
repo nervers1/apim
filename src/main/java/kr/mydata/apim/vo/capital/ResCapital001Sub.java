@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResLoan001Sub {
+public class ResCapital001Sub {
     private String account_num;
     private String is_consent;
     private String seqno;

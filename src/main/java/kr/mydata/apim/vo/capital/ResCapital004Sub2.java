@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResLoan004Sub2 {
+public class ResCapital004Sub2 {
     private String int_start_date;
     private String int_end_date;
     private String int_rate;

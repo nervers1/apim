@@ -91,11 +91,11 @@ public class CapitalController {
      * @return
      */
     @GetMapping(value = "/loans", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResLoan001> loans(@RequestHeader(value = "Authorization") String authorization,
-                                            @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                            @RequestHeader(value = "x-api-id", required = false) String api_id,
-                                            @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
-                                            @Valid ReqLoan001 req) throws Exception {
+    public ResponseEntity<ResCapital001> loans(@RequestHeader(value = "Authorization") String authorization,
+                                               @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                               @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                               @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
+                                               @Valid ReqCapital001 req) throws Exception {
 
         api_id = checkApiId(api_id, "/capital/loans");
         own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
@@ -104,7 +104,7 @@ public class CapitalController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        ResLoan001 res = service.loans(req, api_id, own_org_cd);
+        ResCapital001 res = service.loans(req, api_id, own_org_cd);
         return new ResponseEntity<>(res, HttpStatus.OK);
 
     }
@@ -118,11 +118,11 @@ public class CapitalController {
      * @return
      */
     @PostMapping(value = "/loans/basic", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResLoan002> basic(@RequestHeader(value = "Authorization") String authorization,
-                                            @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                            @RequestHeader(value = "x-api-id", required = false) String api_id,
-                                            @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
-                                            @Valid @RequestBody ReqLoan002 req) throws Exception {
+    public ResponseEntity<ResCapital002> basic(@RequestHeader(value = "Authorization") String authorization,
+                                               @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                               @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                               @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
+                                               @Valid @RequestBody ReqCapital002 req) throws Exception {
 
         api_id = checkApiId(api_id, "/capital/loans/basic");
         own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
@@ -131,7 +131,7 @@ public class CapitalController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        ResLoan002 res = service.basic(req, api_id, own_org_cd);
+        ResCapital002 res = service.basic(req, api_id, own_org_cd);
         return new ResponseEntity<>(res, HttpStatus.OK);
 
     }
@@ -146,11 +146,11 @@ public class CapitalController {
      * @return
      */
     @PostMapping(value = "/loans/detail", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResLoan003> detail(@RequestHeader(value = "Authorization") String authorization,
-                                             @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                             @RequestHeader(value = "x-api-id", required = false) String api_id,
-                                             @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
-                                             @Valid @RequestBody ReqLoan003 req) throws Exception {
+    public ResponseEntity<ResCapital003> detail(@RequestHeader(value = "Authorization") String authorization,
+                                                @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
+                                                @Valid @RequestBody ReqCapital003 req) throws Exception {
 
         api_id = checkApiId(api_id, "/capital/loans/detail");
         own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
@@ -159,7 +159,7 @@ public class CapitalController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        ResLoan003 res = service.detail(req, api_id, own_org_cd);
+        ResCapital003 res = service.detail(req, api_id, own_org_cd);
         return new ResponseEntity<>(res, HttpStatus.OK);
 
     }
@@ -174,11 +174,11 @@ public class CapitalController {
      * @return
      */
     @PostMapping(value = "/loans/transactions", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResLoan004> transactions(@RequestHeader(value = "Authorization") String authorization,
-                                                   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                                   @RequestHeader(value = "x-api-id", required = false) String api_id,
-                                                   @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
-                                                   @Valid @RequestBody ReqLoan004 req) throws Exception {
+    public ResponseEntity<ResCapital004> transactions(@RequestHeader(value = "Authorization") String authorization,
+                                                      @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                      @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                      @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
+                                                      @Valid @RequestBody ReqCapital004 req) throws Exception {
 
         api_id = checkApiId(api_id, "/capital/loans/transactions");
         own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
@@ -187,7 +187,7 @@ public class CapitalController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        ResLoan004 res = service.transactions(req, api_id, own_org_cd);
+        ResCapital004 res = service.transactions(req, api_id, own_org_cd);
         return new ResponseEntity<>(res, HttpStatus.OK);
 
     }
