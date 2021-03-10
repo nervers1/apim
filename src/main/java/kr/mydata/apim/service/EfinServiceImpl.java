@@ -112,8 +112,8 @@ public class EfinServiceImpl implements EfinService {
 
         // 거래일자 조건 처리
         trans_list = trans_list.stream()
-                               .filter(obj -> obj.getTrans_dtime().compareTo(req.getFrom_dtime()) >= 0)
-                               .filter(obj -> obj.getTrans_dtime().compareTo(req.getTo_dtime()) <= 0)
+                               .filter(obj -> obj.getTrans_dtime().compareTo(req.getFrom_date()) >= 0)
+                               .filter(obj -> obj.getTrans_dtime().compareTo(req.getTo_date()) <= 0)
                                .collect(Collectors.toList());
 
         // next_page 는 조회 마지막 row_num 으로 들어옴.
@@ -164,8 +164,8 @@ public class EfinServiceImpl implements EfinService {
 
         // 거래일자 조건 처리
         trans_list = trans_list.stream()
-                                     .filter(obj -> obj.getTrans_dtime().compareTo(req.getFrom_dtime()) >= 0)
-                                     .filter(obj -> obj.getTrans_dtime().compareTo(req.getTo_dtime()) <= 0)
+                                     .filter(obj -> obj.getTrans_dtime().compareTo(req.getFrom_date()) >= 0)
+                                     .filter(obj -> obj.getTrans_dtime().compareTo(req.getTo_date()) <= 0)
                                      .collect(Collectors.toList());
 
         // next_page 는 조회 마지막 row_num 으로 들어옴.
