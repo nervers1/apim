@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.mydata.apim.base.exception.AuthorizationException;
 import kr.mydata.apim.service.MgmtService;
 import kr.mydata.apim.vo.mgmts.*;
-import kr.mydata.apim.vo.oauth.ReqOAuth001;
-import kr.mydata.apim.vo.oauth.ResOAuth001;
+import kr.mydata.apim.vo.mgmts.ReqMgmts001;
+import kr.mydata.apim.vo.mgmts.ResMgmts001;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -92,11 +92,11 @@ public class MgmtsController {
      * @return
      */
     @GetMapping(value = "/support/oauth/2.0/token", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResOAuth001> supportToken(@RequestHeader(value = "Authorization") String authorization,
+    public ResponseEntity<ResMgmts001> supportToken(@RequestHeader(value = "Authorization") String authorization,
                                                     @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                                     @RequestHeader(value = "x-api-id", required = false) String api_id,
                                                     @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
-                                                    @Valid ReqOAuth001 req) throws Exception {
+                                                    @Valid ReqMgmts001 req) throws Exception {
 
         api_id = checkApiId(api_id, "/support/oauth/2.0/token");
         own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
@@ -105,7 +105,7 @@ public class MgmtsController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        ResOAuth001 res = service.supportToken(req, api_id, own_org_cd);
+        ResMgmts001 res = service.supportToken(req, api_id, own_org_cd);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
@@ -198,11 +198,11 @@ public class MgmtsController {
      * @return
      */
     @GetMapping(value = "/company/oauth/2.0/token", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResOAuth001> companyToken(@RequestHeader(value = "Authorization") String authorization,
+    public ResponseEntity<ResMgmts001> companyToken(@RequestHeader(value = "Authorization") String authorization,
                                                     @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                                     @RequestHeader(value = "x-api-id", required = false) String api_id,
                                                     @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
-                                                    @Valid ReqOAuth001 req) throws Exception {
+                                                    @Valid ReqMgmts001 req) throws Exception {
 
         api_id = checkApiId(api_id, "/company/oauth/2.0/token");
         own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
@@ -211,7 +211,7 @@ public class MgmtsController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        ResOAuth001 res = service.companyToken(req, api_id, own_org_cd);
+        ResMgmts001 res = service.companyToken(req, api_id, own_org_cd);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 

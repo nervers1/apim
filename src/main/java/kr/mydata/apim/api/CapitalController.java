@@ -3,7 +3,7 @@ package kr.mydata.apim.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.mydata.apim.base.exception.AuthorizationException;
 import kr.mydata.apim.service.CapitalService;
-import kr.mydata.apim.vo.loan.*;
+import kr.mydata.apim.vo.capital.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

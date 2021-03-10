@@ -1,4 +1,4 @@
-package kr.mydata.apim.vo.oauth;
+package kr.mydata.apim.vo.mgmts;
 
 import kr.mydata.apim.vo.APIEntity;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ReqOAuth001 extends APIEntity {
+public class ReqMgmts001 extends APIEntity {
     @NotNull(message = "grant_type 값이 반드시 있어야 합니다.")
     @Size(min= 18, max = 18, message = "grant_type 값은 18 자리이며 'client_credentials' 고정 입니다.")
     private String grant_type;

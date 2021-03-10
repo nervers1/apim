@@ -1,4 +1,4 @@
-package kr.mydata.apim.vo.oauth;
+package kr.mydata.apim.vo.mgmts;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResOAuth001 {
+public class ResMgmts001 {
     private String token_type;
     private String access_token;
     private int expires_in;

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import kr.mydata.apim.api.util.Util;
-import kr.mydata.apim.vo.loan.*;
+import kr.mydata.apim.vo.capital.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -106,8 +106,8 @@ public class CapitalServiceImpl implements CapitalService {
 
         // 거래일자 조건 처리
         trans_list = trans_list.stream()
-                               .filter(obj -> obj.getTrans_dtime().compareTo(req.getFrom_dtime()) >= 0)
-                               .filter(obj -> obj.getTrans_dtime().compareTo(req.getTo_dtime()) <= 0)
+                               .filter(obj -> obj.getTrans_dtime().compareTo(req.getFrom_date()) >= 0)
+                               .filter(obj -> obj.getTrans_dtime().compareTo(req.getTo_date()) <= 0)
                                .collect(Collectors.toList());
 
         // next_page 는 조회 마지막 row_num 으로 들어옴.

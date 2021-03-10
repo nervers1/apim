@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import kr.mydata.apim.vo.mgmts.*;
-import kr.mydata.apim.vo.oauth.ReqOAuth001;
-import kr.mydata.apim.vo.oauth.ResOAuth001;
+import kr.mydata.apim.vo.mgmts.ReqMgmts001;
+import kr.mydata.apim.vo.mgmts.ResMgmts001;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -22,13 +22,13 @@ public class MgmtServiceImpl implements MgmtService {
     }
 
     @Override
-    public ResOAuth001 supportToken(ReqOAuth001 req, String api_id, String own_org_cd) throws Exception {
+    public ResMgmts001 supportToken(ReqMgmts001 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd);
         // to JSON
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-        return mapper.readValue(res, ResOAuth001.class);
+        return mapper.readValue(res, ResMgmts001.class);
     }
 
     @Override
@@ -62,13 +62,13 @@ public class MgmtServiceImpl implements MgmtService {
     }
 
     @Override
-    public ResOAuth001 companyToken(ReqOAuth001 req, String api_id, String own_org_cd) throws Exception {
+    public ResMgmts001 companyToken(ReqMgmts001 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd);
         // to JSON
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-        return mapper.readValue(res, ResOAuth001.class);
+        return mapper.readValue(res, ResMgmts001.class);
     }
 
     @Override

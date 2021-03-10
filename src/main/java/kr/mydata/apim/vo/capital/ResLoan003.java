@@ -1,4 +1,4 @@
-package kr.mydata.apim.vo.loan;
+package kr.mydata.apim.vo.capital;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,5 +16,5 @@ public class ResLoan003 {
     private String search_timestamp;
     private String balance_amt;
     private String loan_principal;
-    private String int_repay_date;
+    private String next_repay_date;
 }

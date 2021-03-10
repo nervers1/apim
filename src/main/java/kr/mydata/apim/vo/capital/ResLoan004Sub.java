@@ -1,4 +1,4 @@
-package kr.mydata.apim.vo.loan;
+package kr.mydata.apim.vo.capital;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +18,8 @@ public class ResLoan004Sub implements Comparable<ResLoan004Sub> {
     private String trans_type;
     private String trans_amt;
     private String balance_amt;
-    private String trans_principal_amt;
-    private String trans_int_amt;
+    private String principal_amt;
+    private String int_amt;
     private String int_cnt;
     private List<ResLoan004Sub2> int_list;
 

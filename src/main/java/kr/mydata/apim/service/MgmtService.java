@@ -1,8 +1,8 @@
 package kr.mydata.apim.service;
 
 import kr.mydata.apim.vo.mgmts.*;
-import kr.mydata.apim.vo.oauth.ReqOAuth001;
-import kr.mydata.apim.vo.oauth.ResOAuth001;
+import kr.mydata.apim.vo.mgmts.ReqMgmts001;
+import kr.mydata.apim.vo.mgmts.ResMgmts001;
 
 public interface MgmtService {
     /**
@@ -14,7 +14,7 @@ public interface MgmtService {
      * @return
      * @throws Exception
      */
-    ResOAuth001 supportToken(ReqOAuth001 req, String api_id, String own_org_cd) throws Exception;
+    ResMgmts001 supportToken(ReqMgmts001 req, String api_id, String own_org_cd) throws Exception;
 
     /**
      * 지원 API - 기관정보 조회
@@ -58,7 +58,7 @@ public interface MgmtService {
      * @return
      * @throws Exception
      */
-    ResOAuth001 companyToken(ReqOAuth001 req, String api_id, String own_org_cd) throws Exception;
+    ResMgmts001 companyToken(ReqMgmts001 req, String api_id, String own_org_cd) throws Exception;
 
     /**
      * 지원 API - 데이터보유자 상태 조회

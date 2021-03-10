@@ -1,4 +1,4 @@
-package kr.mydata.apim.vo.loan;
+package kr.mydata.apim.vo.capital;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

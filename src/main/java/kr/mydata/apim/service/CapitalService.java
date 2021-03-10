@@ -1,7 +1,7 @@
 package kr.mydata.apim.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import kr.mydata.apim.vo.loan.*;
+import kr.mydata.apim.vo.capital.*;
 
 public interface CapitalService {
     /**
