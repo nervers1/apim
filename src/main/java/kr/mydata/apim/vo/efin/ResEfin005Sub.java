@@ -21,6 +21,7 @@ public class ResEfin005Sub implements Comparable<ResEfin005Sub> {
     private String total_install_cnt;
     private String merchant_name;
     private String trans_title;
+    private String trans_category;
     private String pay_method;
 
 
