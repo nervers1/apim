@@ -21,11 +21,11 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/logs/was/api-server/api-server.log</file>
+        <file>${log.home}/api-server.log</file>
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <fileNamePattern>/logs/was/api-server/hist_api-server.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <fileNamePattern>${log.home}/hist_api-server.%d{yyyy-MM-dd}.%i</fileNamePattern>
             <maxFileSize>100MB</maxFileSize>
             <maxHistory>60</maxHistory>
         </rollingPolicy>
