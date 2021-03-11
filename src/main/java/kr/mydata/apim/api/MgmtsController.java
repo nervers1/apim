@@ -91,7 +91,7 @@ public class MgmtsController {
      * @param req
      * @return
      */
-    @PostMapping(value = "/support/oauth/2.0/token", produces = "application/json; charset=UTF-8", consumes = "application/x-www-form-urlencoded")
+    @PostMapping(value = "/support/oauth/2.0/token", produces = "application/json; charset=UTF-8", consumes = "application/x-www-form-urlencoded; charset=UTF-8")
     public ResponseEntity<ResMgmts001> supportToken(@RequestHeader(value = "Authorization") String authorization,
                                                     @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                                     @RequestHeader(value = "x-api-id", required = false) String api_id,
@@ -201,7 +201,7 @@ public class MgmtsController {
                                                      @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                                      @RequestHeader(value = "x-api-id", required = false) String api_id,
                                                      @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
-                                                     @Valid @RequestBody ReqMgmts005 req) throws Exception {
+                                                     @Valid ReqMgmts005 req) throws Exception {
 
         api_id = checkApiId(api_id, "/mgmts/ca_credentials");
         own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
@@ -222,7 +222,7 @@ public class MgmtsController {
      * @param req
      * @return
      */
-    @PostMapping(value = "/company/oauth/2.0/token", produces = "application/json; charset=UTF-8", consumes = "application/x-www-form-urlencoded")
+    @PostMapping(value = "/company/oauth/2.0/token", produces = "application/json; charset=UTF-8", consumes = "application/x-www-form-urlencoded; charset=UTF-8")
     public ResponseEntity<ResMgmts101> companyToken(@RequestHeader(value = "Authorization") String authorization,
                                                     @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                                     @RequestHeader(value = "x-api-id", required = false) String api_id,
