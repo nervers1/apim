@@ -98,12 +98,12 @@ public class CommonController {
      * @thorws Exception
      */
     @GetMapping(value = "/{industry}/apis", produces = "application/json; charset=UTF-8")
-    public ResponseEntity listAccount(@RequestHeader(value = "Authorization") String authorization,
-                                      @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
-                                      @RequestHeader(value = "x-api-id", required = false) String api_id,
-                                      @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
-                                      @PathVariable String industry,
-                                      @Valid ReqCmn001 req) throws Exception {
+    public ResponseEntity listApis(@RequestHeader(value = "Authorization", required = false) String authorization,
+                                   @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                   @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                   @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
+                                   @PathVariable String industry,
+                                   @Valid ReqCmn001 req) throws Exception {
 
         api_id = checkApiId(api_id, "/" + industry + "/apis");
         own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
