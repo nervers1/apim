@@ -17,7 +17,7 @@ import java.util.List;
 public class ReqMgmts004Sub {
     @NotNull(message = "statistics_date 값이 반드시 있어야 합니다.")
     @Size(min = 8, max = 8, message = "statistics_date 값은 8 자리 입니다.")
-    private String statistics_date;
+    private String stat_date;
 
     @NotNull(message = "org_cnt 값이 반드시 있어야 합니다.")
     @Size(min = 1, max = 3, message = "org_cnt 값은 1 ~ 3 자리 입니다.")

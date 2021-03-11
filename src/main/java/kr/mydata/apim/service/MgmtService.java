@@ -1,8 +1,6 @@
 package kr.mydata.apim.service;
 
 import kr.mydata.apim.vo.mgmts.*;
-import kr.mydata.apim.vo.mgmts.ReqMgmts001;
-import kr.mydata.apim.vo.mgmts.ResMgmts001;
 
 public interface MgmtService {
     /**
@@ -50,6 +48,17 @@ public interface MgmtService {
     ResMgmts004 statistics(ReqMgmts004 req, String api_id, String own_org_cd) throws Exception;
 
     /**
+     * 지원 API - 통합인증 API 호출용 자격증명 조회
+     *
+     * @param req
+     * @param api_id
+     * @param own_org_cd
+     * @return
+     * @throws Exception
+     */
+    ResMgmts005 caCredentials(ReqMgmts005 req, String api_id, String own_org_cd) throws Exception;
+
+    /**
      * 지원 API - 통계자료 전송
      *
      * @param req
@@ -58,7 +67,7 @@ public interface MgmtService {
      * @return
      * @throws Exception
      */
-    ResMgmts001 companyToken(ReqMgmts001 req, String api_id, String own_org_cd) throws Exception;
+    ResMgmts101 companyToken(ReqMgmts101 req, String api_id, String own_org_cd) throws Exception;
 
     /**
      * 지원 API - 데이터보유자 상태 조회
@@ -69,7 +78,7 @@ public interface MgmtService {
      * @return
      * @throws Exception
      */
-    ResMgmts006 status(ReqMgmts006 req, String api_id, String own_org_cd) throws Exception;
+    ResMgmts102 status(ReqMgmts102 req, String api_id, String own_org_cd) throws Exception;
 
     /**
      * 지원 API - 정보주체 별 전송요구 내역 조회
@@ -80,7 +89,7 @@ public interface MgmtService {
      * @return
      * @throws Exception
      */
-    ResMgmts007 consents(ReqMgmts007 req, String api_id, String own_org_cd) throws Exception;
+    ResMgmts103 consents(ReqMgmts103 req, String api_id, String own_org_cd) throws Exception;
 
     /**
      * 지원 API - 통계자료 재전송 요청
@@ -91,5 +100,5 @@ public interface MgmtService {
      * @return
      * @throws Exception
      */
-    ResMgmts008 reqStatistics(ReqMgmts008 req, String api_id, String own_org_cd) throws Exception;
+    ResMgmts104 reqStatistics(ReqMgmts104 req, String api_id, String own_org_cd) throws Exception;
 }

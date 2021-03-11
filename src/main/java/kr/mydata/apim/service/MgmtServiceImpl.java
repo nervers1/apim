@@ -62,42 +62,47 @@ public class MgmtServiceImpl implements MgmtService {
     }
 
     @Override
-    public ResMgmts001 companyToken(ReqMgmts001 req, String api_id, String own_org_cd) throws Exception {
+    public ResMgmts005 caCredentials(ReqMgmts005 req, String api_id, String own_org_cd) throws Exception {
+        return null;
+    }
+
+    @Override
+    public ResMgmts101 companyToken(ReqMgmts101 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd);
         // to JSON
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-        return mapper.readValue(res, ResMgmts001.class);
+        return mapper.readValue(res, ResMgmts101.class);
     }
 
     @Override
-    public ResMgmts006 status(ReqMgmts006 req, String api_id, String own_org_cd) throws Exception {
+    public ResMgmts102 status(ReqMgmts102 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
         // to JSON
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-        return mapper.readValue(res, ResMgmts006.class);
+        return mapper.readValue(res, ResMgmts102.class);
     }
 
     @Override
-    public ResMgmts007 consents(ReqMgmts007 req, String api_id, String own_org_cd) throws Exception {
+    public ResMgmts103 consents(ReqMgmts103 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getOrg_code());
         // to JSON
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-        return mapper.readValue(res, ResMgmts007.class);
+        return mapper.readValue(res, ResMgmts103.class);
     }
 
     @Override
-    public ResMgmts008 reqStatistics(ReqMgmts008 req, String api_id, String own_org_cd) throws Exception {
+    public ResMgmts104 reqStatistics(ReqMgmts104 req, String api_id, String own_org_cd) throws Exception {
         String sql = "SELECT res_data FROM tb_test_data WHERE api_id = ? and own_org_cd = ? and org_cd = ?";
         String res = jdbcTemplate.queryForObject(sql, String.class, Integer.valueOf(api_id), own_org_cd, req.getMydata_org_code());
         // to JSON
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-        return mapper.readValue(res, ResMgmts008.class);
+        return mapper.readValue(res, ResMgmts104.class);
     }
 }

@@ -7,15 +7,15 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * 정보주체 별 전송요구 내역 조회 - 출력
+ * 통합인증 API 호출용 자격증명 조회 - 출력
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResMgmts007 {
+public class ResMgmts005 {
     private String rsp_code;
     private String rsp_msg;
-    private String is_member;
-    private String service_cnt;
-    private List<ResMgmts007Sub> service_list;
+    private String search_timestamp;
+    private String org_cnt;
+    private List<ResMgmts005Sub> org_list;
 }

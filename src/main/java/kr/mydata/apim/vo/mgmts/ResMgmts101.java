@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResMgmts001 {
+public class ResMgmts101 {
     private String token_type;
     private String access_token;
     private String expires_in;

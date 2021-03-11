@@ -15,12 +15,13 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ReqMgmts007 {
+public class ReqMgmts103 {
 
     @NotNull(message = "org_code 값이 반드시 있어야 합니다.")
     @Size(min = 1, max = 10, message = "org_code 값은 1 ~ 10 자리 입니다.")
     private String org_code;
 
     @NotNull(message = "user_ci 값이 반드시 있어야 합니다.")
+    @Size(min = 1, max = 88, message = "user_ci 값은 1 ~ 88 자리 입니다.")
     private String user_ci;
 }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResMgmts007Sub2 {
+public class ResMgmts103Sub2 {
     private String consent_type;
     private String consent_date;
     private String consent_exp_date;

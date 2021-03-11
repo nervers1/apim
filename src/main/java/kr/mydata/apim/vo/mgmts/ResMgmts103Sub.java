@@ -12,9 +12,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResMgmts007Sub {
+public class ResMgmts103Sub {
     private String service_name;
     private String client_id;
     private String consent_cnt;
-    private List<ResMgmts007Sub2> consent_list;
+    private List<ResMgmts103Sub2> consent_list;
 }

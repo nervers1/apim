@@ -21,5 +21,5 @@ public class ReqMgmts004Sub5 {
 
     @NotNull(message = "status_cnt 값이 반드시 있어야 합니다.")
     @Size(min = 1, max = 10, message = "status_cnt 값은 1 ~ 10 자리 입니다.")
-    private String status_cnt;
+    private String api_call_cnt;
 }

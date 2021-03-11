@@ -91,7 +91,7 @@ public class MgmtsController {
      * @param req
      * @return
      */
-    @PostMapping(value = "/support/oauth/2.0/token", produces = "application/json; charset=UTF-8")
+    @PostMapping(value = "/support/oauth/2.0/token", produces = "application/json; charset=UTF-8", consumes = "application/x-www-form-urlencoded")
     public ResponseEntity<ResMgmts001> supportToken(@RequestHeader(value = "Authorization") String authorization,
                                                     @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                                     @RequestHeader(value = "x-api-id", required = false) String api_id,
@@ -162,7 +162,6 @@ public class MgmtsController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-
     /**
      * 지원 API - 통계자료 전송
      *
@@ -190,19 +189,45 @@ public class MgmtsController {
     }
 
     /**
-     * 지원 API - 종합포털제공 접근토큰 발급
+     * 지원 API - 종합포털 API 호출용 자격증명 조회
      *
      * @param api_id
      * @param own_org_cd
      * @param req
      * @return
      */
-    @PostMapping(value = "/company/oauth/2.0/token", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResMgmts001> companyToken(@RequestHeader(value = "Authorization") String authorization,
+    @GetMapping(value = "/mgmts/ca_credentials", produces = "application/json; charset=UTF-8")
+    public ResponseEntity<ResMgmts005> caCredentials(@RequestHeader(value = "Authorization") String authorization,
+                                                     @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                     @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                     @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
+                                                     @Valid @RequestBody ReqMgmts005 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/mgmts/ca_credentials");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+
+        log.info("api_id : {}", api_id);
+        log.info("own_org_cd : {}", own_org_cd);
+        log.info("req : {}", req);
+
+        ResMgmts005 res = service.caCredentials(req, api_id, own_org_cd);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    /**
+     * 지원 API - 마이데이터사업자/정보제공자 접근토큰 발급
+     *
+     * @param api_id
+     * @param own_org_cd
+     * @param req
+     * @return
+     */
+    @PostMapping(value = "/company/oauth/2.0/token", produces = "application/json; charset=UTF-8", consumes = "application/x-www-form-urlencoded")
+    public ResponseEntity<ResMgmts101> companyToken(@RequestHeader(value = "Authorization") String authorization,
                                                     @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                                     @RequestHeader(value = "x-api-id", required = false) String api_id,
                                                     @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
-                                                    @Valid @RequestBody ReqMgmts001 req) throws Exception {
+                                                    @Valid @RequestBody ReqMgmts101 req) throws Exception {
 
         api_id = checkApiId(api_id, "/company/oauth/2.0/token");
         own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
@@ -211,12 +236,12 @@ public class MgmtsController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        ResMgmts001 res = service.companyToken(req, api_id, own_org_cd);
+        ResMgmts101 res = service.companyToken(req, api_id, own_org_cd);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     /**
-     * 지원 API - 데이터보유자 상태조회
+     * 지원 API - 정보제공자 상태조회
      *
      * @param api_id
      * @param own_org_cd
@@ -224,11 +249,11 @@ public class MgmtsController {
      * @return
      */
     @GetMapping(value = "/mgmts/status", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResMgmts006> status(@RequestHeader(value = "Authorization") String authorization,
+    public ResponseEntity<ResMgmts102> status(@RequestHeader(value = "Authorization") String authorization,
                                               @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                               @RequestHeader(value = "x-api-id", required = false) String api_id,
                                               @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
-                                              @Valid ReqMgmts006 req) throws Exception {
+                                              @Valid ReqMgmts102 req) throws Exception {
 
         api_id = checkApiId(api_id, "/mgmts/status");
         own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
@@ -237,7 +262,7 @@ public class MgmtsController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        ResMgmts006 res = service.status(req, api_id, own_org_cd);
+        ResMgmts102 res = service.status(req, api_id, own_org_cd);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
@@ -251,11 +276,11 @@ public class MgmtsController {
      * @return
      */
     @GetMapping(value = "/mgmts/consents", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResMgmts007> consents(@RequestHeader(value = "Authorization") String authorization,
+    public ResponseEntity<ResMgmts103> consents(@RequestHeader(value = "Authorization") String authorization,
                                                 @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                                 @RequestHeader(value = "x-api-id", required = false) String api_id,
                                                 @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
-                                                @Valid ReqMgmts007 req) throws Exception {
+                                                @Valid ReqMgmts103 req) throws Exception {
 
         api_id = checkApiId(api_id, "/mgmts/consents");
         own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
@@ -264,7 +289,7 @@ public class MgmtsController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        ResMgmts007 res = service.consents(req, api_id, own_org_cd);
+        ResMgmts103 res = service.consents(req, api_id, own_org_cd);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
@@ -278,11 +303,11 @@ public class MgmtsController {
      * @return
      */
     @GetMapping(value = "/mgmts/req-statistics", produces = "application/json; charset=UTF-8")
-    public ResponseEntity<ResMgmts008> reqStatistics(@RequestHeader(value = "Authorization") String authorization,
+    public ResponseEntity<ResMgmts104> reqStatistics(@RequestHeader(value = "Authorization") String authorization,
                                                      @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
                                                      @RequestHeader(value = "x-api-id", required = false) String api_id,
                                                      @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
-                                                     @Valid ReqMgmts008 req) throws Exception {
+                                                     @Valid ReqMgmts104 req) throws Exception {
 
         api_id = checkApiId(api_id, "/mgmts/req-statistics");
         own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
@@ -291,7 +316,7 @@ public class MgmtsController {
         log.info("own_org_cd : {}", own_org_cd);
         log.info("req : {}", req);
 
-        ResMgmts008 res = service.reqStatistics(req, api_id, own_org_cd);
+        ResMgmts104 res = service.reqStatistics(req, api_id, own_org_cd);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

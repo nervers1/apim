@@ -38,8 +38,8 @@ public class ReqMgmts004Sub4 {
 
     @NotNull(message = "api_status_cnt 값이 반드시 있어야 합니다.")
     @Size(min = 1, max = 1, message = "api_status_cnt 값은 1 자리 입니다.")
-    private String api_status_cnt;
+    private String status_cnt;
 
     @NotNull(message = "api_status_list 값이 반드시 있어야 합니다.")
-    private List<ReqMgmts004Sub5> api_status_list;
+    private List<ReqMgmts004Sub5> status_list;
 }
