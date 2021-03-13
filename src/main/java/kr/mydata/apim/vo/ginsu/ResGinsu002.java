@@ -16,7 +16,6 @@ public class ResGinsu002 {
     private String rsp_code;
     private String rsp_msg;
     private String search_timestamp;
-    private String is_renewable;
     private String issue_date;
     private String exp_date;
     private String face_amt;

@@ -1,0 +1,79 @@
+2021-03-13 14:20:39.679 INFO  [     restartedMain] o.s.boot.StartupInfoLogger.logStarting:55          : Starting ApimApplication using Java 15.0.2 on gimhyeongtaeui-MacBookPro.local with PID 4140 (/Users/ht/IdeaProjects/apim/build/classes/java/main started by ht in /Users/ht/IdeaProjects/apim)
+2021-03-13 14:20:39.681 DEBUG [     restartedMain] o.s.boot.StartupInfoLogger.logStarting:56          : Running with Spring Boot v2.4.2, Spring v5.3.3
+2021-03-13 14:20:39.681 INFO  [     restartedMain] s.boot.SpringApplication.logStartupProfileInfo:660 : No active profile set, falling back to default profiles: default
+2021-03-13 14:20:39.708 INFO  [     restartedMain] o.s.boot.logging.DeferredLog.logTo:255             : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-03-13 14:20:39.708 INFO  [     restartedMain] o.s.boot.logging.DeferredLog.logTo:255             : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-03-13 14:20:40.186 INFO  [     restartedMain] ryConfigurationDelegate.registerRepositoriesIn:128 : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2021-03-13 14:20:40.206 INFO  [     restartedMain] ryConfigurationDelegate.registerRepositoriesIn:188 : Finished Spring Data repository scanning in 17 ms. Found 0 JDBC repository interfaces.
+2021-03-13 14:20:40.512 INFO  [     restartedMain] o.s.b.w.e.t.TomcatWebServer.initialize:108         : Tomcat initialized with port(s): 7080 (http)
+2021-03-13 14:20:40.567 INFO  [     restartedMain] pplicationContext.prepareWebApplicationContext:289 : Root WebApplicationContext: initialization completed in 858 ms
+2021-03-13 14:20:40.607 INFO  [     restartedMain] k.m.a.c.DataSourceConfiguration.dataSource:36      : Connecting to database...
+2021-03-13 14:20:40.611 INFO  [     restartedMain] c.z.hikari.HikariDataSource.<init>:80              : HikariPool-1 - Starting...
+2021-03-13 14:20:41.248 INFO  [     restartedMain] c.z.hikari.HikariDataSource.<init>:82              : HikariPool-1 - Start completed.
+2021-03-13 14:20:41.420 INFO  [     restartedMain] .s.s.c.ExecutorConfigurationSupport.initialize:181 : Initializing ExecutorService 'applicationTaskExecutor'
+2021-03-13 14:20:41.624 INFO  [     restartedMain] o.s.b.d.a.OptionalLiveReloadServer.startServer:58  : LiveReload server is running on port 35729
+2021-03-13 14:20:41.660 INFO  [     restartedMain] o.s.b.w.e.t.TomcatWebServer.start:220              : Tomcat started on port(s): 7080 (http) with context path ''
+2021-03-13 14:20:41.672 INFO  [     restartedMain] o.s.boot.StartupInfoLogger.logStarted:61           : Started ApimApplication in 2.287 seconds (JVM running for 2.879)
+2021-03-13 14:23:15.716 INFO  [tp-nio-7080-exec-2] o.s.w.servlet.FrameworkServlet.initServletBean:525 : Initializing Servlet 'dispatcherServlet'
+2021-03-13 14:23:15.717 INFO  [tp-nio-7080-exec-2] o.s.w.servlet.FrameworkServlet.initServletBean:547 : Completed initialization in 1 ms
+2021-03-13 14:23:15.759 WARN  [tp-nio-7080-exec-2] .AbstractHandlerExceptionResolver.logException:207 : Resolved [org.springframework.web.bind.MissingRequestHeaderException: Missing request header 'Authorization' for method parameter of type String]
+2021-03-13 14:23:29.449 WARN  [tp-nio-7080-exec-4] .AbstractHandlerExceptionResolver.logException:207 : Resolved [org.springframework.validation.BindException: org.springframework.validation.BeanPropertyBindingResult: 1 errors
+Field error in object 'reqGinsu001' on field 'search_timestamp': rejected value [null]; codes [NotNull.reqGinsu001.search_timestamp,NotNull.search_timestamp,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [reqGinsu001.search_timestamp,search_timestamp]; arguments []; default message [search_timestamp]]; default message [search_timestamp 값이 반드시 있어야 합니다.]]
+2021-03-13 14:24:19.219 ERROR [tp-nio-7080-exec-6] k.m.apim.api.GinsuController.checkApiId:36         : uri - /ginsu/insurances
+2021-03-13 14:24:19.519 WARN  [tp-nio-7080-exec-6] .AbstractHandlerExceptionResolver.logException:207 : Resolved [org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT b.id         FROM apx_api_resource a, apx_api_resource_method b        WHERE a.uri = '/ginsu/insurances'         AND b.resource_version_id = a.target_version]; nested exception is org.postgresql.util.PSQLException: ERROR: relation "apx_api_resource" does not exist
+  Position: 26]
+2021-03-13 14:24:38.974 ERROR [tp-nio-7080-exec-8] k.m.apim.api.GinsuController.checkApiId:36         : uri - /ginsu/insurances
+2021-03-13 14:24:39.228 WARN  [tp-nio-7080-exec-8] .AbstractHandlerExceptionResolver.logException:207 : Resolved [org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT b.id         FROM apx_api_resource a, apx_api_resource_method b        WHERE a.uri = '/ginsu/insurances'         AND b.resource_version_id = a.target_version]; nested exception is org.postgresql.util.PSQLException: ERROR: relation "apx_api_resource" does not exist
+  Position: 26]
+2021-03-13 14:36:39.598 ERROR [p-nio-7080-exec-10] k.m.apim.api.GinsuController.checkApiId:36         : uri - /ginsu/insurances
+2021-03-13 14:36:39.599 INFO  [p-nio-7080-exec-10] k.m.apim.api.GinsuController.listGinsu:104         : api_id : 803
+2021-03-13 14:36:39.599 INFO  [p-nio-7080-exec-10] k.m.apim.api.GinsuController.listGinsu:105         : own_org_cd : 0000000000
+2021-03-13 14:36:39.600 INFO  [p-nio-7080-exec-10] k.m.apim.api.GinsuController.listGinsu:106         : req : ReqGinsu001(org_code=0000000000, search_timestamp=0)
+2021-03-13 14:36:40.235 WARN  [p-nio-7080-exec-10] .AbstractHandlerExceptionResolver.logException:207 : Resolved [org.springframework.dao.EmptyResultDataAccessException: Incorrect result size: expected 1, actual 0]
+2021-03-13 14:37:11.127 ERROR [tp-nio-7080-exec-1] k.m.apim.api.GinsuController.checkApiId:36         : uri - /ginsu/insurances
+2021-03-13 14:37:11.128 INFO  [tp-nio-7080-exec-1] k.m.apim.api.GinsuController.listGinsu:104         : api_id : 803
+2021-03-13 14:37:11.128 INFO  [tp-nio-7080-exec-1] k.m.apim.api.GinsuController.listGinsu:105         : own_org_cd : 0000000000
+2021-03-13 14:37:11.128 INFO  [tp-nio-7080-exec-1] k.m.apim.api.GinsuController.listGinsu:106         : req : ReqGinsu001(org_code=0000000000, search_timestamp=0)
+2021-03-13 14:38:22.117 WARN  [tp-nio-7080-exec-4] .AbstractHandlerExceptionResolver.logException:207 : Resolved [org.springframework.web.bind.MissingRequestHeaderException: Missing request header 'Authorization' for method parameter of type String]
+2021-03-13 14:39:44.007 ERROR [tp-nio-7080-exec-6] k.m.apim.api.CommonController.checkApiId:40        : uri - /ginsu/apis
+2021-03-13 14:39:44.009 WARN  [tp-nio-7080-exec-6] .AbstractHandlerExceptionResolver.logException:207 : Resolved [java.lang.NullPointerException: Cannot invoke "String.startsWith(String)" because "authorization" is null]
+2021-03-13 14:40:41.298 ERROR [tp-nio-7080-exec-8] k.m.apim.api.CommonController.checkApiId:40        : uri - /ginsu/apis
+2021-03-13 14:40:41.299 WARN  [tp-nio-7080-exec-8] .AbstractHandlerExceptionResolver.logException:207 : Resolved [java.lang.NullPointerException: Cannot invoke "String.startsWith(String)" because "authorization" is null]
+2021-03-13 14:40:53.829 INFO  [ontextShutdownHook] o.s.s.c.ExecutorConfigurationSupport.shutdown:218  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-03-13 14:40:53.830 INFO  [ontextShutdownHook] c.z.hikari.HikariDataSource.close:350              : HikariPool-1 - Shutdown initiated...
+2021-03-13 14:40:53.831 INFO  [ontextShutdownHook] c.z.hikari.HikariDataSource.close:352              : HikariPool-1 - Shutdown completed.
+2021-03-13 14:40:56.749 INFO  [     restartedMain] o.s.boot.StartupInfoLogger.logStarting:55          : Starting ApimApplication using Java 15.0.2 on gimhyeongtaeui-MacBookPro.local with PID 4324 (/Users/ht/IdeaProjects/apim/build/classes/java/main started by ht in /Users/ht/IdeaProjects/apim)
+2021-03-13 14:40:56.750 DEBUG [     restartedMain] o.s.boot.StartupInfoLogger.logStarting:56          : Running with Spring Boot v2.4.2, Spring v5.3.3
+2021-03-13 14:40:56.751 INFO  [     restartedMain] s.boot.SpringApplication.logStartupProfileInfo:660 : No active profile set, falling back to default profiles: default
+2021-03-13 14:40:56.778 INFO  [     restartedMain] o.s.boot.logging.DeferredLog.logTo:255             : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-03-13 14:40:56.778 INFO  [     restartedMain] o.s.boot.logging.DeferredLog.logTo:255             : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-03-13 14:40:57.237 INFO  [     restartedMain] ryConfigurationDelegate.registerRepositoriesIn:128 : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2021-03-13 14:40:57.255 INFO  [     restartedMain] ryConfigurationDelegate.registerRepositoriesIn:188 : Finished Spring Data repository scanning in 15 ms. Found 0 JDBC repository interfaces.
+2021-03-13 14:40:57.535 INFO  [     restartedMain] o.s.b.w.e.t.TomcatWebServer.initialize:108         : Tomcat initialized with port(s): 7080 (http)
+2021-03-13 14:40:57.584 INFO  [     restartedMain] pplicationContext.prepareWebApplicationContext:289 : Root WebApplicationContext: initialization completed in 805 ms
+2021-03-13 14:40:57.626 INFO  [     restartedMain] k.m.a.c.DataSourceConfiguration.dataSource:36      : Connecting to database...
+2021-03-13 14:40:57.630 INFO  [     restartedMain] c.z.hikari.HikariDataSource.<init>:80              : HikariPool-1 - Starting...
+2021-03-13 14:40:58.105 INFO  [     restartedMain] c.z.hikari.HikariDataSource.<init>:82              : HikariPool-1 - Start completed.
+2021-03-13 14:40:58.259 INFO  [     restartedMain] .s.s.c.ExecutorConfigurationSupport.initialize:181 : Initializing ExecutorService 'applicationTaskExecutor'
+2021-03-13 14:40:58.440 INFO  [     restartedMain] o.s.b.d.a.OptionalLiveReloadServer.startServer:58  : LiveReload server is running on port 35729
+2021-03-13 14:40:58.469 INFO  [     restartedMain] o.s.b.w.e.t.TomcatWebServer.start:220              : Tomcat started on port(s): 7080 (http) with context path ''
+2021-03-13 14:40:58.480 INFO  [     restartedMain] o.s.boot.StartupInfoLogger.logStarted:61           : Started ApimApplication in 2.023 seconds (JVM running for 2.634)
+2021-03-13 14:41:14.140 INFO  [tp-nio-7080-exec-2] o.s.w.servlet.FrameworkServlet.initServletBean:525 : Initializing Servlet 'dispatcherServlet'
+2021-03-13 14:41:14.141 INFO  [tp-nio-7080-exec-2] o.s.w.servlet.FrameworkServlet.initServletBean:547 : Completed initialization in 0 ms
+2021-03-13 14:41:14.216 ERROR [tp-nio-7080-exec-2] k.m.apim.api.CommonController.checkApiId:40        : uri - /ginsu/apis
+2021-03-13 14:41:14.217 INFO  [tp-nio-7080-exec-2] k.m.apim.api.CommonController.listApis:111         : api_id : 801
+2021-03-13 14:41:14.217 INFO  [tp-nio-7080-exec-2] k.m.apim.api.CommonController.listApis:112         : own_org_cd : 0000000000
+2021-03-13 14:41:14.217 INFO  [tp-nio-7080-exec-2] k.m.apim.api.CommonController.listApis:113         : req : ReqCmn001(org_code=0000000000)
+2021-03-13 14:41:14.217 INFO  [tp-nio-7080-exec-2] k.m.a.s.CommonServiceImpl.listAPI:35               : industry : ginsu
+2021-03-13 14:42:07.628 ERROR [tp-nio-7080-exec-3] k.m.apim.api.CommonController.checkApiId:40        : uri - /ginsu/apis
+2021-03-13 14:42:08.054 WARN  [tp-nio-7080-exec-3] .AbstractHandlerExceptionResolver.logException:207 : Resolved [org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT b.id         FROM apx_api_resource a, apx_api_resource_method b        WHERE a.uri = '/ginsu/apis'         AND b.resource_version_id = a.target_version]; nested exception is org.postgresql.util.PSQLException: ERROR: relation "apx_api_resource" does not exist
+  Position: 26]
+2021-03-13 14:42:31.365 ERROR [tp-nio-7080-exec-5] k.m.apim.api.CommonController.checkApiId:40        : uri - /ginsu/apis
+2021-03-13 14:42:31.365 INFO  [tp-nio-7080-exec-5] k.m.apim.api.CommonController.listConsents:140     : api_id : 802
+2021-03-13 14:42:31.365 INFO  [tp-nio-7080-exec-5] k.m.apim.api.CommonController.listConsents:141     : own_org_cd : 0000000000
+2021-03-13 14:42:31.365 INFO  [tp-nio-7080-exec-5] k.m.apim.api.CommonController.listConsents:142     : req : ReqCmn002(org_code=0000000000)
+2021-03-13 14:42:31.366 INFO  [tp-nio-7080-exec-5] k.m.a.s.CommonServiceImpl.listConsents:55          : industry : ginsu
+2021-03-13 14:44:36.499 ERROR [tp-nio-7080-exec-8] k.m.apim.api.GinsuController.checkApiId:36         : uri - /ginsu/insurances/basic
+2021-03-13 14:44:36.499 INFO  [tp-nio-7080-exec-8] k.m.apim.api.GinsuController.ginsuBasic:131        : api_id : 804
+2021-03-13 14:44:36.499 INFO  [tp-nio-7080-exec-8] k.m.apim.api.GinsuController.ginsuBasic:132        : own_org_cd : 0000000000
+2021-03-13 14:44:36.499 INFO  [tp-nio-7080-exec-8] k.m.apim.api.GinsuController.ginsuBasic:133        : req : ReqGinsu002(org_code=0000000000, insu_num=20210101010101, search_timestamp=0)
