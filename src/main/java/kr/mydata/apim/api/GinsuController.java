@@ -152,7 +152,7 @@ public class GinsuController {
                                                          @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
                                                          @Valid @RequestBody ReqGinsu003 req) throws Exception {
 
-        api_id = checkApiId(api_id, "/insu/insurances/transactions");
+        api_id = checkApiId(api_id, "/ginsu/insurances/transactions");
         own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
 
         log.info("api_id : {}", api_id);
