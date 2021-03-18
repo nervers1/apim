@@ -82,7 +82,34 @@ public class IRPServiceImpl implements IRPService {
         mapper.registerModule(new JavaTimeModule());
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 
-        return mapper.readValue(res, ResIRP003.class);
+        ResIRP003 resVo = mapper.readValue(res, ResIRP003.class);
+        List<ResIRP003Sub> irp_list = resVo.getIrp_list();
+
+
+        // Comparable 구현하여 내림차순 정렬
+        Collections.sort(irp_list);
+
+        // next_page 는 조회 마지막 row_num 으로 들어옴.
+        int page = Util.getPage(req.getNext_page());
+
+        // limit + 1 개 조회처리
+        irp_list = irp_list.stream()
+                .skip(page)
+                .limit(Integer.valueOf(req.getLimit()) + 1)
+                .collect(Collectors.toList());
+
+        // limit + 1 개 만큼 조회된거면 next_page 셋팅
+        resVo.setNext_page(Util.getNextPage(irp_list.size(), page, Integer.valueOf(req.getLimit())));
+
+        // next_page 가 존재하면 limit + 1개 만큼 조회된 것이므로 cnt 는 -1 처리
+        resVo.setIrp_cnt((StringUtils.hasLength(resVo.getNext_page()))
+                ? String.valueOf(irp_list.size() - 1) : String.valueOf(irp_list.size()));
+
+        // next_page 가 존재하면 limit + 1개만큼 조회된 것이므로 list 의 마지막 원소 제거
+        resVo.setIrp_list((StringUtils.hasLength(resVo.getNext_page()))
+                ? irp_list.subList(0, irp_list.size() - 1) : irp_list);
+
+        return resVo;
     }
 
     /**
