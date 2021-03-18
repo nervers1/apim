@@ -16,6 +16,7 @@ public class ResCapital005 {
     private String search_timestamp;
     private String holder_name;
     private String issue_date;
+    private String exp_date;
     private String repay_date;
     private String repay_method;
     private String repay_org_code;
