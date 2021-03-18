@@ -191,4 +191,60 @@ public class CapitalController {
         return new ResponseEntity<>(res, HttpStatus.OK);
 
     }
+
+
+    /**
+     * 할부금융 업권 - 운용리스 기본정보 조회
+     *
+     * @param api_id
+     * @param own_org_cd
+     * @param req
+     * @return
+     */
+    @PostMapping(value = "/loans/oplease/basic", produces = "application/json; charset=UTF-8")
+    public ResponseEntity<ResCapital005> transactions(@RequestHeader(value = "Authorization") String authorization,
+                                                      @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                      @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                      @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
+                                                      @Valid @RequestBody ReqCapital005 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/capital/oplease/basic");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+
+        log.info("api_id : {}", api_id);
+        log.info("own_org_cd : {}", own_org_cd);
+        log.info("req : {}", req);
+
+        ResCapital005 res = service.basicOplease(req, api_id, own_org_cd);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+
+    }
+
+
+    /**
+     * 할부금융 업권 - 운용리스 거래내역 조회
+     *
+     * @param api_id
+     * @param own_org_cd
+     * @param req
+     * @return
+     */
+    @PostMapping(value = "/loans/oplease/transactions", produces = "application/json; charset=UTF-8")
+    public ResponseEntity<ResCapital006> transactions(@RequestHeader(value = "Authorization") String authorization,
+                                                      @RequestHeader(value = "X-FSI-SVC-DATA-KEY", required = false) String xFsiSvcDataKey,
+                                                      @RequestHeader(value = "x-api-id", required = false) String api_id,
+                                                      @RequestHeader(value = "x-own-org-cd", required = false) String own_org_cd,
+                                                      @Valid @RequestBody ReqCapital006 req) throws Exception {
+
+        api_id = checkApiId(api_id, "/capital/oplease/transactions");
+        own_org_cd = checkOwnOrgCd(own_org_cd, authorization, xFsiSvcDataKey);
+
+        log.info("api_id : {}", api_id);
+        log.info("own_org_cd : {}", own_org_cd);
+        log.info("req : {}", req);
+
+        ResCapital006 res = service.transactionsOplease(req, api_id, own_org_cd);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+
+    }
 }
