@@ -37,7 +37,7 @@ public class ReqInsu007 {
     @Size(min = 8, max = 8, message = "to_date 값은 8 자리 입니다.")
     private String to_date;
 
-    @Size(min = 1, max = 1000, message = "next_page 값은 1 ~ 1000 자리 입니다.")
+    @Size(max = 1000, message = "next_page 값은 ~ 1000 자리 입니다.")
     private String next_page;
 
     @NotNull(message = "limit 값이 반드시 있어야 합니다.")
